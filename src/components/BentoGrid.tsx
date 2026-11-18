@@ -371,7 +371,7 @@ export const BentoGrid: React.FC<BentoGridProps> = ({ onOpenProject }) => {
               </div>
 
               <h4 className="font-heading font-semibold text-lg text-text-primary mb-2">
-                Open for Collaboration
+                Open for Opportunities
               </h4>
               <p className="text-xs text-text-secondary mb-4 font-sans">
                 Seeking Summer & Fall internship opportunities, full-stack projects, and engineering discussions.

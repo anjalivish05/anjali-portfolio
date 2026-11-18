@@ -1,28 +1,28 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg-main: #101014;
-  --color-bg-secondary: #17171D;
-  --color-bg-card: #1D1D25;
-  --color-bg-elevated: #252530;
-  --color-bg-hover: #2a2a38;
+  --color-bg-main: #160F19;
+  --color-bg-secondary: #211725;
+  --color-bg-card: #2B1E30;
+  --color-bg-elevated: #37283E;
+  --color-bg-hover: #403047;
 
-  --color-text-primary: #F5F5F7;
-  --color-text-secondary: #A1A1AA;
-  --color-text-muted: #71717A;
+  --color-text-primary: #F7EFF4;
+  --color-text-secondary: #B3A2AE;
+  --color-text-muted: #8E7D8A;
 
-  --color-accent: #A78BFA;
-  --color-accent-light: #C4B5FD;
-  --color-accent-dark: #8B5CF6;
-  --color-accent-glow: rgba(167, 139, 250, 0.15);
+  --color-accent: #E6A995;
+  --color-accent-hover: #D9907B;
+  --color-accent-light: #F2C4B5;
+  --color-accent-glow: rgba(230, 169, 149, 0.12);
 
-  --color-border: #33333D;
-  --color-border-light: #42424F;
-  --color-border-subtle: #262630;
+  --color-border: #403044;
+  --color-border-subtle: #2F2233;
+  --color-border-hover: #E6A995;
 
-  --font-heading: 'Space Grotesk', sans-serif;
-  --font-editorial: 'Instrument Serif', Georgia, serif;
-  --font-sans: 'Inter', sans-serif;
+  --font-serif: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  --font-heading: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
 
@@ -32,83 +32,73 @@ html {
 }
 
 body {
-  background-color: #101014;
-  color: #F5F5F7;
-  font-family: 'Inter', sans-serif;
+  background-color: #160F19;
+  color: #F7EFF4;
+  font-family: 'DM Sans', sans-serif;
   overflow-x: hidden;
   margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
-  background-color: #A78BFA;
-  color: #101014;
+  background-color: #E6A995;
+  color: #160F19;
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 7px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #101014;
+  background: #160F19;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #252530;
+  background: #37283E;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #33333D;
+  background: #403044;
 }
 
-/* Glassmorphism & Surface Utilities */
-.glass-panel {
-  background: rgba(29, 29, 37, 0.75);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid #33333D;
-}
-
+/* Glass & Surface Utilities - Plum Theme */
 .glass-nav {
-  background: rgba(16, 16, 20, 0.88);
+  background: rgba(22, 15, 25, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(51, 51, 61, 0.7);
+  border-bottom: 1px solid rgba(64, 48, 68, 0.7);
 }
 
-/* Editorial Serif Utility */
+.glass-card {
+  background: #2B1E30;
+  border: 1px solid #403044;
+}
+
+.plum-glow {
+  background: radial-gradient(circle at 50% 50%, rgba(230, 169, 149, 0.08) 0%, transparent 70%);
+}
+
+/* Editorial Typography Helpers */
+.font-serif-heading {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  letter-spacing: -0.01em;
+}
+
 .font-editorial {
-  font-family: 'Instrument Serif', Georgia, serif;
+  font-family: 'Cormorant Garamond', Georgia, serif;
   font-style: italic;
-  font-weight: 400;
 }
 
-.font-heading {
-  font-family: 'Space Grotesk', sans-serif;
+/* Refined Editorial Card Hover */
+.editorial-card {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
 }
 
-.font-mono {
-  font-family: 'JetBrains Mono', monospace;
-}
-
-/* Bento Card Hover Depth */
-.bento-card {
-  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease, border-color 0.28s ease;
-}
-
-.bento-card:hover {
+.editorial-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(167, 139, 250, 0.2);
-  border-color: rgba(167, 139, 250, 0.35);
-}
-
-.custom-scrollbar::-webkit-scrollbar {
-  height: 6px;
-  width: 6px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #33333D;
-  border-radius: 3px;
+  box-shadow: 0 16px 36px -12px rgba(10, 6, 12, 0.8), 0 0 0 1px rgba(230, 169, 149, 0.25);
+  border-color: rgba(230, 169, 149, 0.4);
 }

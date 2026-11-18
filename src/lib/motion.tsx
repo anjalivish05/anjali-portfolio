@@ -5,6 +5,11 @@ export const AnimatePresence: React.FC<{ children: React.ReactNode }> = ({ child
   return <>{children}</>;
 };
 
+export const useReducedMotion = () => {
+  if (typeof window === 'undefined') return false;
+  return window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+};
+
 interface MotionProps extends React.HTMLAttributes<HTMLElement> {
   initial?: any;
   animate?: any;

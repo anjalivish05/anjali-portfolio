@@ -7,6 +7,7 @@ import {
   Check, 
   MapPin, 
   Phone, 
+  FileText,
   ArrowUpRight
 } from 'lucide-react';
 import { Linkedin, Github, Twitter } from './Icons';
@@ -42,17 +43,17 @@ export const Contact: React.FC = () => {
 
   const validate = (): boolean => {
     const errs: FormErrors = {};
-    if (!formData.name.trim()) errs.name = 'Please provide your full name.';
+    if (!formData.name.trim()) errs.name = 'Please provide your name.';
     if (!formData.email.trim()) {
       errs.email = 'Please provide your email address.';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      errs.email = 'Please provide a valid email address.';
+      errs.email = 'Please enter a valid email address.';
     }
     if (!formData.subject.trim()) errs.subject = 'Please specify a brief subject.';
     if (!formData.message.trim()) {
-      errs.message = 'Please write a message so I know how to assist.';
+      errs.message = 'Please provide your message.';
     } else if (formData.message.trim().length < 10) {
-      errs.message = 'Please provide at least 10 characters in your message.';
+      errs.message = 'Message must be at least 10 characters.';
     }
 
     setErrors(errs);
@@ -69,16 +70,16 @@ export const Contact: React.FC = () => {
       setIsSubmitted(true);
       try {
         confetti({
-          particleCount: 50,
-          spread: 60,
+          particleCount: 45,
+          spread: 55,
           origin: { y: 0.8 },
-          colors: ['#A78BFA', '#C4B5FD', '#101014']
+          colors: ['#E6A995', '#F2C4B5', '#2B1E30']
         });
       } catch {
-        // Confetti is decorative
+        // decorative
       }
       setFormData({ name: '', email: '', subject: '', message: '' });
-    }, 1200);
+    }, 1100);
   };
 
   const handleCopyEmail = () => {
@@ -88,292 +89,254 @@ export const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-24 relative border-t border-border/60">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="py-28 sm:py-36 relative bg-[#160F19] border-t border-[#403044]/60">
+      {/* Subtle ambient peach lighting */}
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#E6A995]/[0.03] rounded-full blur-[140px] pointer-events-none" />
+
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Editorial Heading specified by user */}
-        <div className="max-w-3xl mb-16">
-          <div className="flex items-center gap-2 text-accent font-mono text-xs uppercase tracking-wider mb-3">
-            <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-            <span>Initiate Dialogue</span>
-          </div>
-          <h2 className="font-heading font-bold text-3xl sm:text-5xl lg:text-6xl text-text-primary tracking-tight leading-tight">
-            Have an interesting idea?<br />
-            <span className="font-editorial italic font-normal text-text-secondary">
-              Let's build something meaningful.
-            </span>
+        {/* Section Header */}
+        <div className="mb-14 sm:mb-20 text-center max-w-2xl mx-auto">
+          <span className="text-[11px] uppercase tracking-[0.26em] font-sans font-medium text-[#E6A995] mb-3 block">
+            GET IN TOUCH
+          </span>
+          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl text-[#F7EFF4] font-normal tracking-tight mb-4">
+            Let's Create Something Meaningful.
           </h2>
-          <p className="text-text-secondary text-sm sm:text-base mt-4 font-sans leading-relaxed">
-            Whether you have an internship opportunity, a project proposal, an open-source collaboration, or just want to talk about system architecture—my inbox is always open.
+          <p className="text-sm sm:text-base font-sans text-[#B3A2AE] font-normal">
+            Have an idea, project or opportunity? Let's connect.
           </p>
         </div>
 
-        {/* Contact Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        {/* 2-Column Minimal Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
           
-          {/* Left Column: Direct Info & Social Channels (5 cols) */}
+          {/* Left Column: Direct Info, Socials, & Resume Card */}
           <div className="lg:col-span-5 space-y-6">
             
-            {/* Quick Email Card */}
-            <div className="bg-bg-card border border-border rounded-2xl p-6 bento-card relative">
-              <span className="text-xs font-mono text-text-muted uppercase tracking-wider block mb-2">
-                Primary Direct Channel
+            {/* Quick Contact Details */}
+            <div className="p-7 rounded-2xl bg-[#2B1E30]/70 border border-[#403044] space-y-4">
+              <span className="text-[11px] font-sans uppercase tracking-wider text-[#E6A995] block mb-2">
+                Direct Channels
               </span>
-              <div className="flex items-center justify-between gap-3">
-                <a
-                  href={`mailto:${PERSONAL_INFO.email}`}
-                  className="font-mono text-sm sm:text-base text-accent hover:underline break-all"
-                >
-                  {PERSONAL_INFO.email}
-                </a>
-                <button
-                  onClick={handleCopyEmail}
-                  className="p-2 rounded-lg bg-bg-elevated hover:bg-border text-text-secondary hover:text-text-primary border border-border transition-colors shrink-0"
-                  title="Copy email to clipboard"
-                >
-                  {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
-                </button>
-              </div>
-            </div>
 
-            {/* Quick Phone & Location Details */}
-            <div className="bg-bg-card border border-border rounded-2xl p-6 bento-card space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-lg bg-bg-elevated border border-border flex items-center justify-center text-accent">
-                  <Phone className="w-4 h-4" />
-                </div>
+              {/* Email */}
+              <div className="flex items-center justify-between pb-3 border-b border-[#403044]/60">
                 <div>
-                  <span className="text-xs font-mono text-text-muted block">Direct Contact</span>
+                  <span className="text-[11px] font-mono text-[#8E7D8A] block">Email</span>
                   <a
-                    href={`tel:${PERSONAL_INFO.phone}`}
-                    className="font-mono text-xs sm:text-sm text-text-primary hover:text-accent transition-colors"
+                    href={`mailto:${PERSONAL_INFO.email}`}
+                    className="text-sm font-sans text-[#F7EFF4] hover:text-[#E6A995] transition-colors"
                   >
-                    {PERSONAL_INFO.phone}
+                    {PERSONAL_INFO.email}
                   </a>
                 </div>
+                <button
+                  onClick={handleCopyEmail}
+                  className="p-2 rounded-lg bg-[#211725] hover:bg-[#37283E] text-[#B3A2AE] hover:text-[#E6A995] border border-[#403044] transition-colors"
+                  title="Copy email to clipboard"
+                  aria-label="Copy email"
+                >
+                  {copied ? <Check className="w-4 h-4 text-[#E6A995]" /> : <Copy className="w-4 h-4" />}
+                </button>
               </div>
 
-              <div className="flex items-center gap-3 pt-3 border-t border-border/60">
-                <div className="w-9 h-9 rounded-lg bg-bg-elevated border border-border flex items-center justify-center text-accent">
+              {/* Location */}
+              <div className="flex items-center gap-3 pt-1">
+                <div className="w-8 h-8 rounded-full bg-[#211725] border border-[#403044] flex items-center justify-center text-[#E6A995]">
                   <MapPin className="w-4 h-4" />
                 </div>
                 <div>
-                  <span className="text-xs font-mono text-text-muted block">Current Base</span>
-                  <span className="font-sans text-xs sm:text-sm text-text-primary">
-                    Mumbai, Maharashtra, India
+                  <span className="text-[11px] font-mono text-[#8E7D8A] block">Location</span>
+                  <span className="text-xs sm:text-sm font-sans text-[#F7EFF4]">
+                    {PERSONAL_INFO.location}
                   </span>
                 </div>
               </div>
             </div>
 
-            {/* Social Network Profiles */}
-            <div className="bg-bg-card border border-border rounded-2xl p-6 bento-card">
-              <span className="text-xs font-mono text-text-muted uppercase tracking-wider block mb-4">
-                Professional Networks & Profiles
+            {/* Social Links Row */}
+            <div className="p-7 rounded-2xl bg-[#2B1E30]/70 border border-[#403044]">
+              <span className="text-[11px] font-sans uppercase tracking-wider text-[#E6A995] block mb-4">
+                Social Profiles
               </span>
-
-              <div className="space-y-2.5">
-                <a
-                  href={PERSONAL_INFO.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-between p-3 rounded-xl bg-bg-elevated/60 hover:bg-bg-elevated border border-border/70 hover:border-accent/40 text-text-primary transition-all group"
-                >
-                  <div className="flex items-center gap-3">
-                    <Linkedin className="w-4 h-4 text-accent" />
-                    <span className="font-heading font-medium text-xs sm:text-sm">
-                      LinkedIn
-                    </span>
-                  </div>
-                  <ArrowUpRight className="w-4 h-4 text-text-muted group-hover:text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-                </a>
-
+              <div className="flex items-center gap-3">
                 <a
                   href={PERSONAL_INFO.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between p-3 rounded-xl bg-bg-elevated/60 hover:bg-bg-elevated border border-border/70 hover:border-accent/40 text-text-primary transition-all group"
+                  className="w-10 h-10 rounded-full bg-[#211725] border border-[#403044] text-[#B3A2AE] hover:text-[#E6A995] hover:border-[#E6A995] hover:bg-[#37283E] transition-all flex items-center justify-center hover:scale-105"
+                  title="GitHub"
                 >
-                  <div className="flex items-center gap-3">
-                    <Github className="w-4 h-4 text-accent" />
-                    <span className="font-heading font-medium text-xs sm:text-sm">
-                      GitHub
-                    </span>
-                  </div>
-                  <ArrowUpRight className="w-4 h-4 text-text-muted group-hover:text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                  <Github className="w-4 h-4" />
+                </a>
+
+                <a
+                  href={PERSONAL_INFO.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-[#211725] border border-[#403044] text-[#B3A2AE] hover:text-[#E6A995] hover:border-[#E6A995] hover:bg-[#37283E] transition-all flex items-center justify-center hover:scale-105"
+                  title="LinkedIn"
+                >
+                  <Linkedin className="w-4 h-4" />
                 </a>
 
                 <a
                   href={PERSONAL_INFO.x}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between p-3 rounded-xl bg-bg-elevated/60 hover:bg-bg-elevated border border-border/70 hover:border-accent/40 text-text-primary transition-all group"
+                  className="w-10 h-10 rounded-full bg-[#211725] border border-[#403044] text-[#B3A2AE] hover:text-[#E6A995] hover:border-[#E6A995] hover:bg-[#37283E] transition-all flex items-center justify-center hover:scale-105"
+                  title="X"
                 >
-                  <div className="flex items-center gap-3">
-                    <Twitter className="w-4 h-4 text-accent" />
-                    <span className="font-heading font-medium text-xs sm:text-sm">
-                      X (Twitter)
-                    </span>
-                  </div>
-                  <ArrowUpRight className="w-4 h-4 text-text-muted group-hover:text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                  <Twitter className="w-4 h-4" />
                 </a>
               </div>
             </div>
 
+            {/* Dedicated Resume Card (Section 10) */}
+            <div className="p-7 rounded-2xl bg-[#2B1E30]/70 border border-[#403044] flex flex-col justify-between">
+              <div>
+                <span className="text-[11px] font-sans uppercase tracking-wider text-[#E6A995] block mb-1">
+                  Curriculum Vitae
+                </span>
+                <h3 className="font-serif text-xl text-[#F7EFF4] font-normal mb-2">
+                  Verified Resume
+                </h3>
+                <p className="text-xs font-sans text-[#B3A2AE] leading-relaxed mb-5">
+                  View the latest verified PDF covering academic history, technical proficiencies, and project architecture.
+                </p>
+              </div>
+
+              <a
+                href={PERSONAL_INFO.resumeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 w-full py-3 rounded-full bg-[#E6A995] text-[#160F19] font-sans font-semibold text-xs hover:bg-[#D9907B] transition-all shadow-md"
+              >
+                <FileText className="w-4 h-4" />
+                <span>View Resume</span>
+              </a>
+            </div>
+
           </div>
 
-          {/* Right Column: Interactive Contact Form (7 cols) */}
-          <div className="lg:col-span-7 bg-bg-card border border-border rounded-2xl p-7 sm:p-9 bento-card relative">
-            <h3 className="font-heading font-bold text-xl text-text-primary mb-2">
-              Send a Message
-            </h3>
-            <p className="text-xs text-text-secondary mb-6 font-sans">
-              Fill out the form below and I will respond to your inquiry within 24 hours.
-            </p>
+          {/* Right Column: Minimal Contact Form */}
+          <div className="lg:col-span-7">
+            <div className="p-7 sm:p-9 rounded-2xl bg-[#2B1E30] border border-[#403044]">
+              <span className="text-[11px] font-sans uppercase tracking-wider text-[#E6A995] block mb-2">
+                Send an Inquiry
+              </span>
+              <h3 className="font-serif text-2xl text-[#F7EFF4] font-normal mb-6">
+                Start a Conversation
+              </h3>
 
-            {isSubmitted ? (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="p-8 rounded-xl bg-bg-elevated/80 border border-emerald-500/30 text-center space-y-4"
-              >
-                <div className="w-12 h-12 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 mx-auto flex items-center justify-center">
-                  <CheckCircle className="w-6 h-6" />
+              {isSubmitted ? (
+                <div className="p-6 rounded-xl bg-[#211725] border border-[#403044] text-center space-y-3">
+                  <div className="w-10 h-10 rounded-full bg-[#E6A995]/20 text-[#E6A995] flex items-center justify-center mx-auto">
+                    <CheckCircle className="w-5 h-5" />
+                  </div>
+                  <h4 className="font-serif text-xl text-[#F7EFF4]">Message Dispatched</h4>
+                  <p className="text-xs font-sans text-[#B3A2AE] leading-relaxed">
+                    Thank you for reaching out. I have received your note and will reply promptly.
+                  </p>
+                  <button
+                    onClick={() => setIsSubmitted(false)}
+                    className="mt-3 px-4 py-1.5 rounded-full bg-[#2B1E30] border border-[#403044] text-xs font-sans text-[#E6A995] hover:border-[#E6A995]"
+                  >
+                    Send another message
+                  </button>
                 </div>
-                <h4 className="font-heading font-bold text-lg text-text-primary">
-                  Message Dispatched Successfully!
-                </h4>
-                <p className="text-xs sm:text-sm text-text-secondary max-w-md mx-auto font-sans leading-relaxed">
-                  Thank you for reaching out. A confirmation has been logged, and I will review your note shortly.
-                </p>
-                <button
-                  onClick={() => setIsSubmitted(false)}
-                  className="px-5 py-2 rounded-xl bg-accent text-bg-main text-xs font-heading font-semibold hover:bg-accent-light transition-all"
-                >
-                  Send Another Note
-                </button>
-              </motion.div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
-                
-                {/* Name & Email Row */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {/* Name */}
+                    <div>
+                      <label className="block text-xs font-sans text-[#B3A2AE] mb-1.5">
+                        Your Name
+                      </label>
+                      <input
+                        type="text"
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        placeholder="e.g. Jane Doe"
+                        className="w-full px-4 py-2.5 rounded-xl bg-[#211725] border border-[#403044] focus:border-[#E6A995] focus:outline-none text-xs font-sans text-[#F7EFF4] placeholder-[#8E7D8A] transition-colors"
+                      />
+                      {errors.name && (
+                        <span className="text-[10px] text-[#E6A995] mt-1 block">{errors.name}</span>
+                      )}
+                    </div>
+
+                    {/* Email */}
+                    <div>
+                      <label className="block text-xs font-sans text-[#B3A2AE] mb-1.5">
+                        Email Address
+                      </label>
+                      <input
+                        type="email"
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        placeholder="e.g. jane@company.com"
+                        className="w-full px-4 py-2.5 rounded-xl bg-[#211725] border border-[#403044] focus:border-[#E6A995] focus:outline-none text-xs font-sans text-[#F7EFF4] placeholder-[#8E7D8A] transition-colors"
+                      />
+                      {errors.email && (
+                        <span className="text-[10px] text-[#E6A995] mt-1 block">{errors.email}</span>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Subject */}
                   <div>
-                    <label className="block text-xs font-mono text-text-secondary mb-1.5">
-                      Your Name <span className="text-accent">*</span>
+                    <label className="block text-xs font-sans text-[#B3A2AE] mb-1.5">
+                      Subject
                     </label>
                     <input
                       type="text"
-                      value={formData.name}
-                      onChange={(e) => {
-                        setFormData({ ...formData, name: e.target.value });
-                        if (errors.name) setErrors({ ...errors, name: undefined });
-                      }}
-                      placeholder="e.g. Elena Rostova"
-                      className={`w-full px-4 py-3 rounded-xl bg-bg-elevated border text-xs sm:text-sm font-sans text-text-primary placeholder:text-text-muted focus:outline-none transition-colors ${
-                        errors.name ? 'border-rose-500/70 focus:border-rose-500' : 'border-border focus:border-accent'
-                      }`}
+                      value={formData.subject}
+                      onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                      placeholder="e.g. Internship Inquiry / Web Development Project"
+                      className="w-full px-4 py-2.5 rounded-xl bg-[#211725] border border-[#403044] focus:border-[#E6A995] focus:outline-none text-xs font-sans text-[#F7EFF4] placeholder-[#8E7D8A] transition-colors"
                     />
-                    {errors.name && (
-                      <span className="text-[11px] font-mono text-rose-400 mt-1 block">
-                        {errors.name}
-                      </span>
+                    {errors.subject && (
+                      <span className="text-[10px] text-[#E6A995] mt-1 block">{errors.subject}</span>
                     )}
                   </div>
 
+                  {/* Message */}
                   <div>
-                    <label className="block text-xs font-mono text-text-secondary mb-1.5">
-                      Email Address <span className="text-accent">*</span>
+                    <label className="block text-xs font-sans text-[#B3A2AE] mb-1.5">
+                      Message
                     </label>
-                    <input
-                      type="email"
-                      value={formData.email}
-                      onChange={(e) => {
-                        setFormData({ ...formData, email: e.target.value });
-                        if (errors.email) setErrors({ ...errors, email: undefined });
-                      }}
-                      placeholder="e.g. elena@company.com"
-                      className={`w-full px-4 py-3 rounded-xl bg-bg-elevated border text-xs sm:text-sm font-sans text-text-primary placeholder:text-text-muted focus:outline-none transition-colors ${
-                        errors.email ? 'border-rose-500/70 focus:border-rose-500' : 'border-border focus:border-accent'
-                      }`}
+                    <textarea
+                      rows={4}
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      placeholder="Share project context, technical scope or timeline..."
+                      className="w-full px-4 py-2.5 rounded-xl bg-[#211725] border border-[#403044] focus:border-[#E6A995] focus:outline-none text-xs font-sans text-[#F7EFF4] placeholder-[#8E7D8A] transition-colors resize-none"
                     />
-                    {errors.email && (
-                      <span className="text-[11px] font-mono text-rose-400 mt-1 block">
-                        {errors.email}
-                      </span>
+                    {errors.message && (
+                      <span className="text-[10px] text-[#E6A995] mt-1 block">{errors.message}</span>
                     )}
                   </div>
-                </div>
 
-                {/* Subject */}
-                <div>
-                  <label className="block text-xs font-mono text-text-secondary mb-1.5">
-                    Subject / Topic <span className="text-accent">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.subject}
-                    onChange={(e) => {
-                      setFormData({ ...formData, subject: e.target.value });
-                      if (errors.subject) setErrors({ ...errors, subject: undefined });
-                    }}
-                    placeholder="e.g. Summer Full-Stack Internship Opportunity"
-                    className={`w-full px-4 py-3 rounded-xl bg-bg-elevated border text-xs sm:text-sm font-sans text-text-primary placeholder:text-text-muted focus:outline-none transition-colors ${
-                      errors.subject ? 'border-rose-500/70 focus:border-rose-500' : 'border-border focus:border-accent'
-                    }`}
-                  />
-                  {errors.subject && (
-                    <span className="text-[11px] font-mono text-rose-400 mt-1 block">
-                      {errors.subject}
-                    </span>
-                  )}
-                </div>
+                  {/* Submit Button */}
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="inline-flex items-center justify-center gap-2 w-full py-3 rounded-full bg-[#E6A995] text-[#160F19] font-sans font-semibold text-xs hover:bg-[#D9907B] transition-all shadow-md disabled:opacity-50"
+                  >
+                    {isSubmitting ? (
+                      <span className="inline-block w-4 h-4 border-2 border-[#160F19] border-t-transparent rounded-full animate-spin" />
+                    ) : (
+                      <>
+                        <Send className="w-3.5 h-3.5" />
+                        <span>Send Message</span>
+                      </>
+                    )}
+                  </button>
+                </form>
+              )}
 
-                {/* Message */}
-                <div>
-                  <label className="block text-xs font-mono text-text-secondary mb-1.5">
-                    Your Message <span className="text-accent">*</span>
-                  </label>
-                  <textarea
-                    rows={5}
-                    value={formData.message}
-                    onChange={(e) => {
-                      setFormData({ ...formData, message: e.target.value });
-                      if (errors.message) setErrors({ ...errors, message: undefined });
-                    }}
-                    placeholder="Share brief details about the project, role, or collaboration..."
-                    className={`w-full px-4 py-3 rounded-xl bg-bg-elevated border text-xs sm:text-sm font-sans text-text-primary placeholder:text-text-muted focus:outline-none transition-colors resize-none ${
-                      errors.message ? 'border-rose-500/70 focus:border-rose-500' : 'border-border focus:border-accent'
-                    }`}
-                  />
-                  {errors.message && (
-                    <span className="text-[11px] font-mono text-rose-400 mt-1 block">
-                      {errors.message}
-                    </span>
-                  )}
-                </div>
-
-                {/* Submit CTA */}
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-accent hover:bg-accent-light text-bg-main font-heading font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all disabled:opacity-50 shadow-[0_4px_24px_-6px_rgba(167,139,250,0.5)]"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <div className="w-4 h-4 border-2 border-bg-main border-t-transparent rounded-full animate-spin" />
-                      <span>Transmitting Message...</span>
-                    </>
-                  ) : (
-                    <>
-                      <span>Transmit Message</span>
-                      <Send className="w-4 h-4" />
-                    </>
-                  )}
-                </button>
-
-              </form>
-            )}
+            </div>
           </div>
 
         </div>

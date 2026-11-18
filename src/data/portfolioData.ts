@@ -3,12 +3,12 @@ import { Project, SkillCategory, Achievement, GitHubRepo } from '../types';
 export const PERSONAL_INFO = {
   name: 'Anjali Vishwakarma',
   fullName: 'Anjali Manoj Vishwakarma',
-  brand: 'ANJALI.V',
+  brand: 'ANJALI',
   role: 'Full-Stack Developer',
-  identity: 'Full-Stack Developer | Web Developer | AI & Technology Enthusiast',
-  tagline: 'Building digital experiences through code, creativity and technology.',
-  about: `I am a BTech Information Technology student at Shree L. R. Tiwari College of Engineering, Mumbai (graduating in 2028). My work sits at the intersection of robust backend engineering and thoughtful, human-first frontend design. I am deeply interested in developing scalable web applications, integrating AI capabilities to solve tangible problems, and crafting interfaces that prioritize clarity and refined aesthetics.`,
-  philosophy: `Engineering is not just about making things function—it's about making them clear, dependable, and intuitive. Whether designing hospital queue coordination, public library discovery platforms, or interactive maps, I build with attention to system architecture and user empathy.`,
+  identity: 'Full-Stack Developer | Creative Developer | Technology Enthusiast',
+  tagline: 'Building thoughtful digital experiences.',
+  about: `I'm Anjali Manoj Vishwakarma, an Information Technology engineering student passionate about building thoughtful digital experiences through technology and creativity. Constantly learning, experimenting with modern architectures, and developing practical solutions to real-world challenges.`,
+  philosophy: `Engineering is not just about making things function—it's about making them thoughtful, dependable, and intuitive. Whether designing hospital queue coordination, public library discovery platforms, or interactive maps, I build with attention to system architecture and user empathy.`,
   location: 'Mumbai, India',
   email: 'anjali13anuj@gmail.com',
   phone: '+91 9987406608',
@@ -16,8 +16,7 @@ export const PERSONAL_INFO = {
   github: 'https://github.com/anjalivish05',
   x: 'https://x.com/anjalivish05',
   resumeUrl: '/resume.pdf',
-  avatarUrl: '/assets/profile.jpg',
-  status: 'Open for Summer & Fall Opportunities',
+  status: 'Open for Opportunities',
   education: [
     {
       institution: 'Shree L. R. Tiwari College of Engineering',
@@ -40,88 +39,203 @@ export const PERSONAL_INFO = {
 
 export const PROJECTS: Project[] = [
   {
-    id: 'hospitalflow',
-    title: 'HospitalFlow',
-    subtitle: 'Smart Hospital OPD Coordination Platform',
-    tagline: 'Real-Time OPD Coordination & Smart Queue Management',
-    shortDescription: 'Multi-hospital OPD coordination platform engineered to reduce wait times and anxiety through live digital tokens, dynamic queue visualization, and doctor availability tracking.',
-    overview: 'HospitalFlow transforms unpredictable outpatient clinic delays into a transparent, coordinated digital experience. Rather than traditional static appointment bookings that fail to reflect doctor emergencies or procedure delays, HospitalFlow provides patients and administrators with live OPD queue updates, digital token issuance, and estimated consultation wait times.',
-    category: 'Frontend / UI',
-    role: 'Frontend UI/UX Developer',
-    image: '/assets/projects/hospitalflow-preview.png',
-    tags: ['React', 'JavaScript', 'Figma', 'Python', 'FastAPI', 'PostgreSQL', 'Tailwind CSS'],
-    githubUrl: 'https://github.com/subhamstiwari24-dot/HospitalFlow.git',
-    liveDemoUrl: 'https://github.com/subhamstiwari24-dot/HospitalFlow.git',
+    id: 'movesmart',
+    title: 'MoveSmart',
+    subtitle: 'Smart Mobility & Urban Transportation',
+    role: 'Full Stack Developer',
+    year: '2024',
+    tagline: 'Incident Reporting, Interactive Mapping & Structured Intelligence',
+    shortDescription: 'A smart mobility platform designed to support urban transportation management through incident reporting, interactive mapping and structured incident information.',
+    overview: 'MoveSmart bridges commuters and municipal traffic command through real-time hazard reporting, geotagged GPS, and photographic incident verification across highway corridors and arterial urban connectors.',
+    category: 'Smart Systems',
+    image: '/assets/projects/movesmart-inner.png',
+    deploymentUrl: 'https://move-smart-five.vercel.app',
+    liveDemoUrl: 'https://move-smart-five.vercel.app',
+    githubUrl: 'https://github.com/anjalivish05',
+    tags: ['React', 'TypeScript', 'Java Spring Boot', 'PostgreSQL', 'Maps Integration', 'Tailwind CSS'],
     featured: true,
-    problem: 'Hospital outpatient departments (OPDs) frequently suffer from overcrowded waiting rooms, unpredictable doctor schedules, and lack of real-time visibility. Patients are left stranded with no sense of when their turn will arrive, while hospital staff deal with chaotic crowd congestion.',
-    solution: 'Designed and engineered responsive, high-clarity patient and admin interfaces that interface with FastAPI backends. Patients receive dynamic digital tokens that show queue position in real-time, while administrators and doctors can adjust patient flow with immediate client-side UI reflections.',
+    problem: 'Urban commuters and traffic management authorities suffer from delayed road incident awareness, uncoordinated hazard clearing, and lack of verified photographic evidence.',
+    solution: 'Engineered an interactive incident intelligence portal combining Leaflet mapping, Spring Boot microservices, geotagged GPS reporting, and live status dispatch workflows.',
     keyFeatures: [
       {
-        title: 'Digital Token Generation & Live Tracking',
-        description: 'Instant ticket booking with unique token identifiers, estimated wait windows, and live queue progress indicators.'
+        title: 'Geospatial Incident Reporting',
+        description: 'Real-time road hazard logging with geotagged GPS coordinates and photographic documentation.'
       },
       {
-        title: 'Doctor Schedule & Status Dashboard',
-        description: 'Real-time toggle states showing Active, In-Consultation, On Break, or Emergency states for doctors across multiple OPD wings.'
+        title: 'Interactive Operations Map',
+        description: 'Live interactive mapping interface visualizing incidents, road congestion, and clearance progress.'
       },
       {
-        title: 'Dynamic Waiting-Time Estimation UI',
-        description: 'Visual cues showing calculated consultation delays and queue pace to set realistic patient expectations.'
-      },
-      {
-        title: 'Accessible & Responsive Healthcare UI',
-        description: 'High-contrast, accessible typography and clear color-coded indicators designed for users of all digital literacy levels.'
+        title: 'Structured Tracking & Dispatch',
+        description: 'Unique incident tracking IDs allowing citizens and dispatchers to monitor resolution stages.'
       }
     ],
     architecture: {
-      frontend: 'HTML5, CSS3, JavaScript, Responsive Component Architecture, Tailwind CSS',
-      backend: 'Python FastAPI (RESTful API endpoints for token issuance and doctor status)',
-      database: 'PostgreSQL (relational schema for patients, doctors, appointments, and token states)',
-      apisAndAi: 'AI-assisted waiting time calculation and OPD throughput optimization algorithms',
-      deployment: 'Modular client-server deployment with Git version control'
+      frontend: 'React, TypeScript, Leaflet Maps, Tailwind CSS, Vite',
+      backend: 'Java Spring Boot RESTful microservices for incident processing',
+      database: 'PostgreSQL with spatial indexing for location-based queries',
+      apisAndAi: 'Map integration, telemetry calculation, and automated status alerts',
+      deployment: 'Vercel / Cloud Container Deployment'
     },
     myContribution: [
-      'Engineered the responsive frontend user experience across patient-token views and doctor-queue monitoring dashboards.',
-      'Designed high-fidelity mockups, UI components, and design systems in Figma prior to code implementation.',
-      'Built dynamic token state cards, modal confirmations, and form validation for booking workflows.',
-      'Integrated frontend data stores with REST API endpoints ensuring consistent loading, error, and optimistic state feedback.',
-      'Collaborated closely with backend teammates to ensure reliable data serialization and token status synchronization.'
+      'Engineered the responsive citizen and command center frontend interfaces in React and TypeScript.',
+      'Integrated interactive geospatial mapping with custom marker layers and real-time state updates.',
+      'Built structured incident reporting forms with client-side validation and photo attachments.'
     ],
     developmentChallenges: [
       {
-        challenge: 'Synchronizing real-time queue states smoothly without jarring layout shifts or constant intrusive polling.',
-        solution: 'Implemented structured status polling with memoized UI cards and smooth transition animations that highlight state changes without freezing user actions.'
-      },
-      {
-        challenge: 'Designing an interface that remains crystal clear under stressful hospital conditions on small mobile screens.',
-        solution: 'Adopted an editorial high-contrast hierarchy with large token numbering, distinct status badges, and minimal visual noise.'
+        challenge: 'Rendering high-density incident markers without map panning stutter on mobile screens.',
+        solution: 'Implemented marker clustering and viewport-bounded query debouncing.'
       }
     ],
     resultsAndLearnings: [
-      'Gained deep experience in healthcare UI/UX design considerations, where clarity directly impacts patient anxiety.',
-      'Learned strict separation of concerns between backend state ownership and frontend responsive rendering.',
-      'Successfully delivered a clean, cohesive prototype tested across multiple screen resolutions.'
+      'Deepened proficiency in geospatial UI engineering and Java Spring Boot API integration.',
+      'Delivered an intuitive civic intelligence dashboard tested across multiple device form factors.'
+    ]
+  },
+  {
+    id: 'stealthpay',
+    title: 'Stealth Pay',
+    subtitle: 'Privacy-focused Payments',
+    role: 'Web3 & Full Stack Developer',
+    year: '2026',
+    highlight: 'Developed and submitted to ETHGlobal Mumbai (November 2026).',
+    tagline: 'Resolving the Public Ledger Privacy Paradox on Ethereum',
+    shortDescription: 'A blockchain-based privacy payment concept exploring stealth-address technology to improve payment privacy and reduce public exposure of recipient wallet activity.',
+    overview: 'Stealth Pay resolves the public blockchain privacy paradox where wallet addresses expose entire transaction histories. Utilizing an ERC-5564 dual-key architecture (Viewing key and Spending key), senders interact with ephemeral private keys to generate fresh, single-use, deterministic stealth addresses via ECDH secrets, ensuring zero traceable link on-chain to the recipient.',
+    category: 'Web3 / Privacy',
+    image: '/assets/projects/stealthpay-inner.png',
+    deploymentUrl: 'https://stealth-pay-team1.vercel.app',
+    liveDemoUrl: 'https://stealth-pay-team1.vercel.app',
+    showcaseUrl: 'https://ethglobal.com/showcase/stealth-pay-xtdtj',
+    githubUrl: '',
+    isComingSoonSource: true,
+    tags: ['Web3', 'Blockchain', 'Smart Contracts', 'ERC-5564', 'React', 'TypeScript'],
+    featured: true,
+    problem: 'Public blockchains enforce full transparency by design, exposing account balances and transaction histories to malicious tracking, address poisoning, and targeted threats.',
+    solution: 'Developed an intuitive web application implementing ERC-5564 dual-key stealth addresses with a real-time cryptographic derivation stepper, scanning engine, and one-click sweep modal.',
+    keyFeatures: [
+      {
+        title: 'Stealth Meta-Address Generator',
+        description: 'Deterministic derivation of viewing and spending keypairs with 1-click copy and QR code export.'
+      },
+      {
+        title: 'Real-time Cryptographic Stepper',
+        description: 'Live UI visualization of ephemeral key generation, ECDH shared secret derivation, and stealth address computation.'
+      },
+      {
+        title: 'Automated Payment Scanner',
+        description: 'Lightweight client-side parsing of announcer contract logs using viewing keys without compromising private spending authority.'
+      },
+      {
+        title: 'One-Click Funds Sweeper',
+        description: 'Direct settlement to recipient-specified clean destination wallets in a single transaction.'
+      }
+    ],
+    architecture: {
+      frontend: 'React, TypeScript, RainbowKit/Wagmi, Tailwind CSS',
+      backend: 'Smart contracts implementing ERC-5564 standard on Ethereum testnets',
+      database: 'Client-side local storage indexing for detected stealth payments',
+      apisAndAi: 'Client-side elliptic curve cryptography (ECDH on secp256k1 curve)',
+      deployment: 'IPFS / Vercel Web3 hosting'
+    },
+    myContribution: [
+      'Designed the complete frontend interface specification, visual identity, and component design system.',
+      'Built the interactive cryptographic stepper demonstrating step-by-step mathematical derivation.',
+      'Implemented the receiver dashboard and payment scanner user flow for hackathon demonstration.'
+    ],
+    developmentChallenges: [
+      {
+        challenge: 'Translating complex elliptic curve math into an intuitive visual stepper for non-technical users.',
+        solution: 'Engineered an interactive state machine with progress indicators and simplified cryptographic explanations.'
+      }
+    ],
+    resultsAndLearnings: [
+      'Mastered ERC-5564 privacy standards and dual-key cryptographic workflows.',
+      'Deepened experience designing high-stakes Web3 interfaces requiring maximum clarity and security assurances.'
+    ]
+  },
+  {
+    id: 'royaledge',
+    title: 'Royal Edge Enterprises',
+    subtitle: 'B2B Business Catalogue & Enquiry Platform',
+    label: 'FREELANCE PROJECT',
+    role: 'Full Stack Developer',
+    year: '2024',
+    tagline: 'Precision Fusible Interlining & Backing Materials for Apparel Excellence',
+    shortDescription: 'A B2B manufacturing catalogue and enquiry platform designed to help customers explore embroidery backing materials and submit product enquiries for private quotations.',
+    overview: 'Royal Edge Enterprises is a commercial platform engineered to streamline B2B wholesale transactions. It delivers a modern product showcase, custom quotation builder, order inquiry workflows, and administrative back-office management to eliminate manual paperwork and enhance client acquisition.',
+    category: 'Full-Stack',
+    image: '/assets/projects/royaledge-inner.png',
+    deploymentUrl: 'https://royal-edge-enterprise-v2.vercel.app',
+    liveDemoUrl: 'https://royal-edge-enterprise-v2.vercel.app',
+    githubUrl: 'https://github.com/anjalivish05',
+    tags: ['React', 'TypeScript', 'Java Spring Boot', 'PostgreSQL', 'Tailwind CSS'],
+    featured: true,
+    problem: 'Traditional B2B wholesale procurement involves slow manual quoting, disconnected product sheets, and delayed inquiry handling that reduces customer conversion.',
+    solution: 'Engineered a modern web portal allowing wholesale buyers to browse categorized products, configure quotation requests, and submit structured procurement inquiries directly to administrators.',
+    keyFeatures: [
+      {
+        title: 'Dynamic Product Catalog',
+        description: 'Searchable inventory with specifications, volume pricing brackets, and high-resolution galleries.'
+      },
+      {
+        title: 'Quotation Request Engine',
+        description: 'Step-by-step RFQ submission with customized parameter selection and quantity tiers.'
+      },
+      {
+        title: 'Customer Inquiry Portal',
+        description: 'Structured inquiry routing with automated acknowledgment and status tracking.'
+      },
+      {
+        title: 'Administrative Order Review',
+        description: 'Secure back-office management for processing customer requests and order dispatching.'
+      }
+    ],
+    architecture: {
+      frontend: 'React, TypeScript, Tailwind CSS, Lucide React, Vite',
+      backend: 'Java Spring Boot / RESTful APIs for catalog indexing and quotation ingestion',
+      database: 'Structured PostgreSQL storage for catalog items and customer inquiries',
+      apisAndAi: 'Automated quotation generation and structured email notification webhooks',
+      deployment: 'Vercel / Cloud hosting'
+    },
+    myContribution: [
+      'Designed the UI architecture, component hierarchy, and design tokens in Figma and code.',
+      'Implemented interactive catalog filtering, product modal views, and multi-step quotation forms.',
+      'Developed responsive layouts optimized for desktop buyers and mobile procurement agents.'
+    ],
+    developmentChallenges: [
+      {
+        challenge: 'Managing dynamic pricing logic based on tiered bulk order quantities without UI latency.',
+        solution: 'Created memoized calculation hooks that update subtotal estimates client-side instantaneously.'
+      }
+    ],
+    resultsAndLearnings: [
+      'Delivered a commercial production solution meeting real-world business requirements.',
+      'Strengthened expertise in client consulting, scope definition, and end-to-end frontend architecture.'
     ]
   },
   {
     id: 'libraryease',
     title: 'LibraryEase',
-    subtitle: 'Public Library Information & Vintage Digital Platform',
-    tagline: 'A Smarter Way to Discover, Explore and Experience Public Libraries',
-    shortDescription: 'Full-stack platform digitizing public libraries with AI-powered book recommendations via Google Gemini, branch geolocation, digital cataloging, and a unique vintage aesthetic.',
+    subtitle: 'Public Library Management & Digital Services',
+    role: 'Full Stack Developer',
+    year: '2024',
+    tagline: 'Your Gateway to Knowledge — Public Library Management & Digital Services',
+    shortDescription: 'A modern public library management system and digital service platform connecting classical book preservation with intelligent discovery, catalogue search, and branch navigation.',
     overview: 'LibraryEase modernizes municipal and public library systems that traditionally lack modern web accessibility. By blending a warm vintage library aesthetic with cutting-edge AI assistance, LibraryEase enables readers to search library catalogs, discover branch availability, track borrow history, and receive nuanced reading recommendations generated by Google Gemini AI.',
     category: 'Full-Stack',
-    role: 'Full-Stack Developer & UI Architect',
-    image: '/assets/projects/libraryease-preview.png',
+    image: '/assets/projects/libraryease-inner.png',
     caseStudyImages: [
-      '/assets/projects/libraryease-preview.png',
+      '/assets/projects/libraryease-inner.png',
       '/assets/projects/libraryease-architecture.png',
       '/assets/projects/libraryease-flowchart.png',
       '/assets/projects/libraryease-emblem.png'
     ],
-    tags: ['React', 'FastAPI', 'Python', 'Gemini AI', 'PostgreSQL', 'Tailwind CSS', 'Vite'],
+    deploymentUrl: 'https://libraryease-frontend.vercel.app',
+    liveDemoUrl: 'https://libraryease-frontend.vercel.app',
     githubUrl: 'https://github.com/anjalivish05/LibraryEase-Vintage-and-Digital-Library.git',
-    liveDemoUrl: 'https://github.com/anjalivish05/LibraryEase-Vintage-and-Digital-Library.git',
+    tags: ['React', 'Python', 'Leaflet', 'JavaScript', 'HTML5', 'CSS3'],
     featured: true,
     problem: 'Public and community libraries struggle to engage digital-native readers due to outdated paper-based registries, fragmented branch catalogs, and lack of conversational search capabilities.',
     solution: 'Built a full-stack digital hub connecting library branches with readers. Integrated Google Gemini AI to act as a virtual librarian offering thematic recommendations, created an intuitive book reservation system, and provided branch discovery features.',
@@ -144,8 +258,8 @@ export const PROJECTS: Project[] = [
       }
     ],
     architecture: {
-      frontend: 'React with Vite, Tailwind CSS, Lucide Icons, and responsive design',
-      backend: 'FastAPI (Python) providing lightweight, high-performance async REST endpoints',
+      frontend: 'React with Vite, Leaflet, Tailwind CSS, Lucide Icons, and responsive design',
+      backend: 'Python FastAPI providing lightweight, high-performance async REST endpoints',
       database: 'PostgreSQL / SQLite with SQLAlchemy ORM for book entities, branches, and loan tracking',
       apisAndAi: 'Google Gemini Pro API integration for natural language literary recommendations',
       deployment: 'Vercel / Render cloud deployment with CI pipeline'
@@ -171,198 +285,76 @@ export const PROJECTS: Project[] = [
       'Developed deep understanding of prompt engineering and structured JSON outputs with Gemini AI.',
       'Produced verified research documentation and complete system architecture diagrams.'
     ]
-  },
-  {
-    id: 'manzil',
-    title: 'Manzil',
-    subtitle: 'AI-Powered Cafe Finder & Discovery Experience',
-    tagline: 'Find Your Next Productive or Cozy Corner',
-    shortDescription: 'Smart cafe discovery web application tailored for Mumbai students and professionals, offering purpose-based recommendations (Work, Study, Date, Friends) and Google Maps integration.',
-    overview: 'Manzil is designed to eliminate the trial-and-error of finding the right spot to study, work remotely, or socialize. By organizing spots by budget, ambience, seating amenities, Wi-Fi availability, and purpose, Manzil helps users pinpoint their ideal cafe within seconds.',
-    category: 'AI / Web',
-    role: 'Full-Stack Developer & UI Designer',
-    image: '/assets/projects/manzil-hero.png',
-    tags: ['JavaScript', 'HTML5', 'CSS3', 'Google Maps API', 'Python', 'MySQL'],
-    githubUrl: 'https://github.com/anjalivish05/Manzil---The-CafeFinder.git',
-    liveDemoUrl: 'https://github.com/anjalivish05/Manzil---The-CafeFinder.git',
-    featured: true,
-    problem: 'Standard mapping applications list hundreds of cafes but fail to answer practical questions: Does this cafe have reliable Wi-Fi? Are there power outlets? Is it too noisy for remote meetings or studying? What is the average spend per person?',
-    solution: 'Engineered a purpose-driven cafe discovery platform with curated categories (Work, Study, Date, Friends), budget filters, interactive Google Maps pinpoints, and smart matching logic.',
-    keyFeatures: [
-      {
-        title: 'Purpose-Driven Quick Picks',
-        description: 'Instant filters for Work-Friendly (Wi-Fi + Power Outlets), Quiet Study Zones, Romantic Dates, and Casual Hangouts.'
-      },
-      {
-        title: 'Interactive Google Maps Integration',
-        description: 'Geospatial markers with live distance calculations, directions, and locality highlights.'
-      },
-      {
-        title: 'Budget-Tier Matching Matrix',
-        description: 'Transparent average cost per head breakdowns with menu price tiering.'
-      },
-      {
-        title: 'Responsive Mobile Exploration',
-        description: 'Touch-optimized card deck navigation designed for on-the-go exploration.'
-      }
-    ],
-    architecture: {
-      frontend: 'HTML5, CSS3, Modern JavaScript with responsive Flexbox/Grid layouts',
-      backend: 'Python / Node backend handling cafe dataset queries and filtering heuristics',
-      database: 'MySQL relational database storing venue attributes, amenities, and user ratings',
-      apisAndAi: 'Google Maps JavaScript API, Places API, and recommendation scoring algorithms',
-      deployment: 'Static/Node web hosting with Git version control'
-    },
-    myContribution: [
-      'Conceptualized and executed the UI/UX design, visual identity, and color palette.',
-      'Developed interactive search, filter chips, and card layout with smooth CSS transitions.',
-      'Implemented Google Maps API integration with custom markers and responsive info windows.',
-      'Structured relational MySQL database schema for cafes, amenities, and pricing tiers.'
-    ],
-    developmentChallenges: [
-      {
-        challenge: 'Accurately representing multi-attribute search queries (e.g., Budget < 500 AND Wi-Fi available AND Quiet) without slow query times.',
-        solution: 'Normalized MySQL indexing on frequent search dimensions and built client-side filtering for sub-millisecond response.'
-      },
-      {
-        challenge: 'Maintaining map responsiveness on low-bandwidth mobile devices.',
-        solution: 'Implemented lazy-loading of map embeds and debounced map panning events.'
-      }
-    ],
-    resultsAndLearnings: [
-      'Gained practical expertise with the Google Maps developer ecosystem.',
-      'Deepened knowledge of consumer-facing UX heuristics and purpose-based filtering mechanisms.'
-    ]
-  },
-  {
-    id: 'transittwin',
-    title: 'TransitTwin',
-    subtitle: 'Smart Urban Transit Solution & Digital Simulation',
-    tagline: 'Real-Time Telemetry & Predictive Fleet Visualization',
-    shortDescription: 'Smart public transit digital twin concept providing live route simulation, vehicle telemetry, congestion hotspot detection, and passenger crowd estimation.',
-    overview: 'TransitTwin explores how smart city infrastructure can modernize public bus and metro transit systems. By modeling transit fleets in a digital twin environment, the platform simulates vehicle arrival times, passenger density bottlenecks, and predictive delay rerouting to improve urban mobility.',
-    category: 'Smart Systems',
-    role: 'System Architect & Frontend Engineer',
-    image: '/assets/projects/transittwin-preview.svg',
-    tags: ['React', 'TypeScript', 'WebSockets', 'Python', 'Leaflet', 'Tailwind CSS'],
-    githubUrl: 'https://github.com/anjalivish05',
-    liveDemoUrl: 'https://github.com/anjalivish05',
-    featured: true,
-    problem: 'Urban commuters suffer from unpredictable public transport wait times and overcrowded vehicles, while municipal transit dispatchers struggle to monitor fleet bottlenecks in real time.',
-    solution: 'Designed an interactive digital twin dashboard that visualizes active transit routes, vehicle telemetry, delay forecasts, and station crowding levels with interactive maps and telemetry graphs.',
-    keyFeatures: [
-      {
-        title: 'Fleet Telemetry Dashboard',
-        description: 'Real-time vehicle position markers, speed indicators, and battery/fuel consumption telemetry.'
-      },
-      {
-        title: 'Congestion & Crowd Heatmaps',
-        description: 'Station-by-station passenger density monitoring to anticipate boarding delays.'
-      },
-      {
-        title: 'Predictive ETA Calculator',
-        description: 'Dynamic arrival estimations adjusted for current corridor traffic and historical delay patterns.'
-      },
-      {
-        title: 'Interactive Route Simulator',
-        description: 'Visual route simulation allowing operators to test headway adjustments and skip-stop schedules.'
-      }
-    ],
-    architecture: {
-      frontend: 'React, TypeScript, Leaflet map integration, Tailwind CSS',
-      backend: 'Python FastAPI with simulated telemetry feeds and WebSocket broadcast channels',
-      database: 'PostgreSQL with PostGIS extensions for spatial queries',
-      apisAndAi: 'Predictive traffic regression modeling and route optimization algorithms',
-      deployment: 'Containerized deployment architecture'
-    },
-    myContribution: [
-      'Designed technical system architecture and state model for digital transit twins.',
-      'Created interactive telemetry visualization dashboard and station status cards.',
-      'Built vector map layers and animated vehicle route tracks.'
-    ],
-    developmentChallenges: [
-      {
-        challenge: 'Rendering high-frequency coordinate updates without causing UI re-render bottlenecks.',
-        solution: 'Utilized React canvas overlays and isolated sub-tree rendering for map vehicle markers.'
-      }
-    ],
-    resultsAndLearnings: [
-      'Explored digital twin principles and real-time geospatial data structures.',
-      'Strengthened TypeScript proficiency and advanced reactive state synchronization.'
-    ]
   }
 ];
 
 export const SKILL_CATEGORIES: SkillCategory[] = [
   {
-    id: 'languages',
-    title: 'Programming Languages',
-    tagline: 'Core languages for algorithm design and systems development',
+    id: 'programming',
+    title: 'Programming',
+    tagline: 'Programming languages used for problem-solving, application development and software engineering.',
     skills: [
       { name: 'Java', badge: 'Core & OOP', featured: true },
-      { name: 'Python', badge: 'FastAPI & AI', featured: true },
-      { name: 'JavaScript', badge: 'ES6+ & Modern', featured: true },
+      { name: 'Python', badge: 'FastAPI & Scripting', featured: true },
       { name: 'C++', badge: 'Data Structures' },
-      { name: 'TypeScript', badge: 'Type Safety' }
+      { name: 'JavaScript', badge: 'ES6+ & Modern', featured: true }
     ]
   },
   {
     id: 'frontend',
     title: 'Frontend Development',
-    tagline: 'Crafting responsive, accessible, and high-performance interfaces',
+    tagline: 'Building responsive, accessible and interactive web experiences.',
     skills: [
       { name: 'React.js', badge: 'Component Architecture', featured: true },
-      { name: 'Tailwind CSS', badge: 'Design Systems', featured: true },
-      { name: 'HTML5 & CSS3', badge: 'Semantic & Layouts' },
-      { name: 'JavaScript (DOM)', badge: 'Interactive UI' },
-      { name: 'Framer Motion', badge: 'Micro-Interactions' },
-      { name: 'Responsive Web Design', badge: 'Mobile-First' }
+      { name: 'TypeScript', badge: 'Type Safety', featured: true },
+      { name: 'HTML5', badge: 'Semantic Structure' },
+      { name: 'CSS3', badge: 'Modern Styling & Grid' }
     ]
   },
   {
     id: 'backend',
-    title: 'Backend & APIs',
-    tagline: 'Designing reliable server architectures and RESTful interfaces',
+    title: 'Backend Development',
+    tagline: 'Developing backend services, APIs and application logic.',
     skills: [
-      { name: 'Java Spring Boot', badge: 'Enterprise Services', featured: true },
-      { name: 'Python FastAPI', badge: 'High-Perf REST APIs', featured: true },
-      { name: 'RESTful APIs', badge: 'API Contracts', featured: true },
-      { name: 'Node.js', badge: 'Full-Stack Runtime' },
-      { name: 'Microservices Concept', badge: 'System Design' }
+      { name: 'Python', badge: 'Core Language', featured: true },
+      { name: 'FastAPI', badge: 'Async APIs', featured: true },
+      { name: 'Java', badge: 'Core & OOP' },
+      { name: 'Spring Boot', badge: 'Enterprise Services', featured: true },
+      { name: 'REST APIs', badge: 'Contract Architecture', featured: true }
     ]
   },
   {
-    id: 'databases',
-    title: 'Databases & Storage',
-    tagline: 'Relational data modeling, query optimization, and schema integrity',
+    id: 'database',
+    title: 'Database',
+    tagline: 'Working with relational databases, queries and structured data.',
     skills: [
-      { name: 'PostgreSQL', badge: 'Relational DB', featured: true },
-      { name: 'MySQL', badge: 'Structured Queries', featured: true },
-      { name: 'SQL', badge: 'Complex Queries' },
-      { name: 'Database Design', badge: 'Normalization & ERD' }
+      { name: 'MySQL', badge: 'Relational DB', featured: true },
+      { name: 'PostgreSQL', badge: 'ACID Transactions', featured: true },
+      { name: 'SQL', badge: 'Complex Queries' }
     ]
   },
   {
     id: 'design',
-    title: 'Design & UI/UX',
-    tagline: 'Bridging technical logic with visual refinement and usability',
+    title: 'UI/UX & Design',
+    tagline: 'Designing intuitive interfaces, creating wireframes and prototypes, and improving digital user experiences.',
     skills: [
-      { name: 'Figma', badge: 'Prototyping & Design', featured: true },
-      { name: 'UI/UX Design', badge: 'User-Centered' },
-      { name: 'Wireframing', badge: 'Information Architecture' },
-      { name: 'Design Systems', badge: 'Tokens & Components' }
+      { name: 'Figma', badge: 'Primary Tool', featured: true },
+      { name: 'UI Design', badge: 'Visual Systems', featured: true },
+      { name: 'UX Design', badge: 'User-Centered' },
+      { name: 'Wireframing', badge: 'Information Flow' },
+      { name: 'Prototyping', badge: 'Interactive Mockups' },
+      { name: 'Responsive Design', badge: 'Cross-Device' }
     ]
   },
   {
     id: 'tools',
-    title: 'Tools & Workflows',
-    tagline: 'Industry-standard developer environment and collaboration tooling',
+    title: 'Developer Tools',
+    tagline: 'Tools for development workflows, version control, API testing and team workflows.',
     skills: [
-      { name: 'Git & GitHub', badge: 'Version Control', featured: true },
+      { name: 'Git', badge: 'Version Control', featured: true },
+      { name: 'GitHub', badge: 'Version Control', featured: true },
       { name: 'VS Code', badge: 'Primary IDE' },
-      { name: 'Postman', badge: 'API Testing' },
-      { name: 'Vite', badge: 'Fast Bundling' },
-      { name: 'AI-Assisted Dev', badge: 'LLMs & Productivity' }
+      { name: 'Postman', badge: 'API Testing' }
     ]
   }
 ];
@@ -375,11 +367,11 @@ export const ACHIEVEMENTS: Achievement[] = [
     date: '2025',
     badge: 'National Hackathon Participant',
     type: 'Hackathon',
-    description: 'Selected as participant in India\'s premier national innovation competition, collaborating with a multidisciplinary engineering team on real-world civic technology challenges.',
+    description: 'Selected as participant in India\'s premier national innovation competition, partnering with a multidisciplinary engineering team on real-world civic technology challenges.',
     bullets: [
-      'Collaborated on problem statements addressing public sector modernization and civic digital accessibility.',
+      'Worked on problem statements addressing public sector modernization and civic digital accessibility.',
       'Iterated on rapid UI prototypes and full-stack backend integrations under time constraints.',
-      'Demonstrated collaborative problem solving, code reviews, and architectural presentations.'
+      'Demonstrated structured problem solving, code reviews, and architectural presentations.'
     ]
   },
   {
@@ -401,13 +393,16 @@ export const ACHIEVEMENTS: Achievement[] = [
     id: 'ethglobal-mumbai',
     title: 'ETHGlobal Mumbai',
     organization: 'ETHGlobal',
-    date: 'Participation',
-    badge: 'Web3 & Distributed Systems',
-    type: 'Hackathon',
-    description: 'Participated in intense hackathon sessions exploring decentralized architectures, smart contract integration, and next-generation web applications.',
+    date: 'November 5–7, 2026',
+    badge: 'Hackathon Participation',
+    type: 'Hackathon Participation',
+    description: 'Participated in ETHGlobal Mumbai, an official ETHGlobal event featuring coding, workshops, keynotes and technical talks. Submitted the project Stealth Pay as part of the event.',
+    project: 'Stealth Pay',
+    certificateUrl: '/assets/ethglobal-mumbai-certificate.jpg',
+    showcaseUrl: 'https://ethglobal.com/showcase/stealth-pay-xtdtj',
     bullets: [
-      'Explored decentralized identity and client-side cryptography patterns.',
-      'Engaged with global developers on scalable web infrastructure and modern protocol design.'
+      'Submitted privacy-focused Web3 project Stealth Pay implementing ERC-5564 stealth addresses.',
+      'Engaged in technical keynotes, workshops, and protocol deep-dives with global Ethereum contributors.'
     ]
   }
 ];
@@ -422,27 +417,27 @@ export const GITHUB_REPOS: GitHubRepo[] = [
     highlight: true
   },
   {
-    name: 'HospitalFlow',
-    description: 'Smart Hospital OPD Coordination Platform with dynamic patient tokens, real-time queues, and doctor status monitoring.',
-    url: 'https://github.com/subhamstiwari24-dot/HospitalFlow',
-    language: 'JavaScript / Python',
+    name: 'royal-edge-enterprises',
+    description: 'B2B commercial wholesale platform with custom quotation builder, order inquiry portal, and administrative workflows.',
+    url: 'https://github.com/anjalivish05',
+    language: 'TypeScript / React',
     stars: 2,
     highlight: true
   },
   {
-    name: 'Manzil---The-CafeFinder',
-    description: 'AI-assisted cafe discovery platform offering purpose-based recommendations, budget filtering, and Google Maps integration.',
-    url: 'https://github.com/anjalivish05/Manzil---The-CafeFinder',
-    language: 'Python / JavaScript',
+    name: 'StealthPay-Protocol',
+    description: 'ERC-5564 dual-key stealth address privacy protocol with interactive cryptographic stepper and automated scanner.',
+    url: 'https://github.com/anjalivish05',
+    language: 'TypeScript / Web3',
     stars: 1,
     highlight: true
   },
   {
-    name: 'My-Portfolio',
+    name: 'Anjali-Vishwakarma---live-Portfolio-',
     description: 'Personal developer showcase exploring responsive design systems, semantic HTML, and creative interface layouts.',
-    url: 'https://github.com/anjalivish05/My-Portfolio',
-    language: 'HTML / CSS / JS',
-    stars: 0
+    url: 'https://github.com/anjalivish05/Anjali-Vishwakarma---live-Portfolio-',
+    language: 'TypeScript / React',
+    stars: 1
   }
 ];
 

@@ -1,154 +1,319 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { GraduationCap, MapPin, Code2, Sparkles, BookOpen, Compass, ExternalLink } from 'lucide-react';
-import { PERSONAL_INFO } from '../data/portfolioData';
+import React, { useEffect, useRef, useState } from 'react';
+import { 
+  GraduationCap, 
+  MapPin, 
+  Code2, 
+  Layers, 
+  Palette, 
+  Cpu, 
+  Sparkles, 
+  ArrowUpRight 
+} from 'lucide-react';
 
 export const About: React.FC = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isRevealed, setIsRevealed] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.matchMedia) {
+      const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+      setPrefersReducedMotion(mediaQuery.matches);
+      const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+      mediaQuery.addEventListener('change', handler);
+      return () => mediaQuery.removeEventListener('change', handler);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (prefersReducedMotion) {
+      setIsRevealed(true);
+      return;
+    }
+
+    const currentEl = sectionRef.current;
+    if (!currentEl) return;
+
+    if (!('IntersectionObserver' in window)) {
+      setIsRevealed(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry.isIntersecting) {
+          setIsRevealed(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -60px 0px',
+      }
+    );
+
+    observer.observe(currentEl);
+    return () => observer.disconnect();
+  }, [prefersReducedMotion]);
+
+  const getRevealStyle = (delayMs: number, yOffset: number = 20): React.CSSProperties => {
+    if (prefersReducedMotion) {
+      return { opacity: 1, transform: 'none' };
+    }
+    return {
+      opacity: isRevealed ? 1 : 0,
+      transform: isRevealed ? 'translateY(0)' : `translateY(${yOffset}px)`,
+      transition: `opacity 800ms cubic-bezier(0.22, 1, 0.36, 1) ${delayMs}ms, transform 800ms cubic-bezier(0.22, 1, 0.36, 1) ${delayMs}ms`,
+      willChange: isRevealed ? 'auto' : 'transform, opacity',
+    };
+  };
+
   return (
-    <section id="about" className="py-24 relative border-t border-border/60">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section 
+      id="about" 
+      ref={sectionRef}
+      className="py-24 sm:py-32 relative bg-[#160F19] border-t border-[#403044]/60 overflow-hidden"
+    >
+      {/* Subtle ambient peach lighting */}
+      <div className="absolute top-1/4 left-0 w-[450px] h-[450px] bg-[#E6A995]/[0.03] rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-0 w-[400px] h-[400px] bg-[#E6A995]/[0.025] rounded-full blur-[130px] pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Section Header */}
-        <div className="mb-16">
-          <div className="flex items-center gap-2 text-accent font-mono text-xs uppercase tracking-wider mb-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-            <span>Biography & Background</span>
-          </div>
-          <h2 className="font-heading font-bold text-3xl sm:text-5xl text-text-primary tracking-tight">
-            About Me
+        {/* 1. Section Header */}
+        <div 
+          style={getRevealStyle(0, 24)}
+          className="mb-14 sm:mb-20 text-center max-w-2xl mx-auto"
+        >
+          <span className="text-[11px] uppercase tracking-[0.26em] font-mono font-medium text-[#E6A995] mb-3 block">
+            BIOGRAPHY
+          </span>
+          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl text-[#F7EFF4] font-normal tracking-tight">
+            A Little About Me
           </h2>
         </div>
 
-        {/* Editorial Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        {/* 2. Two-Column Introduction Area */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 xl:gap-16 items-center mb-16 sm:mb-24">
           
-          {/* Left: Professional Photograph & Credential Frame */}
-          <div className="lg:col-span-5 relative">
-            <div className="relative mx-auto max-w-sm lg:max-w-none">
-              
-              {/* Image Frame with Editorial Border and Offset Backdrop */}
-              <div className="relative rounded-2xl overflow-hidden bg-bg-card border border-border shadow-2xl aspect-[4/5]">
-                <img
-                  src={PERSONAL_INFO.avatarUrl}
-                  alt={PERSONAL_INFO.name}
-                  className="w-full h-full object-cover object-top grayscale hover:grayscale-0 transition-all duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-bg-main via-transparent to-transparent opacity-80" />
-                
-                {/* Overlay Caption */}
-                <div className="absolute bottom-5 left-5 right-5 p-4 rounded-xl bg-bg-card/90 border border-border backdrop-blur-md">
-                  <span className="font-heading font-semibold text-sm text-text-primary block">
-                    {PERSONAL_INFO.fullName}
-                  </span>
-                  <div className="flex items-center justify-between text-xs font-mono text-text-secondary mt-1">
-                    <span className="flex items-center gap-1">
-                      <MapPin className="w-3 h-3 text-accent" />
-                      Mumbai, Maharashtra
-                    </span>
-                    <span className="text-accent">B.Tech IT '28</span>
+          {/* LEFT SIDE: Creative Polaroid-Style Image Collage (5 Cols on Large) */}
+          <div 
+            style={getRevealStyle(150, 25)}
+            className="lg:col-span-5 w-full flex items-center justify-center"
+          >
+            <div className="relative w-full max-w-[340px] sm:max-w-[400px] h-[340px] sm:h-[400px] flex items-center justify-center">
+
+              {/* Polaroid 1: Books & Learning (Top Left / Back Layer) */}
+              <div 
+                className="absolute top-2 left-2 sm:left-4 w-40 sm:w-48 -rotate-6 hover:-rotate-2 transition-all duration-500 hover:scale-105 z-10 hover:z-30 cursor-pointer"
+                title="Curiosity & books"
+              >
+                <div className="p-2.5 pb-6 sm:p-3 sm:pb-7 rounded-2xl bg-[#211725] border border-[#E6A995]/30 hover:border-[#E6A995] shadow-xl backdrop-blur-sm group/polaroid">
+                  <div className="aspect-[4/3] rounded-xl overflow-hidden bg-[#160F19]">
+                    <img 
+                      src="/assets/about/books-learning.jpg" 
+                      alt="Books and continuous learning" 
+                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover/polaroid:scale-105"
+                      loading="lazy"
+                    />
                   </div>
+                  <p className="mt-2 text-center font-serif italic text-[11px] text-[#B3A2AE] group-hover/polaroid:text-[#E6A995] transition-colors">
+                    curiosity &amp; books
+                  </p>
                 </div>
               </div>
 
-              {/* Offset Accent Outline Box */}
-              <div className="absolute -bottom-4 -left-4 w-full h-full rounded-2xl border border-accent/20 -z-10 hidden sm:block pointer-events-none" />
-            </div>
-
-            {/* Quick Education Card */}
-            <div className="mt-8 bg-bg-card border border-border rounded-xl p-5 space-y-4">
-              <div className="flex items-center gap-2 text-xs font-mono text-accent uppercase tracking-wider">
-                <GraduationCap className="w-4 h-4" />
-                <span>Academic Roadmap</span>
-              </div>
-
-              {PERSONAL_INFO.education.map((edu, idx) => (
-                <div key={idx} className="border-l-2 border-border pl-3 space-y-1">
-                  <span className="text-xs font-mono text-text-muted block">{edu.period}</span>
-                  <h4 className="font-heading font-semibold text-sm text-text-primary">
-                    {edu.degree}
-                  </h4>
-                  <p className="text-xs text-text-secondary">
-                    {edu.institution}, {edu.location}
-                  </p>
-                  <p className="text-[11px] font-mono text-text-muted">
-                    {edu.highlights}
+              {/* Polaroid 2: Coding & Systems (Bottom Right / Middle Layer) */}
+              <div 
+                className="absolute bottom-3 right-2 sm:right-4 w-44 sm:w-52 rotate-6 hover:rotate-2 transition-all duration-500 hover:scale-105 z-15 hover:z-30 cursor-pointer"
+                title="Crafting with code"
+              >
+                <div className="p-2.5 pb-6 sm:p-3 sm:pb-7 rounded-2xl bg-[#211725] border border-[#E6A995]/30 hover:border-[#E6A995] shadow-2xl backdrop-blur-sm group/polaroid">
+                  <div className="aspect-[4/3] rounded-xl overflow-hidden bg-[#160F19]">
+                    <img 
+                      src="/assets/about/coding.jpg" 
+                      alt="Programming logic and web architecture" 
+                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover/polaroid:scale-105"
+                      loading="lazy"
+                    />
+                  </div>
+                  <p className="mt-2 text-center font-serif italic text-[11px] text-[#B3A2AE] group-hover/polaroid:text-[#E6A995] transition-colors">
+                    crafting with code
                   </p>
                 </div>
-              ))}
+              </div>
+
+              {/* Polaroid 3: Coffee & Creative Workspace (Center / Front Layer) */}
+              <div 
+                className="absolute top-12 sm:top-14 left-10 sm:left-14 w-44 sm:w-52 -rotate-1 hover:rotate-0 transition-all duration-500 hover:scale-105 z-20 hover:z-30 cursor-pointer"
+                title="Creative workspace"
+              >
+                <div className="p-3 pb-7 sm:p-3.5 sm:pb-8 rounded-2xl bg-[#2B1E30] border border-[#E6A995]/50 hover:border-[#E6A995] shadow-2xl backdrop-blur-sm group/polaroid">
+                  <div className="aspect-[4/3] rounded-xl overflow-hidden bg-[#160F19]">
+                    <img 
+                      src="/assets/about/workspace-coffee.jpg" 
+                      alt="Creative workspace and coffee" 
+                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover/polaroid:scale-105"
+                      loading="lazy"
+                    />
+                  </div>
+                  <p className="mt-2 text-center font-serif italic text-[11px] text-[#B3A2AE] group-hover/polaroid:text-[#E6A995] transition-colors">
+                    creative studio vibes
+                  </p>
+                </div>
+              </div>
+
             </div>
           </div>
 
-          {/* Right: Narrative & Engineering Focus */}
-          <div className="lg:col-span-7 flex flex-col justify-between">
-            <div className="space-y-6">
+          {/* RIGHT SIDE: Personal Introduction & Identity Badges (7 Cols on Large) */}
+          <div className="lg:col-span-7 flex flex-col justify-center">
+            
+            {/* Identity Greeting */}
+            <div style={getRevealStyle(250, 18)} className="mb-4">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="w-2 h-2 rounded-full bg-[#E6A995]" />
+                <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#E6A995] font-semibold">
+                  PERSONAL PROFILE
+                </span>
+              </div>
+              <h3 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#F7EFF4] font-normal tracking-tight leading-tight">
+                I'm <span className="text-[#E6A995] font-serif italic">Anjali Manoj Vishwakarma</span>
+              </h3>
+            </div>
+
+            {/* Introduction Lead Statement */}
+            <div style={getRevealStyle(350, 18)}>
+              <p className="font-serif text-xl sm:text-2xl text-[#F7EFF4] leading-relaxed font-normal mb-5">
+                "An Information Technology engineering student passionate about building thoughtful digital experiences through technology and creativity."
+              </p>
+            </div>
+
+            {/* Supporting Paragraph */}
+            <div style={getRevealStyle(450, 18)}>
+              <p className="text-sm sm:text-base font-sans text-[#B3A2AE] leading-relaxed mb-7 max-w-2xl font-normal">
+                I focus on continuously learning modern web architectures, experimenting with emerging developer technologies, and engineering dependable solutions to practical challenges.
+              </p>
+            </div>
+
+            {/* Developer Identity Badges (Section 4) */}
+            <div style={getRevealStyle(550, 18)}>
+              <div className="flex flex-wrap gap-2.5 sm:gap-3">
+                {/* 1. Full-Stack Developer */}
+                <div className="group flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-full bg-[#2B1E30] border border-[#403044] hover:border-[#E6A995] hover:-translate-y-1 hover:shadow-[0_0_15px_-3px_rgba(230,169,149,0.35)] transition-all duration-300 cursor-default">
+                  <Layers className="w-3.5 h-3.5 text-[#E6A995] transition-transform duration-300 group-hover:scale-110" />
+                  <span className="text-xs font-sans text-[#F7EFF4] font-medium">Full-Stack Developer</span>
+                </div>
+
+                {/* 2. UI/UX Enthusiast */}
+                <div className="group flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-full bg-[#2B1E30] border border-[#403044] hover:border-[#E6A995] hover:-translate-y-1 hover:shadow-[0_0_15px_-3px_rgba(230,169,149,0.35)] transition-all duration-300 cursor-default">
+                  <Palette className="w-3.5 h-3.5 text-[#E6A995] transition-transform duration-300 group-hover:scale-110" />
+                  <span className="text-xs font-sans text-[#F7EFF4] font-medium">UI/UX Enthusiast</span>
+                </div>
+
+                {/* 3. Problem Solver */}
+                <div className="group flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-full bg-[#2B1E30] border border-[#403044] hover:border-[#E6A995] hover:-translate-y-1 hover:shadow-[0_0_15px_-3px_rgba(230,169,149,0.35)] transition-all duration-300 cursor-default">
+                  <Cpu className="w-3.5 h-3.5 text-[#E6A995] transition-transform duration-300 group-hover:scale-110" />
+                  <span className="text-xs font-sans text-[#F7EFF4] font-medium">Problem Solver</span>
+                </div>
+
+                {/* 4. Lifelong Learner */}
+                <div className="group flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-full bg-[#2B1E30] border border-[#403044] hover:border-[#E6A995] hover:-translate-y-1 hover:shadow-[0_0_15px_-3px_rgba(230,169,149,0.35)] transition-all duration-300 cursor-default">
+                  <Sparkles className="w-3.5 h-3.5 text-[#E6A995] transition-transform duration-300 group-hover:scale-110" />
+                  <span className="text-xs font-sans text-[#F7EFF4] font-medium">Lifelong Learner</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        {/* 3. Three Information Cards (Section 5) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
+          
+          {/* CARD 1: ACADEMIC DEGREE */}
+          <div 
+            style={getRevealStyle(650, 20)}
+            className="p-7 sm:p-8 rounded-2xl bg-[#2B1E30]/70 border border-[#403044] hover:border-[#E6A995]/50 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_-6px_rgba(230,169,149,0.15)] transition-all duration-300 flex flex-col justify-between group"
+          >
+            <div>
+              <div className="w-10 h-10 rounded-full bg-[#211725] border border-[#403044] group-hover:border-[#E6A995]/60 flex items-center justify-center text-[#E6A995] mb-5 transition-colors">
+                <GraduationCap className="w-4 h-4 transition-transform duration-300 group-hover:scale-110" />
+              </div>
+              <span className="text-[11px] font-mono uppercase tracking-wider text-[#E6A995] block mb-1">
+                ACADEMIC DEGREE
+              </span>
+              <h4 className="font-serif text-xl sm:text-2xl text-[#F7EFF4] font-normal mb-2.5">
+                B.Tech in Information Technology
+              </h4>
+              <p className="text-xs sm:text-sm font-sans text-[#B3A2AE] leading-relaxed">
+                Shree L. R. Tiwari College of Engineering, Mumbai (2024–2028).
+              </p>
+            </div>
+            <div className="mt-6 pt-4 border-t border-[#403044]/60 text-xs font-mono text-[#8E7D8A] flex items-center justify-between">
+              <span>Expected Graduation: 2028</span>
+              <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 text-[#E6A995] transition-opacity" />
+            </div>
+          </div>
+
+          {/* CARD 2: TECHNICAL FOCUS (Technology Pills) */}
+          <div 
+            style={getRevealStyle(750, 20)}
+            className="p-7 sm:p-8 rounded-2xl bg-[#2B1E30]/70 border border-[#403044] hover:border-[#E6A995]/50 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_-6px_rgba(230,169,149,0.15)] transition-all duration-300 flex flex-col justify-between group"
+          >
+            <div>
+              <div className="w-10 h-10 rounded-full bg-[#211725] border border-[#403044] group-hover:border-[#E6A995]/60 flex items-center justify-center text-[#E6A995] mb-5 transition-colors">
+                <Code2 className="w-4 h-4 transition-transform duration-300 group-hover:scale-110" />
+              </div>
+              <span className="text-[11px] font-mono uppercase tracking-wider text-[#E6A995] block mb-1">
+                TECHNICAL FOCUS
+              </span>
+              <h4 className="font-serif text-xl sm:text-2xl text-[#F7EFF4] font-normal mb-3">
+                Full-Stack Architecture
+              </h4>
               
-              <blockquote className="font-editorial text-3xl sm:text-4xl text-text-primary leading-tight">
-                "Bridging rigorous backend systems with clear, human-first digital experiences."
-              </blockquote>
-
-              <p className="text-base text-text-secondary leading-relaxed font-sans">
-                I am an Information Technology undergraduate student at <strong className="text-text-primary font-medium">Shree L. R. Tiwari College of Engineering, Mumbai</strong>. My journey in software engineering began with a curiosity about how software solves everyday bottlenecks—from chaotic hospital OPD waiting rooms to outdated municipal libraries.
-              </p>
-
-              <p className="text-base text-text-secondary leading-relaxed font-sans">
-                Rather than treating frontend and backend as isolated silos, I approach web applications holistically. I focus on developing clean RESTful APIs using <strong className="text-text-primary font-medium">Java Spring Boot</strong> and <strong className="text-text-primary font-medium">Python FastAPI</strong>, organizing structured relational schemas with <strong className="text-text-primary font-medium">PostgreSQL</strong> and <strong className="text-text-primary font-medium">MySQL</strong>, and pairing them with high-fidelity, accessible interfaces using <strong className="text-text-primary font-medium">React.js</strong> and <strong className="text-text-primary font-medium">Tailwind CSS</strong>.
-              </p>
-
-              <p className="text-base text-text-secondary leading-relaxed font-sans">
-                I am especially enthusiastic about integrating <strong className="text-accent font-medium">Generative AI and LLMs</strong> into real-world applications—not as cosmetic gimmicks, but as functional assistants that interpret unstructured user requests and produce structured, actionable recommendations.
-              </p>
-
-              {/* Three Core Principles */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6">
-                
-                <div className="bg-bg-card border border-border rounded-xl p-4">
-                  <Code2 className="w-5 h-5 text-accent mb-2" />
-                  <h4 className="font-heading font-semibold text-sm text-text-primary mb-1">
-                    System Clarity
-                  </h4>
-                  <p className="text-xs text-text-secondary font-sans">
-                    Modular codebases, explicit contracts, and predictable data flow.
-                  </p>
-                </div>
-
-                <div className="bg-bg-card border border-border rounded-xl p-4">
-                  <Sparkles className="w-5 h-5 text-emerald-400 mb-2" />
-                  <h4 className="font-heading font-semibold text-sm text-text-primary mb-1">
-                    Human Usability
-                  </h4>
-                  <p className="text-xs text-text-secondary font-sans">
-                    Clear typography, meaningful feedback, and zero cognitive overload.
-                  </p>
-                </div>
-
-                <div className="bg-bg-card border border-border rounded-xl p-4">
-                  <Compass className="w-5 h-5 text-amber-400 mb-2" />
-                  <h4 className="font-heading font-semibold text-sm text-text-primary mb-1">
-                    Civic Impact
-                  </h4>
-                  <p className="text-xs text-text-secondary font-sans">
-                    Tools that genuinely simplify healthcare, transport, and community access.
-                  </p>
-                </div>
-
+              {/* Stylish technology pills */}
+              <div className="flex flex-wrap gap-1.5 mb-2">
+                {['React', 'Spring Boot', 'FastAPI', 'PostgreSQL', 'TypeScript'].map((tech) => (
+                  <span
+                    key={tech}
+                    className="px-2.5 py-1 rounded-full text-[11px] font-sans font-medium bg-[#211725] border border-[#403044] text-[#B3A2AE] hover:text-[#E6A995] hover:border-[#E6A995]/50 transition-colors"
+                  >
+                    {tech}
+                  </span>
+                ))}
               </div>
+            </div>
+            <div className="mt-6 pt-4 border-t border-[#403044]/60 text-xs font-mono text-[#8E7D8A] flex items-center justify-between">
+              <span>Modern Web &amp; Scalable Systems</span>
+              <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 text-[#E6A995] transition-opacity" />
+            </div>
+          </div>
 
-              {/* Download Resume Strip */}
-              <div className="pt-6 border-t border-border flex flex-wrap items-center justify-between gap-4">
-                <div className="text-xs font-mono text-text-muted">
-                  Looking for full-stack developer internships & collaborative engineering opportunities.
-                </div>
-
-                <a
-                  href={PERSONAL_INFO.resumeUrl}
-                  download="Anjali_Vishwakarma_Resume.pdf"
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-bg-elevated hover:bg-bg-card border border-border text-xs font-mono text-accent hover:border-accent transition-all"
-                >
-                  <span>Download Curriculum Vitae (PDF)</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
+          {/* CARD 3: BASE & REACH */}
+          <div 
+            style={getRevealStyle(850, 20)}
+            className="p-7 sm:p-8 rounded-2xl bg-[#2B1E30]/70 border border-[#403044] hover:border-[#E6A995]/50 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_-6px_rgba(230,169,149,0.15)] transition-all duration-300 flex flex-col justify-between group"
+          >
+            <div>
+              <div className="w-10 h-10 rounded-full bg-[#211725] border border-[#403044] group-hover:border-[#E6A995]/60 flex items-center justify-center text-[#E6A995] mb-5 transition-colors">
+                <MapPin className="w-4 h-4 transition-transform duration-300 group-hover:scale-110" />
               </div>
-
+              <span className="text-[11px] font-mono uppercase tracking-wider text-[#E6A995] block mb-1">
+                BASE &amp; REACH
+              </span>
+              <h4 className="font-serif text-xl sm:text-2xl text-[#F7EFF4] font-normal mb-2.5">
+                Mumbai, India
+              </h4>
+              <p className="text-xs sm:text-sm font-sans text-[#B3A2AE] leading-relaxed">
+                Open to remote and on-site engineering internships, hackathons, and innovative projects.
+              </p>
+            </div>
+            <div className="mt-6 pt-4 border-t border-[#403044]/60 text-xs font-mono text-[#8E7D8A] flex items-center justify-between">
+              <span>Available Worldwide</span>
+              <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 text-[#E6A995] transition-opacity" />
             </div>
           </div>
 

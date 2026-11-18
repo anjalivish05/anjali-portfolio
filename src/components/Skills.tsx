@@ -1,162 +1,196 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 import { 
   Code2, 
   Layout, 
   Server, 
   Database, 
-  Terminal, 
-  CheckCircle2, 
-  Layers,
+  Palette, 
+  Terminal,
   Sparkles
 } from 'lucide-react';
 import { Figma } from './Icons';
-import { SKILL_CATEGORIES } from '../data/portfolioData';
+
+interface SkillCardData {
+  id: string;
+  number: string;
+  title: string;
+  icon: React.ReactNode;
+  description: string;
+  technologies: { name: string; isProminent?: boolean }[];
+  countLabel: string;
+}
+
+const SKILL_CARDS: SkillCardData[] = [
+  {
+    id: 'programming',
+    number: '01',
+    title: 'Programming',
+    icon: <Code2 className="w-4 h-4 text-[#E6A995]" />,
+    description: 'Programming languages used for problem-solving, application development and software engineering.',
+    technologies: [
+      { name: 'Java' },
+      { name: 'Python' },
+      { name: 'C++' },
+      { name: 'JavaScript' }
+    ],
+    countLabel: '4 Languages'
+  },
+  {
+    id: 'frontend',
+    number: '02',
+    title: 'Frontend Development',
+    icon: <Layout className="w-4 h-4 text-[#E6A995]" />,
+    description: 'Building responsive, accessible and interactive web experiences.',
+    technologies: [
+      { name: 'React.js' },
+      { name: 'TypeScript' },
+      { name: 'HTML5' },
+      { name: 'CSS3' }
+    ],
+    countLabel: '4 Technologies'
+  },
+  {
+    id: 'backend',
+    number: '03',
+    title: 'Backend Development',
+    icon: <Server className="w-4 h-4 text-[#E6A995]" />,
+    description: 'Developing backend services, APIs and application logic.',
+    technologies: [
+      { name: 'Python' },
+      { name: 'FastAPI' },
+      { name: 'Java' },
+      { name: 'Spring Boot' },
+      { name: 'REST APIs' }
+    ],
+    countLabel: '5 Technologies'
+  },
+  {
+    id: 'database',
+    number: '04',
+    title: 'Database',
+    icon: <Database className="w-4 h-4 text-[#E6A995]" />,
+    description: 'Working with relational databases, queries and structured data.',
+    technologies: [
+      { name: 'MySQL' },
+      { name: 'PostgreSQL' },
+      { name: 'SQL' }
+    ],
+    countLabel: '3 Technologies'
+  },
+  {
+    id: 'design',
+    number: '05',
+    title: 'UI/UX & Design',
+    icon: <Figma className="w-4 h-4 text-[#E6A995]" />,
+    description: 'Designing intuitive interfaces, creating wireframes and prototypes, and improving digital user experiences.',
+    technologies: [
+      { name: 'Figma', isProminent: true },
+      { name: 'UI Design' },
+      { name: 'UX Design' },
+      { name: 'Wireframing' },
+      { name: 'Prototyping' },
+      { name: 'Responsive Design' }
+    ],
+    countLabel: '6 Disciplines'
+  },
+  {
+    id: 'tools',
+    number: '06',
+    title: 'Developer Tools',
+    icon: <Terminal className="w-4 h-4 text-[#E6A995]" />,
+    description: 'Tools for development workflows, version control, API testing and team workflows.',
+    technologies: [
+      { name: 'Git' },
+      { name: 'GitHub' },
+      { name: 'VS Code' },
+      { name: 'Postman' }
+    ],
+    countLabel: '4 Workflows'
+  }
+];
 
 export const Skills: React.FC = () => {
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
-
-  const categoryIcons: Record<string, React.ReactNode> = {
-    languages: <Code2 className="w-4 h-4" />,
-    frontend: <Layout className="w-4 h-4" />,
-    backend: <Server className="w-4 h-4" />,
-    databases: <Database className="w-4 h-4" />,
-    design: <Figma className="w-4 h-4" />,
-    tools: <Terminal className="w-4 h-4" />,
-  };
-
-  const filteredCategories = selectedCategory === 'all'
-    ? SKILL_CATEGORIES
-    : SKILL_CATEGORIES.filter(cat => cat.id === selectedCategory);
-
   return (
-    <section id="skills" className="py-24 relative border-t border-border/60">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="skills" className="py-28 sm:py-36 relative bg-[#160F19] border-t border-[#403044]/60">
+      {/* Subtle ambient peach lighting */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[#E6A995]/[0.025] rounded-full blur-[140px] pointer-events-none" />
+
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 border-b border-border/80 pb-6">
-          <div>
-            <div className="flex items-center gap-2 text-accent font-mono text-xs uppercase tracking-wider mb-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-              <span>Technical Arsenal</span>
-            </div>
-            <h2 className="font-heading font-bold text-3xl sm:text-5xl text-text-primary tracking-tight">
-              Skills & Engineering Toolkit
-            </h2>
-          </div>
-          <p className="text-text-secondary text-sm max-w-md mt-4 md:mt-0 font-sans">
-            Categorized technical capabilities applied across verified full-stack applications and collaborative initiatives.
+        <div className="mb-14 sm:mb-20 text-center max-w-2xl mx-auto">
+          <span className="text-[11px] uppercase tracking-[0.26em] font-sans font-medium text-[#E6A995] mb-3 block">
+            TECHNICAL ARSENAL
+          </span>
+          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl text-[#F7EFF4] font-normal tracking-tight mb-4">
+            Technologies I Work With<span className="text-[#E6A995]">.</span>
+          </h2>
+          <p className="text-sm sm:text-base font-sans text-[#B3A2AE] font-normal">
+            Tools, technologies and creative skills I use to build digital experiences.
           </p>
         </div>
 
-        {/* Category Filter Tabs */}
-        <div className="flex flex-wrap gap-2 mb-10">
-          <button
-            onClick={() => setSelectedCategory('all')}
-            className={`px-4 py-2 rounded-xl text-xs font-mono transition-all flex items-center gap-2 ${
-              selectedCategory === 'all'
-                ? 'bg-accent text-bg-main font-semibold shadow-md'
-                : 'bg-bg-card hover:bg-bg-elevated text-text-secondary border border-border'
-            }`}
-          >
-            <Layers className="w-3.5 h-3.5" />
-            <span>All Categories ({SKILL_CATEGORIES.length})</span>
-          </button>
-
-          {SKILL_CATEGORIES.map((cat) => (
-            <button
-              key={cat.id}
-              onClick={() => setSelectedCategory(cat.id)}
-              className={`px-4 py-2 rounded-xl text-xs font-mono transition-all flex items-center gap-2 ${
-                selectedCategory === cat.id
-                  ? 'bg-accent text-bg-main font-semibold shadow-md'
-                  : 'bg-bg-card hover:bg-bg-elevated text-text-secondary border border-border'
-              }`}
+        {/* 6-Card Grid Layout (3 columns on desktop, 2 on tablet, 1 on mobile) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
+          {SKILL_CARDS.map((card, idx) => (
+            <motion.div
+              key={card.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.5, delay: idx * 0.08 }}
+              className="group p-7 sm:p-8 rounded-2xl bg-[#2B1E30] border border-[#403044] hover:border-[#E6A995]/50 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_16px_36px_-10px_rgba(10,6,12,0.85)] flex flex-col justify-between"
             >
-              {categoryIcons[cat.id]}
-              <span>{cat.title}</span>
-            </button>
-          ))}
-        </div>
-
-        {/* Skill Category Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <AnimatePresence>
-            {filteredCategories.map((category) => (
-              <motion.div
-                key={category.id}
-                layout
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.3 }}
-                className="bg-bg-card border border-border rounded-2xl p-6 flex flex-col justify-between bento-card relative"
-              >
-                <div>
-                  {/* Category Header */}
-                  <div className="flex items-center justify-between pb-4 mb-4 border-b border-border/70">
-                    <div className="flex items-center gap-2.5">
-                      <div className="w-8 h-8 rounded-lg bg-bg-elevated border border-border flex items-center justify-center text-accent">
-                        {categoryIcons[category.id] || <Code2 className="w-4 h-4" />}
-                      </div>
-                      <div>
-                        <h3 className="font-heading font-semibold text-base text-text-primary">
-                          {category.title}
-                        </h3>
-                      </div>
-                    </div>
-                    <span className="text-[10px] font-mono text-text-muted">
-                      {category.skills.length} competencies
-                    </span>
+              <div>
+                {/* Card Top Row: Icon Container + Number */}
+                <div className="flex items-center justify-between mb-5">
+                  <div className="w-10 h-10 rounded-xl bg-[#211725] border border-[#403044] group-hover:border-[#E6A995]/40 flex items-center justify-center transition-colors">
+                    {card.icon}
                   </div>
-
-                  <p className="text-xs text-text-secondary mb-5 font-sans">
-                    {category.tagline}
-                  </p>
-
-                  {/* Skills List */}
-                  <div className="space-y-2">
-                    {category.skills.map((skill) => (
-                      <div
-                        key={skill.name}
-                        className="group flex items-center justify-between p-2.5 rounded-xl bg-bg-elevated/50 hover:bg-bg-elevated border border-border/50 hover:border-border transition-all"
-                      >
-                        <div className="flex items-center gap-2.5">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-accent shrink-0" />
-                          <span className="font-mono text-xs font-medium text-text-primary group-hover:text-accent transition-colors">
-                            {skill.name}
-                          </span>
-                        </div>
-                        {skill.badge && (
-                          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-bg-card text-text-muted border border-border/60">
-                            {skill.badge}
-                          </span>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Footer Micro-note */}
-                <div className="mt-5 pt-3 border-t border-border/40 flex items-center justify-between text-[11px] font-mono text-text-muted">
-                  <span className="flex items-center gap-1">
-                    <Sparkles className="w-3 h-3 text-emerald-400" />
-                    Applied in real projects
+                  <span className="text-xs font-mono text-[#8E7D8A]">
+                    {card.number}
                   </span>
-                  <span>Tested</span>
                 </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </div>
 
-        {/* Verification Note (Explicitly avoiding fake percentages) */}
-        <div className="mt-12 p-4 rounded-xl bg-bg-card/50 border border-border/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-text-secondary">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-400" />
-            <span>Honest Technical Assessment: Skills backed by working repositories, schema designs, and system architectures.</span>
-          </div>
-          <span className="text-text-muted">Zero artificial percentage bars</span>
+                {/* Card Heading */}
+                <h3 className="font-serif text-2xl sm:text-[26px] text-[#F7EFF4] group-hover:text-[#E6A995] transition-colors font-normal mb-2.5">
+                  {card.title}
+                </h3>
+
+                {/* Description */}
+                <p className="text-xs sm:text-[13px] font-sans text-[#B3A2AE] leading-relaxed mb-6">
+                  {card.description}
+                </p>
+
+                {/* Technology Badges */}
+                <div className="flex flex-wrap gap-2">
+                  {card.technologies.map((tech) => (
+                    <span
+                      key={tech.name}
+                      className={`px-3 py-1.5 rounded-full text-xs font-sans transition-all duration-200 flex items-center gap-1.5 ${
+                        tech.isProminent
+                          ? 'bg-[#E6A995]/15 border border-[#E6A995]/50 text-[#E6A995] font-medium shadow-sm hover:bg-[#E6A995]/25 hover:border-[#E6A995]'
+                          : 'bg-[#211725] border border-[#403044] text-[#F7EFF4] hover:border-[#E6A995]/50 hover:text-[#E6A995]'
+                      }`}
+                    >
+                      {tech.isProminent && <Figma className="w-3.5 h-3.5 text-[#E6A995]" />}
+                      <span>{tech.name}</span>
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Card Footer Divider */}
+              <div className="mt-8 pt-4 border-t border-[#403044]/60 flex items-center justify-between text-[11px] font-mono text-[#8E7D8A]">
+                <span className="flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#E6A995]" />
+                  <span>Production Ready</span>
+                </span>
+                <span>{card.countLabel}</span>
+              </div>
+            </motion.div>
+          ))}
         </div>
 
       </div>

@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
-import { BentoGrid } from './components/BentoGrid';
 import { About } from './components/About';
 import { Projects } from './components/Projects';
-import { ProjectModal } from './components/ProjectModal';
 import { Skills } from './components/Skills';
 import { Achievements } from './components/Achievements';
-import { GitHubSection } from './components/GitHubSection';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
+import { ProjectModal } from './components/ProjectModal';
 import { PROJECTS } from './data/portfolioData';
 import { Project } from './types';
 
@@ -67,34 +65,28 @@ export const App: React.FC = () => {
     : null;
 
   return (
-    <div className="relative min-h-screen bg-bg-main text-text-primary selection:bg-accent selection:text-bg-main">
-      {/* Sticky Top Navigation */}
+    <div className="relative min-h-screen bg-[#160F19] text-[#F7EFF4] selection:bg-[#E6A995] selection:text-[#160F19]">
+      {/* 1. Floating Sticky Navigation */}
       <Navbar activeSection={activeSection} />
 
-      {/* Main Content Sections */}
+      {/* Main Sections */}
       <main>
-        {/* 1. Hero Section */}
+        {/* 2. Hero Section */}
         <Hero />
 
-        {/* 2. Asymmetric Bento Grid Section */}
-        <BentoGrid onOpenProject={handleOpenProject} />
-
-        {/* 3. About Me Section */}
+        {/* 3. About Section */}
         <About />
 
-        {/* 4. Featured Projects Section */}
+        {/* 4. Selected Works (Projects) Section */}
         <Projects onOpenProject={handleOpenProject} />
 
-        {/* 5. Technical Skills Section */}
+        {/* 5. Tools I Work With (Skills) Section */}
         <Skills />
 
-        {/* 6. Hackathons & Achievements Section */}
+        {/* 6. Beyond the Code (Hackathons & Achievements) Section */}
         <Achievements />
 
-        {/* 7. GitHub Activity & Public Repos */}
-        <GitHubSection />
-
-        {/* 8. Contact Section */}
+        {/* 7. Contact Section */}
         <Contact />
       </main>
 
@@ -102,10 +94,12 @@ export const App: React.FC = () => {
       <Footer />
 
       {/* Case Study Modal */}
-      <ProjectModal
-        project={currentProject}
-        onClose={handleCloseProject}
-      />
+      {currentProject && (
+        <ProjectModal
+          project={currentProject}
+          onClose={handleCloseProject}
+        />
+      )}
     </div>
   );
 };

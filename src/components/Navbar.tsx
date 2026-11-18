@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FileText, Menu, X, ArrowUpRight, Sparkles } from 'lucide-react';
+import { FileText, Menu, X, ArrowUpRight } from 'lucide-react';
 import { PERSONAL_INFO } from '../data/portfolioData';
 
 interface NavbarProps {
@@ -11,6 +11,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  // Track window scroll for background glass transition
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
@@ -18,6 +19,29 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Support Escape key to close mobile menu
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [mobileMenuOpen]);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
 
   const navLinks = [
     { name: 'Home', href: '#home' },
@@ -32,48 +56,49 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? 'glass-nav py-3.5 shadow-2xl' : 'bg-transparent py-6'
+          scrolled
+            ? 'bg-[#160F19]/92 backdrop-blur-md py-2.5 sm:py-3 border-b border-[#403044]/80 shadow-lg shadow-black/30'
+            : 'bg-transparent py-3 sm:py-4 lg:py-5'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
-            {/* Logo */}
+        <div className="max-w-7xl mx-auto px-2.5 sm:px-4 lg:px-6 xl:px-8">
+          <div className="flex items-center justify-between gap-1.5 sm:gap-3 lg:gap-4">
+            
+            {/* 1. LEFT BRANDING: AV Monogram + Complete Name ANJALI MANOJ VISHWAKARMA */}
             <a
               href="#home"
-              className="group flex items-center gap-2.5 text-text-primary hover:text-accent transition-colors"
+              className="group flex items-center gap-1.5 sm:gap-2.5 text-[#F7EFF4] hover:text-[#E6A995] transition-colors shrink-0"
+              aria-label="Anjali Manoj Vishwakarma — Home"
             >
-              <div className="w-8 h-8 rounded-lg bg-bg-card border border-border flex items-center justify-center font-heading font-bold text-sm tracking-wider text-accent group-hover:border-accent transition-all">
+              <div className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 rounded-full bg-[#2B1E30] border border-[#403044] flex items-center justify-center font-sans font-semibold text-[10px] sm:text-xs tracking-wider text-[#E6A995] group-hover:border-[#E6A995] group-hover:shadow-[0_0_12px_rgba(230,169,149,0.25)] transition-all shrink-0">
                 AV
               </div>
-              <div className="flex flex-col">
-                <span className="font-heading font-bold tracking-tight text-base text-text-primary group-hover:text-accent transition-colors">
-                  ANJALI<span className="text-accent">.V</span>
-                </span>
-                <span className="hidden sm:flex items-center gap-1.5 text-[10px] font-mono text-emerald-400">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                  Open for Opportunities
-                </span>
-              </div>
+              <span className="font-serif text-[10px] sm:text-xs md:text-[11px] lg:text-[12px] xl:text-[13px] tracking-normal sm:tracking-wider lg:tracking-[0.1em] xl:tracking-[0.12em] uppercase font-medium text-[#F7EFF4] group-hover:text-[#E6A995] transition-colors whitespace-nowrap">
+                ANJALI MANOJ VISHWAKARMA
+              </span>
             </a>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center gap-1 bg-bg-card/70 border border-border/80 rounded-full px-4 py-1.5 backdrop-blur-md">
+            {/* 2A. CENTRE: Desktop Navigation (1024px and above) */}
+            <nav
+              className="hidden lg:flex items-center gap-1 bg-[#211725]/85 border border-[#403044] rounded-full px-3 xl:px-4 py-1.5 backdrop-blur-md shrink-0"
+              aria-label="Desktop Navigation"
+            >
               {navLinks.map((link) => {
                 const isActive = activeSection === link.href.replace('#', '');
                 return (
                   <a
                     key={link.name}
                     href={link.href}
-                    className={`relative px-3.5 py-1.5 text-xs font-medium font-heading tracking-wide transition-all rounded-full ${
+                    className={`relative px-2.5 xl:px-3.5 py-1 text-[11.5px] xl:text-xs font-medium font-sans tracking-wide transition-all rounded-full ${
                       isActive
-                        ? 'text-text-primary'
-                        : 'text-text-secondary hover:text-text-primary hover:bg-bg-elevated/40'
+                        ? 'text-[#160F19]'
+                        : 'text-[#B3A2AE] hover:text-[#F7EFF4] hover:bg-[#2B1E30]/60'
                     }`}
                   >
                     {isActive && (
                       <motion.div
-                        layoutId="activeNavTab"
-                        className="absolute inset-0 bg-bg-elevated rounded-full border border-border"
+                        layoutId="activeNavIndicator"
+                        className="absolute inset-0 bg-[#E6A995] rounded-full shadow-[0_2px_12px_rgba(230,169,149,0.35)]"
                         transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                       />
                     )}
@@ -83,94 +108,174 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
               })}
             </nav>
 
-            {/* Resume Button & Contact CTA */}
-            <div className="hidden md:flex items-center gap-3">
+            {/* 2B. CENTRE: Tablet Navigation (768px to 1023px) — Compact layout preventing overflow */}
+            <nav
+              className="hidden md:flex lg:hidden items-center gap-0.5 bg-[#211725]/85 border border-[#403044] rounded-full px-2 py-1 backdrop-blur-md shrink-0"
+              aria-label="Tablet Navigation"
+            >
+              {navLinks.map((link) => {
+                const isActive = activeSection === link.href.replace('#', '');
+                return (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    className={`relative px-2 py-0.5 text-[10.5px] font-medium font-sans tracking-tight transition-all rounded-full ${
+                      isActive
+                        ? 'text-[#160F19]'
+                        : 'text-[#B3A2AE] hover:text-[#F7EFF4] hover:bg-[#2B1E30]/60'
+                    }`}
+                  >
+                    {isActive && (
+                      <motion.div
+                        layoutId="activeNavIndicatorTablet"
+                        className="absolute inset-0 bg-[#E6A995] rounded-full shadow-[0_2px_10px_rgba(230,169,149,0.3)]"
+                        transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                      />
+                    )}
+                    <span className="relative z-10">{link.name}</span>
+                  </a>
+                );
+              })}
+            </nav>
+
+            {/* 3A. RIGHT ACTIONS: Desktop CTAs (1024px and above) */}
+            <div className="hidden lg:flex items-center gap-2.5 xl:gap-3 shrink-0">
               <a
                 href={PERSONAL_INFO.resumeUrl}
-                download="Anjali_Vishwakarma_Resume.pdf"
-                className="flex items-center gap-2 px-3.5 py-1.5 text-xs font-medium font-mono text-text-secondary hover:text-accent bg-bg-card hover:bg-bg-elevated border border-border rounded-lg transition-all"
-                title="Download Resume PDF"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 px-3 xl:px-3.5 py-1.5 text-[11.5px] xl:text-xs font-medium font-sans text-[#B3A2AE] hover:text-[#E6A995] bg-[#2B1E30] hover:bg-[#37283E] border border-[#403044] hover:border-[#E6A995]/50 rounded-full transition-all"
+                title="View Resume (PDF)"
               >
-                <FileText className="w-3.5 h-3.5 text-accent" />
-                <span>Resume</span>
+                <FileText className="w-3.5 h-3.5 text-[#E6A995]" />
+                <span>View Resume</span>
               </a>
 
               <a
                 href="#contact"
-                className="group relative inline-flex items-center gap-1.5 px-4 py-1.5 text-xs font-heading font-medium tracking-wide text-bg-main bg-accent hover:bg-accent-light rounded-lg transition-all shadow-[0_0_20px_-5px_rgba(167,139,250,0.5)]"
+                className="group relative inline-flex items-center gap-1.5 px-3.5 xl:px-4 py-1.5 text-[11.5px] xl:text-xs font-sans font-medium tracking-wide text-[#160F19] bg-[#E6A995] hover:bg-[#D9907B] rounded-full transition-all shadow-[0_0_20px_-4px_rgba(230,169,149,0.4)]"
               >
                 <span>Let's Talk</span>
                 <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
             </div>
 
-            {/* Mobile Hamburger Button */}
-            <div className="flex md:hidden items-center gap-2">
+            {/* 3B. RIGHT ACTIONS: Tablet CTAs (768px to 1023px) — Compact */}
+            <div className="hidden md:flex lg:hidden items-center gap-1.5 shrink-0">
               <a
                 href={PERSONAL_INFO.resumeUrl}
-                download="Anjali_Vishwakarma_Resume.pdf"
-                className="p-2 text-text-secondary hover:text-accent bg-bg-card border border-border rounded-lg"
-                title="Resume"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 px-2.5 py-1 text-[10.5px] font-medium font-sans text-[#B3A2AE] hover:text-[#E6A995] bg-[#2B1E30] hover:bg-[#37283E] border border-[#403044] hover:border-[#E6A995]/50 rounded-full transition-all"
+                title="View Resume (PDF)"
               >
-                <FileText className="w-4 h-4 text-accent" />
+                <FileText className="w-3 h-3 text-[#E6A995]" />
+                <span>View Resume</span>
               </a>
+
+              <a
+                href="#contact"
+                className="group relative inline-flex items-center gap-1 px-2.5 py-1 text-[10.5px] font-sans font-medium tracking-tight text-[#160F19] bg-[#E6A995] hover:bg-[#D9907B] rounded-full transition-all shadow-sm"
+              >
+                <span>Let's Talk</span>
+                <ArrowUpRight className="w-3 h-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </a>
+            </div>
+
+            {/* 4. MOBILE CONTROLS (Below 768px): Quick Resume Icon + Accessible Hamburger Toggle */}
+            <div className="flex md:hidden items-center gap-1.5 shrink-0">
+              <a
+                href={PERSONAL_INFO.resumeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-1.5 rounded-full bg-[#2B1E30] border border-[#403044] text-[#E6A995] hover:border-[#E6A995] transition-all"
+                aria-label="View Resume (PDF)"
+                title="View Resume"
+              >
+                <FileText className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              </a>
+
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 text-text-secondary hover:text-text-primary bg-bg-card border border-border rounded-lg"
-                aria-label="Toggle Navigation Menu"
+                className="p-1.5 rounded-full bg-[#2B1E30] border border-[#403044] text-[#F7EFF4] hover:text-[#E6A995] hover:border-[#E6A995]/50 transition-colors"
+                aria-label={mobileMenuOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'}
+                aria-expanded={mobileMenuOpen}
               >
-                {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                {mobileMenuOpen ? <X className="w-4 h-4 sm:w-5 sm:h-5 text-[#E6A995]" /> : <Menu className="w-4 h-4 sm:w-5 sm:h-5" />}
               </button>
             </div>
+
           </div>
         </div>
       </header>
 
-      {/* Mobile Drawer Menu */}
+      {/* 5. MOBILE NAVIGATION DRAWER & BACKDROP */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-x-0 top-[72px] z-40 p-4 md:hidden"
-          >
-            <div className="bg-bg-card border border-border rounded-2xl p-5 shadow-2xl backdrop-blur-xl">
-              <div className="flex flex-col gap-2">
-                {navLinks.map((link) => (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="flex items-center justify-between px-4 py-2.5 rounded-xl text-sm font-heading font-medium text-text-primary hover:bg-bg-elevated hover:text-accent transition-colors"
-                  >
-                    <span>{link.name}</span>
-                    <ArrowUpRight className="w-4 h-4 text-text-muted" />
-                  </a>
-                ))}
-              </div>
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setMobileMenuOpen(false)}
+              className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm md:hidden"
+            />
 
-              <div className="mt-4 pt-4 border-t border-border flex flex-col gap-2.5">
-                <a
-                  href={PERSONAL_INFO.resumeUrl}
-                  download="Anjali_Vishwakarma_Resume.pdf"
-                  className="flex items-center justify-center gap-2 w-full py-2.5 text-xs font-mono text-text-primary bg-bg-elevated border border-border rounded-xl"
-                >
-                  <FileText className="w-4 h-4 text-accent" />
-                  <span>Download Resume PDF</span>
-                </a>
-                <a
-                  href="#contact"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center justify-center gap-2 w-full py-2.5 text-xs font-heading font-semibold text-bg-main bg-accent rounded-xl"
-                >
-                  <Sparkles className="w-4 h-4" />
-                  <span>Get In Touch</span>
-                </a>
-              </div>
-            </div>
-          </motion.div>
+            {/* Dropdown Navigation Panel */}
+            <motion.div
+              initial={{ opacity: 0, y: -15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              className="fixed inset-x-0 top-[52px] sm:top-[60px] z-40 bg-[#160F19]/98 backdrop-blur-2xl border-b border-[#403044] px-5 sm:px-6 py-5 shadow-2xl md:hidden max-h-[calc(100vh-60px)] overflow-y-auto"
+            >
+              <nav className="flex flex-col space-y-2.5" aria-label="Mobile Navigation Menu">
+                {navLinks.map((link) => {
+                  const isActive = activeSection === link.href.replace('#', '');
+                  return (
+                    <a
+                      key={link.name}
+                      href={link.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={`flex items-center justify-between px-4 py-2.5 rounded-xl text-xs sm:text-sm font-sans font-medium transition-all ${
+                        isActive
+                          ? 'bg-[#E6A995] text-[#160F19] shadow-sm'
+                          : 'text-[#B3A2AE] hover:text-[#F7EFF4] hover:bg-[#2B1E30]'
+                      }`}
+                    >
+                      <span>{link.name}</span>
+                      {isActive && <span className="w-1.5 h-1.5 rounded-full bg-[#160F19]" />}
+                    </a>
+                  );
+                })}
+
+                {/* Mobile Actions: Resume & Let's Talk */}
+                <div className="pt-4 mt-2 border-t border-[#403044] flex flex-col gap-2.5">
+                  <a
+                    href={PERSONAL_INFO.resumeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-[#2B1E30] hover:bg-[#37283E] border border-[#403044] text-xs font-sans text-[#E6A995] font-medium transition-colors"
+                  >
+                    <FileText className="w-4 h-4 text-[#E6A995]" />
+                    <span>View Resume</span>
+                  </a>
+
+                  <a
+                    href="#contact"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center justify-center gap-1.5 w-full py-2.5 rounded-xl bg-[#E6A995] hover:bg-[#D9907B] text-[#160F19] text-xs font-sans font-semibold shadow-md transition-colors"
+                  >
+                    <span>Let's Talk</span>
+                    <ArrowUpRight className="w-3.5 h-3.5" />
+                  </a>
+                </div>
+              </nav>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>

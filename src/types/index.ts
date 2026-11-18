@@ -5,8 +5,14 @@ export interface Project {
   tagline: string;
   shortDescription: string;
   overview: string;
-  category: 'Full-Stack' | 'Frontend / UI' | 'AI / Web' | 'Smart Systems';
+  category: 'Full-Stack' | 'Frontend / UI' | 'AI / Web' | 'Smart Systems' | 'Web3 / Privacy';
+  label?: string;
   role: string;
+  year?: string;
+  highlight?: string;
+  deploymentUrl?: string;
+  showcaseUrl?: string;
+  isComingSoonSource?: boolean;
   image: string;
   caseStudyImages?: string[];
   tags: string[];
@@ -47,10 +53,12 @@ export interface Achievement {
   organization: string;
   date: string;
   badge: string;
-  type: 'Hackathon' | 'Certification' | 'Academic';
+  type: 'Hackathon' | 'Certification' | 'Academic' | 'Hackathon Participation';
   description: string;
   bullets: string[];
   certificateUrl?: string;
+  showcaseUrl?: string;
+  project?: string;
 }
 
 export interface GitHubRepo {
