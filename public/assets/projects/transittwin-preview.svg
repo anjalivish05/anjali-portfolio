@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 680" width="100%" height="100%" fill="none">
+  <defs>
+    <linearGradient id="grid-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1D1D25" />
+      <stop offset="100%" stop-color="#14141B" />
+    </linearGradient>
+    <linearGradient id="accent-glow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8B5CF6" />
+      <stop offset="50%" stop-color="#A78BFA" />
+      <stop offset="100%" stop-color="#C4B5FD" />
+    </linearGradient>
+    <pattern id="dot-pattern" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.2" fill="#33333D" />
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="680" fill="url(#grid-grad)"/>
+  <rect width="1200" height="680" fill="url(#dot-pattern)"/>
+
+  <!-- Schematic Transit Lines -->
+  <!-- Line 1: Purple Express -->
+  <path d="M 100 450 C 350 450, 420 220, 680 220 C 880 220, 950 380, 1100 380" stroke="url(#accent-glow)" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.9"/>
+  <!-- Line 2: Subtle Blue/Cyan Auxiliary Route -->
+  <path d="M 120 200 C 300 200, 480 340, 720 340 C 900 340, 1000 180, 1080 180" stroke="#60A5FA" stroke-width="3" stroke-dasharray="6 6" fill="none" opacity="0.6"/>
+  <!-- Line 3: Connecting Spur -->
+  <path d="M 420 220 L 420 540 C 420 580, 640 580, 760 520 L 950 380" stroke="#34D399" stroke-width="2.5" fill="none" opacity="0.5"/>
+
+  <!-- Station Nodes & Pulses -->
+  <!-- Station A: Hub Central -->
+  <circle cx="420" cy="220" r="18" fill="#101014" stroke="#A78BFA" stroke-width="4"/>
+  <circle cx="420" cy="220" r="7" fill="#A78BFA"/>
+  <rect x="360" y="160" width="120" height="36" rx="8" fill="#252530" stroke="#33333D"/>
+  <text x="420" y="183" fill="#F5F5F7" font-family="Space Grotesk, sans-serif" font-size="12" font-weight="600" text-anchor="middle">Central Terminal</text>
+
+  <!-- Station B: Transit Twin Interchange -->
+  <circle cx="680" cy="220" r="14" fill="#101014" stroke="#60A5FA" stroke-width="3.5"/>
+  <circle cx="680" cy="220" r="6" fill="#60A5FA"/>
+
+  <!-- Station C: East Junction -->
+  <circle cx="950" cy="380" r="16" fill="#101014" stroke="#A78BFA" stroke-width="4"/>
+  <circle cx="950" cy="380" r="6" fill="#A78BFA"/>
+
+  <!-- Live Vehicle / Sensor Indicators -->
+  <g transform="translate(560, 210)">
+    <rect x="0" y="0" width="80" height="28" rx="6" fill="#A78BFA" opacity="0.15"/>
+    <rect x="0" y="0" width="80" height="28" rx="6" stroke="#A78BFA" stroke-width="1.5"/>
+    <text x="40" y="18" fill="#F5F5F7" font-family="JetBrains Mono, monospace" font-size="11" font-weight="bold" text-anchor="middle">BUS #08 • 98%</text>
+  </g>
+
+  <!-- Telemetry HUD Card Left -->
+  <rect x="70" y="60" width="300" height="150" rx="12" fill="#17171D" stroke="#33333D" stroke-width="1.5" opacity="0.95"/>
+  <text x="95" y="92" fill="#A1A1AA" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1">DIGITAL TWIN SIMULATION</text>
+  <text x="95" y="122" fill="#F5F5F7" font-family="Space Grotesk, sans-serif" font-size="18" font-weight="700">Active Fleet: 42 Nodes</text>
+  <text x="95" y="148" fill="#34D399" font-family="Inter, sans-serif" font-size="12">● 99.4% On-time Schedule Reliability</text>
+  <text x="95" y="172" fill="#A1A1AA" font-family="JetBrains Mono, monospace" font-size="11">Avg Delay: -1.2 min (Optimized)</text>
+
+  <!-- Telemetry HUD Card Right -->
+  <rect x="830" y="60" width="300" height="130" rx="12" fill="#17171D" stroke="#33333D" stroke-width="1.5" opacity="0.95"/>
+  <text x="855" y="92" fill="#A1A1AA" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1">PREDICTIVE CONGESTION</text>
+  <text x="855" y="120" fill="#A78BFA" font-family="Space Grotesk, sans-serif" font-size="18" font-weight="700">Low Congestion Zone</text>
+  <text x="855" y="148" fill="#A1A1AA" font-family="Inter, sans-serif" font-size="12">Dynamic re-routing active for Line 4</text>
+</svg>
