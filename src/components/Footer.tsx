@@ -1,5 +1,6 @@
 import React from 'react';
-import { ArrowUp, Mail, FileText } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ArrowUp, Mail, ArrowUpRight } from 'lucide-react';
 import { Github, Linkedin, Twitter } from './Icons';
 import { PERSONAL_INFO } from '../data/portfolioData';
 
@@ -11,137 +12,149 @@ export const Footer: React.FC = () => {
     });
   };
 
+  const navLinks = [
+    { label: 'Home', href: '#home' },
+    { label: 'About', href: '#about' },
+    { label: 'Projects', href: '#projects' },
+    { label: 'Skills', href: '#skills' },
+    { label: 'Hackathons', href: '#hackathons' },
+    { label: 'Contact', href: '#contact' }
+  ];
+
   return (
-    <footer className="bg-[#160F19] border-t border-[#403044] py-16 relative">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <motion.footer 
+      initial={{ opacity: 0, y: 25 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-50px' }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      className="bg-transparent border-t border-[#403044] py-16 sm:py-20 relative overflow-hidden"
+    >
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Main Footer Row */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-[#403044]/60">
+        {/* Main Footer Row: 3 Balanced Columns */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-14 pb-14 border-b border-[#403044]/60">
           
-          {/* Brand & Identity (5 cols) */}
+          {/* 1. Brand Section (5 cols) */}
           <div className="md:col-span-5 space-y-4">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-full bg-[#2B1E30] border border-[#403044] flex items-center justify-center font-sans font-semibold text-xs text-[#E6A995]">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-[#211725] border border-[#403044] flex items-center justify-center font-serif text-sm font-medium text-[#E6A995] shrink-0 shadow-sm">
                 AV
               </div>
-              <span className="font-serif text-xl tracking-wider text-[#F7EFF4] font-medium">
-                ANJALI<span className="text-[#E6A995]">.</span>
-              </span>
+              <h3 className="font-serif text-lg sm:text-xl lg:text-2xl tracking-wide text-[#F7EFF4] font-medium leading-tight">
+                ANJALI MANOJ VISHWAKARMA
+              </h3>
             </div>
 
-            <p className="text-xs sm:text-sm text-[#B3A2AE] leading-relaxed font-sans max-w-sm">
+            <p className="text-xs sm:text-sm text-[#B3A2AE] leading-relaxed font-sans max-w-sm pt-1">
               Full-Stack &amp; Creative Developer based in Mumbai. Building thoughtful digital experiences through technology and human-centered design.
             </p>
           </div>
 
-          {/* Quick Nav Links (3 cols) */}
-          <div className="md:col-span-3 space-y-3">
-            <span className="text-xs font-sans text-[#E6A995] uppercase tracking-wider block font-medium">
-              Navigation
+          {/* 2. Navigation Section (3 cols) */}
+          <div className="md:col-span-3 space-y-3.5">
+            <span className="text-[11px] font-mono text-[#E6A995] uppercase tracking-[0.2em] block font-medium">
+              NAVIGATION
             </span>
-            <ul className="space-y-2 text-xs font-sans text-[#B3A2AE]">
-              <li>
-                <a href="#home" className="hover:text-[#E6A995] transition-colors">Home</a>
-              </li>
-              <li>
-                <a href="#about" className="hover:text-[#E6A995] transition-colors">About</a>
-              </li>
-              <li>
-                <a href="#projects" className="hover:text-[#E6A995] transition-colors">Projects</a>
-              </li>
-              <li>
-                <a href="#skills" className="hover:text-[#E6A995] transition-colors">Skills</a>
-              </li>
-              <li>
-                <a href="#hackathons" className="hover:text-[#E6A995] transition-colors">Hackathons</a>
-              </li>
-              <li>
-                <a href="#contact" className="hover:text-[#E6A995] transition-colors">Contact</a>
-              </li>
+            <ul className="space-y-2 text-xs sm:text-sm font-sans text-[#B3A2AE]">
+              {navLinks.map((link) => (
+                <li key={link.href}>
+                  <a 
+                    href={link.href} 
+                    className="inline-block hover:text-[#E6A995] hover:translate-x-1 transition-all duration-200"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Socials & Resume (4 cols) */}
-          <div className="md:col-span-4 space-y-4">
-            <span className="text-xs font-sans text-[#E6A995] uppercase tracking-wider block font-medium">
-              Connect
+          {/* 3. Connect Section (4 cols) */}
+          <div className="md:col-span-4 space-y-5">
+            <span className="text-[11px] font-mono text-[#E6A995] uppercase tracking-[0.2em] block font-medium">
+              LET'S CONNECT
             </span>
 
-            <div className="flex items-center gap-2.5">
+            {/* Social Icons Row */}
+            <div className="flex items-center gap-3">
               <a
                 href={PERSONAL_INFO.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-[#2B1E30] hover:bg-[#37283E] border border-[#403044] text-[#B3A2AE] hover:text-[#E6A995] transition-all flex items-center justify-center hover:scale-105"
+                className="w-10 h-10 rounded-full bg-[#211725] hover:bg-[#2B1E30] border border-[#403044] hover:border-[#E6A995]/60 text-[#B3A2AE] hover:text-[#E6A995] hover:-translate-y-1 hover:shadow-[0_0_15px_-3px_rgba(230,169,149,0.3)] transition-all duration-300 flex items-center justify-center group"
                 title="GitHub"
+                aria-label="GitHub"
               >
-                <Github className="w-3.5 h-3.5" />
+                <Github className="w-4 h-4 transition-transform group-hover:scale-110" />
               </a>
 
               <a
                 href={PERSONAL_INFO.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-[#2B1E30] hover:bg-[#37283E] border border-[#403044] text-[#B3A2AE] hover:text-[#E6A995] transition-all flex items-center justify-center hover:scale-105"
+                className="w-10 h-10 rounded-full bg-[#211725] hover:bg-[#2B1E30] border border-[#403044] hover:border-[#E6A995]/60 text-[#B3A2AE] hover:text-[#E6A995] hover:-translate-y-1 hover:shadow-[0_0_15px_-3px_rgba(230,169,149,0.3)] transition-all duration-300 flex items-center justify-center group"
                 title="LinkedIn"
+                aria-label="LinkedIn"
               >
-                <Linkedin className="w-3.5 h-3.5" />
+                <Linkedin className="w-4 h-4 transition-transform group-hover:scale-110" />
               </a>
 
               <a
                 href={PERSONAL_INFO.x}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-[#2B1E30] hover:bg-[#37283E] border border-[#403044] text-[#B3A2AE] hover:text-[#E6A995] transition-all flex items-center justify-center hover:scale-105"
+                className="w-10 h-10 rounded-full bg-[#211725] hover:bg-[#2B1E30] border border-[#403044] hover:border-[#E6A995]/60 text-[#B3A2AE] hover:text-[#E6A995] hover:-translate-y-1 hover:shadow-[0_0_15px_-3px_rgba(230,169,149,0.3)] transition-all duration-300 flex items-center justify-center group"
                 title="X"
+                aria-label="X"
               >
-                <Twitter className="w-3.5 h-3.5" />
+                <Twitter className="w-4 h-4 transition-transform group-hover:scale-110" />
               </a>
 
               <a
                 href={`mailto:${PERSONAL_INFO.email}`}
-                className="w-9 h-9 rounded-full bg-[#2B1E30] hover:bg-[#37283E] border border-[#403044] text-[#B3A2AE] hover:text-[#E6A995] transition-all flex items-center justify-center hover:scale-105"
+                className="w-10 h-10 rounded-full bg-[#211725] hover:bg-[#2B1E30] border border-[#403044] hover:border-[#E6A995]/60 text-[#B3A2AE] hover:text-[#E6A995] hover:-translate-y-1 hover:shadow-[0_0_15px_-3px_rgba(230,169,149,0.3)] transition-all duration-300 flex items-center justify-center group"
                 title="Email"
+                aria-label="Email"
               >
-                <Mail className="w-3.5 h-3.5" />
+                <Mail className="w-4 h-4 transition-transform group-hover:scale-110" />
               </a>
             </div>
 
-            <div>
+            {/* Prominent VIEW RESUME ↗ Button */}
+            <div className="pt-1">
               <a
                 href={PERSONAL_INFO.resumeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#2B1E30] hover:bg-[#37283E] border border-[#403044] text-xs font-sans text-[#F7EFF4] hover:text-[#E6A995] transition-all"
+                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-[#E6A995] hover:bg-[#D9907B] text-[#160F19] font-sans font-semibold text-xs tracking-wider uppercase hover:-translate-y-0.5 hover:shadow-[0_0_20px_-3px_rgba(230,169,149,0.35)] transition-all duration-300"
               >
-                <FileText className="w-3.5 h-3.5 text-[#E6A995]" />
-                <span>View Resume</span>
+                <span>VIEW RESUME</span>
+                <ArrowUpRight className="w-4 h-4" />
               </a>
             </div>
           </div>
 
         </div>
 
-        {/* Bottom Sub-footer */}
+        {/* 4. Bottom Copyright Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-sans text-[#8E7D8A]">
           <div>
-            © {new Date().getFullYear()} {PERSONAL_INFO.fullName}. All rights reserved.
+            © 2026 Anjali Manoj Vishwakarma. All rights reserved.
           </div>
 
-          <div className="flex items-center gap-4">
-            {/* Back to top button */}
+          <div>
             <button
               onClick={scrollToTop}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#2B1E30] hover:bg-[#37283E] border border-[#403044] text-[#B3A2AE] hover:text-[#E6A995] transition-all"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#211725] hover:bg-[#2B1E30] border border-[#403044] hover:border-[#E6A995]/60 text-xs font-sans text-[#B3A2AE] hover:text-[#E6A995] hover:-translate-y-0.5 transition-all duration-300 group"
               aria-label="Back to top"
             >
-              <span>Back to Top</span>
-              <ArrowUp className="w-3 h-3 text-[#E6A995]" />
+              <span>Back to top</span>
+              <ArrowUp className="w-3.5 h-3.5 text-[#E6A995] group-hover:-translate-y-0.5 transition-transform" />
             </button>
           </div>
         </div>
 
       </div>
-    </footer>
+    </motion.footer>
   );
 };

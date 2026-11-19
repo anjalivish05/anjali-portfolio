@@ -5,9 +5,8 @@ import {
   Layout, 
   Server, 
   Database, 
-  Palette, 
   Terminal,
-  Sparkles
+  Cpu
 } from 'lucide-react';
 import { Figma } from './Icons';
 
@@ -107,15 +106,39 @@ const SKILL_CARDS: SkillCardData[] = [
       { name: 'Postman' }
     ],
     countLabel: '4 Workflows'
+  },
+  {
+    id: 'blockchain',
+    number: '07',
+    title: 'Blockchain',
+    icon: <Cpu className="w-4 h-4 text-[#E6A995]" />,
+    description: 'Exploration of cryptographic privacy mechanisms and decentralized standards.',
+    technologies: [
+      { name: 'Web3' },
+      { name: 'Blockchain Fundamentals' },
+      { name: 'Smart Contracts' },
+      { name: 'ERC-5564' }
+    ],
+    countLabel: '4 Technologies'
   }
 ];
 
 export const Skills: React.FC = () => {
-  return (
-    <section id="skills" className="py-28 sm:py-36 relative bg-[#160F19] border-t border-[#403044]/60">
-      {/* Subtle ambient peach lighting */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[#E6A995]/[0.025] rounded-full blur-[140px] pointer-events-none" />
+  const getCardSpan = (idx: number) => {
+    // Row 1 (first 4 cards): 3 cols on desktop (4 * 3 = 12)
+    if (idx < 4) {
+      return 'col-span-1 md:col-span-1 lg:col-span-3';
+    }
+    // Final card on tablet spans 2 cols to eliminate orphan slot
+    if (idx === 6) {
+      return 'col-span-1 md:col-span-2 lg:col-span-4';
+    }
+    // Row 2 (cards 4, 5, 6): 4 cols on desktop (3 * 4 = 12)
+    return 'col-span-1 md:col-span-1 lg:col-span-4';
+  };
 
+  return (
+    <section id="skills" className="py-28 sm:py-36 relative bg-transparent border-t border-[#403044]/60">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
@@ -131,16 +154,16 @@ export const Skills: React.FC = () => {
           </p>
         </div>
 
-        {/* 6-Card Grid Layout (3 columns on desktop, 2 on tablet, 1 on mobile) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
+        {/* 7-Card Balanced Grid Layout (12-column on desktop: 4 in Row 1, 3 in Row 2; 2-col on tablet; 1-col on mobile) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 sm:gap-7">
           {SKILL_CARDS.map((card, idx) => (
             <motion.div
               key={card.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.5, delay: idx * 0.08 }}
-              className="group p-7 sm:p-8 rounded-2xl bg-[#2B1E30] border border-[#403044] hover:border-[#E6A995]/50 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_16px_36px_-10px_rgba(10,6,12,0.85)] flex flex-col justify-between"
+              transition={{ duration: 0.5, delay: idx * 0.07 }}
+              className={`group p-6 sm:p-7 rounded-2xl bg-[#2B1E30] border border-[#403044] hover:border-[#E6A995]/50 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_16px_36px_-10px_rgba(10,6,12,0.85)] flex flex-col justify-between ${getCardSpan(idx)}`}
             >
               <div>
                 {/* Card Top Row: Icon Container + Number */}

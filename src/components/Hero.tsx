@@ -47,49 +47,9 @@ export const Hero: React.FC = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex flex-col justify-center items-center text-center px-4 sm:px-6 lg:px-8 overflow-hidden pt-28 pb-20 select-none bg-[#160F19]"
+      className="relative min-h-screen flex flex-col justify-center items-center text-center px-4 sm:px-6 lg:px-8 overflow-hidden pt-28 pb-20 select-none bg-transparent"
     >
-      {/* 1. Subtle Aubergine & Peach Atmospheric Ambient Lighting (No Photos) */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Deep aubergine central glow */}
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] sm:w-[900px] h-[500px] bg-[#2B1E30]/60 rounded-full blur-[140px]" />
-        
-        {/* Soft peach top edge ambient glow */}
-        <div className="absolute -top-32 right-1/4 w-[450px] h-[350px] bg-[#E6A995]/[0.07] rounded-full blur-[130px]" />
-        
-        {/* Soft peach bottom left ambient glow */}
-        <div className="absolute -bottom-32 left-10 w-[500px] h-[380px] bg-[#E6A995]/[0.05] rounded-full blur-[140px]" />
-
-        {/* Elegant abstract flowing vector contours */}
-        <svg
-          className="absolute inset-0 w-full h-full opacity-[0.06] text-[#E6A995]"
-          viewBox="0 0 1440 900"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M-100 450 C 300 200, 700 700, 1100 400 C 1300 250, 1500 500, 1600 450"
-            stroke="currentColor"
-            strokeWidth="1.2"
-          />
-          <path
-            d="M-50 520 C 350 280, 650 780, 1050 480 C 1250 330, 1450 580, 1550 520"
-            stroke="currentColor"
-            strokeWidth="0.8"
-            strokeDasharray="4 4"
-          />
-          <path
-            d="M100 150 C 500 350, 800 100, 1200 300 C 1350 400, 1500 250, 1600 300"
-            stroke="currentColor"
-            strokeWidth="0.8"
-          />
-        </svg>
-
-        {/* Subtle radial vignette */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_40%,#160F19_95%)]" />
-      </div>
-
-      {/* 2. Centered Content Container */}
+      {/* Centered Content Container */}
       <div className="relative z-10 max-w-3xl mx-auto flex flex-col items-center text-center">
         
         {/* Small greeting badge: "HELLO & WELCOME" */}

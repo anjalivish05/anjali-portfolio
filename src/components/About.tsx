@@ -73,12 +73,8 @@ export const About: React.FC = () => {
     <section 
       id="about" 
       ref={sectionRef}
-      className="py-24 sm:py-32 relative bg-[#160F19] border-t border-[#403044]/60 overflow-hidden"
+      className="py-24 sm:py-32 relative bg-transparent border-t border-[#403044]/60 overflow-hidden"
     >
-      {/* Subtle ambient peach lighting */}
-      <div className="absolute top-1/4 left-0 w-[450px] h-[450px] bg-[#E6A995]/[0.03] rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-0 w-[400px] h-[400px] bg-[#E6A995]/[0.025] rounded-full blur-[130px] pointer-events-none" />
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* 1. Section Header */}

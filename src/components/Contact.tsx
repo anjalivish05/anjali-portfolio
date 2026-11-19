@@ -49,13 +49,12 @@ export const Contact: React.FC = () => {
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       errs.email = 'Please enter a valid email address.';
     }
-    if (!formData.subject.trim()) errs.subject = 'Please specify a brief subject.';
+    if (!formData.subject.trim()) errs.subject = 'Please add a subject.';
     if (!formData.message.trim()) {
-      errs.message = 'Please provide your message.';
+      errs.message = 'Please include a brief message.';
     } else if (formData.message.trim().length < 10) {
-      errs.message = 'Message must be at least 10 characters.';
+      errs.message = 'Please provide at least 10 characters.';
     }
-
     setErrors(errs);
     return Object.keys(errs).length === 0;
   };
@@ -89,10 +88,7 @@ export const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-28 sm:py-36 relative bg-[#160F19] border-t border-[#403044]/60">
-      {/* Subtle ambient peach lighting */}
-      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#E6A995]/[0.03] rounded-full blur-[140px] pointer-events-none" />
-
+    <section id="contact" className="py-28 sm:py-36 relative bg-transparent border-t border-[#403044]/60">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
@@ -111,7 +107,7 @@ export const Contact: React.FC = () => {
         {/* 2-Column Minimal Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
           
-          {/* Left Column: Direct Info, Socials, & Resume Card */}
+          {/* Left Column: Direct Info & Resume Card */}
           <div className="lg:col-span-5 space-y-6">
             
             {/* Quick Contact Details */}
@@ -152,44 +148,6 @@ export const Contact: React.FC = () => {
                     {PERSONAL_INFO.location}
                   </span>
                 </div>
-              </div>
-            </div>
-
-            {/* Social Links Row */}
-            <div className="p-7 rounded-2xl bg-[#2B1E30]/70 border border-[#403044]">
-              <span className="text-[11px] font-sans uppercase tracking-wider text-[#E6A995] block mb-4">
-                Social Profiles
-              </span>
-              <div className="flex items-center gap-3">
-                <a
-                  href={PERSONAL_INFO.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-[#211725] border border-[#403044] text-[#B3A2AE] hover:text-[#E6A995] hover:border-[#E6A995] hover:bg-[#37283E] transition-all flex items-center justify-center hover:scale-105"
-                  title="GitHub"
-                >
-                  <Github className="w-4 h-4" />
-                </a>
-
-                <a
-                  href={PERSONAL_INFO.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-[#211725] border border-[#403044] text-[#B3A2AE] hover:text-[#E6A995] hover:border-[#E6A995] hover:bg-[#37283E] transition-all flex items-center justify-center hover:scale-105"
-                  title="LinkedIn"
-                >
-                  <Linkedin className="w-4 h-4" />
-                </a>
-
-                <a
-                  href={PERSONAL_INFO.x}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-[#211725] border border-[#403044] text-[#B3A2AE] hover:text-[#E6A995] hover:border-[#E6A995] hover:bg-[#37283E] transition-all flex items-center justify-center hover:scale-105"
-                  title="X"
-                >
-                  <Twitter className="w-4 h-4" />
-                </a>
               </div>
             </div>
 
@@ -339,6 +297,89 @@ export const Contact: React.FC = () => {
             </div>
           </div>
 
+        </div>
+
+        {/* Social Profiles: LET'S CONNECT */}
+        <div className="mt-14 sm:mt-16 pt-12 sm:pt-14 border-t border-[#403044]/60">
+          <div className="mb-8 text-center sm:text-left">
+            <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#E6A995] block mb-1.5 font-medium">
+              LET'S CONNECT
+            </span>
+            <p className="text-xs sm:text-sm font-sans text-[#B3A2AE]">
+              Find me across the web.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+            {/* 1. GitHub Card */}
+            <a
+              href={PERSONAL_INFO.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-between p-4 sm:p-5 rounded-2xl bg-[#211725] border border-[#403044] hover:border-[#E6A995]/60 hover:-translate-y-1 hover:shadow-[0_0_20px_-3px_rgba(230,169,149,0.35)] transition-all duration-300 group"
+            >
+              <div className="flex items-center gap-3.5 min-w-0">
+                <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#160F19] border border-[#403044] group-hover:border-[#E6A995]/60 flex items-center justify-center text-[#B3A2AE] group-hover:text-[#E6A995] transition-colors shrink-0">
+                  <Github className="w-4 h-4 sm:w-5 sm:h-5" />
+                </div>
+                <div className="min-w-0">
+                  <span className="font-serif text-base sm:text-lg text-[#F7EFF4] group-hover:text-[#E6A995] transition-colors block font-medium truncate">
+                    GitHub
+                  </span>
+                  <span className="text-xs font-sans text-[#B3A2AE] block truncate">
+                    Explore my projects
+                  </span>
+                </div>
+              </div>
+              <ArrowUpRight className="w-4 h-4 text-[#8E7D8A] group-hover:text-[#E6A995] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0 ml-3" />
+            </a>
+
+            {/* 2. LinkedIn Card */}
+            <a
+              href={PERSONAL_INFO.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-between p-4 sm:p-5 rounded-2xl bg-[#211725] border border-[#403044] hover:border-[#E6A995]/60 hover:-translate-y-1 hover:shadow-[0_0_20px_-3px_rgba(230,169,149,0.35)] transition-all duration-300 group"
+            >
+              <div className="flex items-center gap-3.5 min-w-0">
+                <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#160F19] border border-[#403044] group-hover:border-[#E6A995]/60 flex items-center justify-center text-[#B3A2AE] group-hover:text-[#E6A995] transition-colors shrink-0">
+                  <Linkedin className="w-4 h-4 sm:w-5 sm:h-5" />
+                </div>
+                <div className="min-w-0">
+                  <span className="font-serif text-base sm:text-lg text-[#F7EFF4] group-hover:text-[#E6A995] transition-colors block font-medium truncate">
+                    LinkedIn
+                  </span>
+                  <span className="text-xs font-sans text-[#B3A2AE] block truncate">
+                    Connect professionally
+                  </span>
+                </div>
+              </div>
+              <ArrowUpRight className="w-4 h-4 text-[#8E7D8A] group-hover:text-[#E6A995] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0 ml-3" />
+            </a>
+
+            {/* 3. X Card */}
+            <a
+              href={PERSONAL_INFO.x}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-between p-4 sm:p-5 rounded-2xl bg-[#211725] border border-[#403044] hover:border-[#E6A995]/60 hover:-translate-y-1 hover:shadow-[0_0_20px_-3px_rgba(230,169,149,0.35)] transition-all duration-300 group"
+            >
+              <div className="flex items-center gap-3.5 min-w-0">
+                <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#160F19] border border-[#403044] group-hover:border-[#E6A995]/60 flex items-center justify-center text-[#B3A2AE] group-hover:text-[#E6A995] transition-colors shrink-0">
+                  <Twitter className="w-4 h-4 sm:w-5 sm:h-5" />
+                </div>
+                <div className="min-w-0">
+                  <span className="font-serif text-base sm:text-lg text-[#F7EFF4] group-hover:text-[#E6A995] transition-colors block font-medium truncate">
+                    X
+                  </span>
+                  <span className="text-xs font-sans text-[#B3A2AE] block truncate">
+                    Follow my updates
+                  </span>
+                </div>
+              </div>
+              <ArrowUpRight className="w-4 h-4 text-[#8E7D8A] group-hover:text-[#E6A995] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0 ml-3" />
+            </a>
+          </div>
         </div>
 
       </div>

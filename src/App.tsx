@@ -7,6 +7,7 @@ import { Skills } from './components/Skills';
 import { Achievements } from './components/Achievements';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
+import { GlobalBackground } from './components/GlobalBackground';
 import { ProjectModal } from './components/ProjectModal';
 import { PROJECTS } from './data/portfolioData';
 import { Project } from './types';
@@ -65,12 +66,15 @@ export const App: React.FC = () => {
     : null;
 
   return (
-    <div className="relative min-h-screen bg-[#160F19] text-[#F7EFF4] selection:bg-[#E6A995] selection:text-[#160F19]">
+    <div className="relative min-h-screen bg-[#160F19] text-[#F7EFF4] selection:bg-[#E6A995] selection:text-[#160F19] overflow-x-hidden">
+      {/* Unified Continuous Global Background System */}
+      <GlobalBackground />
+
       {/* 1. Floating Sticky Navigation */}
       <Navbar activeSection={activeSection} />
 
       {/* Main Sections */}
-      <main>
+      <main className="relative z-10">
         {/* 2. Hero Section */}
         <Hero />
 

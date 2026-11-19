@@ -231,12 +231,8 @@ export const Projects: React.FC<ProjectsProps> = ({ onOpenProject }) => {
   return (
     <section 
       id="projects" 
-      className="py-24 sm:py-32 relative bg-[#160F19] border-t border-[#403044]/60 overflow-hidden"
+      className="py-24 sm:py-32 relative bg-transparent border-t border-[#403044]/60 overflow-hidden"
     >
-      {/* Subtle ambient peach lighting */}
-      <div className="absolute top-1/4 right-0 w-[550px] h-[550px] bg-[#E6A995]/[0.035] rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-1/3 left-0 w-[500px] h-[500px] bg-[#E6A995]/[0.03] rounded-full blur-[140px] pointer-events-none" />
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}

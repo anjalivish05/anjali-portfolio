@@ -102,3 +102,42 @@ body {
   box-shadow: 0 16px 36px -12px rgba(10, 6, 12, 0.8), 0 0 0 1px rgba(230, 169, 149, 0.25);
   border-color: rgba(230, 169, 149, 0.4);
 }
+
+/* Unified Global Background Ambient Motion */
+@keyframes ambientGlowDrift {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.95;
+  }
+  50% {
+    transform: translate(12px, -8px) scale(1.03);
+    opacity: 1;
+  }
+}
+
+@keyframes waveContourFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.global-ambient-layer {
+  animation: ambientGlowDrift 28s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.global-wave-layer {
+  animation: waveContourFloat 22s ease-in-out infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .global-ambient-layer,
+  .global-wave-layer {
+    animation: none !important;
+    transform: none !important;
+  }
+}
