@@ -1,213 +1,215 @@
-# ✨ Anjali Vishwakarma | Personal Developer Portfolio
+# Anjali Manoj Vishwakarma
 
-### Full-Stack Developer | UI/UX Enthusiast | Technology Explorer
+### Full-Stack Developer | UI/UX Designer
 
-A personal portfolio showcasing my development journey, technical skills, projects, achievements and experiences.
+Building thoughtful, dependable digital solutions through technology, creativity, and problem-solving.
 
-**Connect with me:** [GitHub](https://github.com/anjalivish05) · [Portfolio Repository](https://github.com/anjalivish05/anjali-portfolio)
-
----
----
-
-## 👩🏻‍💻 About Me
-
-Hi! I'm **Anjali Manoj Vishwakarma**, an Information Technology engineering student passionate about building meaningful digital experiences.
-
-I enjoy exploring new technologies, developing web applications, solving problems and experimenting with creative UI/UX designs.
-
-My interests include:
-
-- Full-Stack Web Development
-- Artificial Intelligence and Automation
-- UI/UX Design
-- Software Engineering
-- Hackathons and collaborative projects
-
-I believe in learning by building and turning ideas into practical solutions.
+[![Portfolio](https://img.shields.io/badge/Portfolio-Visit- E6A995?style=for-the-badge)](https://github.com/anjalivish05/anjali-portfolio)
+[![GitHub](https://img.shields.io/badge/GitHub-anjalivish05-181717?style=for-the-badge&logo=github)](https://github.com/anjalivish05)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/anjali-vishwakarma-736392382/)
 
 ---
 
-## 🚀 About This Portfolio
+## About Me
 
-This portfolio is my digital space to showcase who I am, what I build and what I'm learning.
+I'm a Full-Stack Developer and UI/UX Designer passionate about creating practical digital experiences. I enjoy working across the development lifecycle, from understanding real-world problems and designing intuitive interfaces to developing functional applications.
 
-It brings together my projects, technical capabilities, achievements and development journey in one interactive experience.
-
-### ✨ Key Features
-
-- **Cinematic Hero Section** – A visually engaging introduction.
-- **About Me** – My background, interests and development journey.
-- **Technical Skills** – Technologies and tools I work with.
-- **Featured Projects** – A collection of my development projects.
-- **Achievements** – Hackathon participation and certifications.
-- **GitHub Section** – Links to my development work.
-- **Resume Access** – Downloadable resume.
-- **Responsive Design** – Designed for desktop, tablet and mobile.
-- **Interactive UI** – Smooth animations and engaging interactions.
+- 🎓 B.Tech in Information Technology (2024–2028).
+- 🏫 Shree L. R. Tiwari College of Engineering, Mumbai.
+- 💻 Interested in full-stack development and software engineering.
+- 🎨 UI/UX design and prototyping using Figma.
+- 🤖 Exploring AI-powered applications and automation.
+- 🔗 Exploring Blockchain, Web3 and Smart Contracts.
 
 ---
 
-## 🛠️ Tech Stack
+## Featured Projects
 
-| Category          | Technologies                                 |
-| ----------------- | -------------------------------------------- |
-| Frontend          | React.js, HTML5, CSS3, TypeScript            |
-| Build Tool        | Vite                                         |
-| Programming       | JavaScript, TypeScript, Python, Java, C++    |
-| Backend Knowledge | Python, FastAPI, Java Spring Boot, REST APIs |
-| Databases         | MySQL, PostgreSQL                            |
-| UI/UX             | Figma                                        |
-| Development Tools | Git, GitHub, VS Code, Antigravity            |
+### 1. MoveSmart
+**Smart Mobility & Urban Transportation Platform**
 
----
+A smart mobility platform featuring interactive Leaflet maps and incident tracking to support urban transportation awareness.
 
-## 💼 Featured Projects
+- Interactive mapping using Leaflet.
+- Location-based incident tracking.
+- Smart mobility-focused user experience.
 
-Here are some of the projects I've worked on:
+[Live Demo](https://move-smart-five.vercel.app)
 
-### 1. HospitalFlow
+### 2. Stealth Pay
+**Blockchain & Web3**
 
-**Smart Hospital OPD Coordination Platform**
+A privacy-focused payment project implementing ERC-5564 dual-key stealth addresses on Ethereum.
 
-A healthcare coordination platform focused on improving outpatient department experiences through digital tokens, dynamic queues and doctor-status updates.
+- Blockchain-based payment privacy.
+- ERC-5564 stealth address implementation.
+- Ethereum ecosystem exploration.
 
-**Focus:** Frontend Development and UI/UX.
+[Live Demo](https://stealth-pay-team1.vercel.app) · [ETHGlobal Showcase](https://ethglobal.com/showcase/stealth-pay-xtdtj)
 
-### 2. Manzil – AI Cafe Finder
+### 3. Royal Edge Enterprises
+**Freelance Project**
 
-**Discover Cafés That Match Your Preferences**
+A commercial B2B wholesale catalog and quotation inquiry platform designed to support business product discovery and customer inquiries.
 
-An AI-powered cafe discovery concept designed to help users find suitable cafes based on budget, preferences and purpose.
+[Live Demo](https://royal-edge-enterprise-v2.vercel.app)
 
-**Focus:** Web Development, AI Integration and Maps.
+### 4. LibraryEase
+**Public Library Platform**
 
-### 3. LibraryEase
+A public library management and digital catalog platform featuring conversational book discovery powered by Google Gemini AI.
 
-**A Smarter Public Library Experience**
+- Digital book catalog.
+- Conversational book discovery.
+- AI-powered search experience.
 
-A public library information platform focused on improving access to library information and discovering literature, including Hindi Sahitya.
-
-**Focus:** Web Development and User Experience.
-
-### 4. TransitTwin
-
-**Smart Transit Solution**
-
-A technology-driven project developed as part of my exploration of smart transportation solutions.
+[Live Demo](https://libraryease-frontend.vercel.app)
 
 ---
 
-## 🏆 Hackathons & Achievements
+## Experience
 
-- Participated in ETHGlobal Mumbai.
-- Participated in Smart India Hackathon.
-- AWS Academy / AWS-related certification experience.
+### HospitalFlow
+**Frontend Development**
+
+Worked on the frontend of a smart hospital OPD coordination platform.
+
+- Responsive patient and hospital interfaces.
+- Digital token and dynamic queue interfaces.
+- UI consistency and form validation.
+- Loading states and user experience improvements.
+
+### Manzil – AI Cafe Finder
+**Full-Stack Development**
+
+An AI-powered cafe discovery platform designed to help users find cafes based on their budget and preferences.
+
+- Frontend development and user experience.
+- Backend development using Python and FastAPI.
+- REST API integration.
+- Budget-based cafe discovery.
+- Google Maps integration exploration.
 
 ---
 
-## 🎓 Education
+## Technical Skills
 
-**Bachelor of Technology – Information Technology**
-
-Shree L. R. Tiwari College of Engineering
-
-Expected Graduation: 2028
+| Category | Technologies |
+|---|---|
+| Programming | Java, Python, C++, JavaScript |
+| Frontend | React.js, TypeScript, HTML5, CSS3 |
+| Backend | FastAPI, Spring Boot, REST APIs |
+| Databases | MySQL, PostgreSQL, SQL |
+| UI/UX & Design | Figma, UI Design, UX Design, Wireframing, Prototyping |
+| Developer Tools | Git, GitHub, VS Code, Postman |
+| Blockchain & Web3 | Web3, Blockchain Fundamentals, Smart Contracts, ERC-5564 |
 
 ---
 
-## 📂 Project Structure
+## Certifications & Achievements
+
+### AWS Solutions Architecture Job Simulation
+**Amazon Web Services & Forage — September 2025**
+
+Completed practical simulation tasks involving highly available, cost-effective and secure cloud infrastructure patterns.
+
+[View Certificate](public/assets/aws-forage-certificate.pdf)
+
+### Smart India Hackathon 2025
+**Ministry of Education & AICTE, Government of India**
+
+Selected as a participant in India's national innovation competition.
+
+### ETHGlobal Mumbai
+**November 5–7, 2026**
+
+Participated in ETHGlobal Mumbai and submitted the project Stealth Pay.
+
+[View Project Showcase](https://ethglobal.com/showcase/stealth-pay-xtdtj)
+
+[View Participation Certificate](public/assets/ethglobal-mumbai-certificate.jpg)
+
+---
+
+## Tech Stack & Tools
+
+![Java](https://img.shields.io/badge/Java-ED8B00?style=flat-square&logo=openjdk&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=flat-square&logo=springboot&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=flat-square&logo=postgresql&logoColor=white)
+![Figma](https://img.shields.io/badge/Figma-F24E1E?style=flat-square&logo=figma&logoColor=white)
+![Git](https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white)
+
+---
+
+## Repository & Local Setup
+
+**Repository:** [anjalivish05/anjali-portfolio](https://github.com/anjalivish05/anjali-portfolio)
+
+To run the portfolio locally:
+
+```bash
+# Clone the repository
+git clone https://github.com/anjalivish05/anjali-portfolio.git
+
+# Navigate into the project
+cd anjali-portfolio
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Create production build
+npm run build
+
+# Preview production build
+npm run preview
+```
+
+### Project Structure
 
 ```text
 anjali-portfolio/
-│
 ├── public/
-│   └── assets/
-│       ├── projects/
-│       ├── profile.jpg
-│       ├── resume.pdf
-│       └── aws-forage-certificate.pdf
-│
+│   ├── assets/
+│   └── resume.pdf
 ├── src/
 │   ├── components/
 │   │   ├── About.tsx
 │   │   ├── Achievements.tsx
-│   │   ├── BentoGrid.tsx
 │   │   ├── Contact.tsx
+│   │   ├── Experience.tsx
 │   │   ├── Footer.tsx
+│   │   ├── GlobalBackground.tsx
 │   │   ├── Hero.tsx
 │   │   ├── Navbar.tsx
 │   │   ├── Projects.tsx
 │   │   └── Skills.tsx
-│   │
 │   ├── data/
 │   ├── lib/
+│   ├── types/
 │   ├── App.tsx
-│   ├── index.css
-│   └── main.tsx
-│
+│   └── index.css
 ├── index.html
 ├── package.json
-├── tsconfig.json
-└── vite.config.ts
+└── README.md
 ```
 
 ---
 
-## ⚙️ Run Locally
-
-Want to explore or run this project on your computer?
-
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/anjalivish05/anjali-portfolio.git
-```
-
-### 2. Navigate to the project
-
-```bash
-cd anjali-portfolio
-```
-
-### 3. Install dependencies
-
-```bash
-npm install
-```
-
-### 4. Start the development server
-
-```bash
-npm run dev
-```
-
-### 5. Build for production
-
-```bash
-npm run build
-```
-
----
-
-## 📬 Connect With Me
-
-I'm always interested in connecting with developers, collaborating on projects and exploring new opportunities.
+## Connect With Me
 
 - **GitHub:** [@anjalivish05](https://github.com/anjalivish05)
-- **Portfolio Repository:** [anjali-portfolio](https://github.com/anjalivish05/anjali-portfolio)
+- **LinkedIn:** [Anjali Vishwakarma](https://www.linkedin.com/in/anjali-vishwakarma-736392382/)
+- **X (Twitter):** [@anjalivish05](https://x.com/anjalivish05)
+- **Email:** [anjali13anuj@gmail.com](mailto:anjali13anuj@gmail.com)
 
 ---
 
-## 💜 A Little Note
-
-This portfolio represents my journey of learning, experimenting, building and growing as a developer.
-
-I'm continuously exploring new technologies and improving my skills through real-world projects.
-
-**Built with curiosity, creativity and a passion for technology.**
-
----
-
-
-&#x20; © 2026 Anjali Manoj Vishwakarma. All rights reserved.
-
+*Building with purpose. Designing with clarity. Learning continuously.*
