@@ -16,6 +16,7 @@ export const Footer: React.FC = () => {
     { label: 'Home', href: '#home' },
     { label: 'About', href: '#about' },
     { label: 'Projects', href: '#projects' },
+    { label: 'Experience', href: '#experience' },
     { label: 'Skills', href: '#skills' },
     { label: 'Hackathons', href: '#hackathons' },
     { label: 'Contact', href: '#contact' }
@@ -23,9 +24,9 @@ export const Footer: React.FC = () => {
 
   return (
     <motion.footer 
-      initial={{ opacity: 0, y: 25 }}
+      initial={{ opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-50px' }}
+      viewport={{ once: false, margin: '-40px' }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       className="bg-transparent border-t border-[#403044] py-16 sm:py-20 relative overflow-hidden"
     >
@@ -37,10 +38,10 @@ export const Footer: React.FC = () => {
           {/* 1. Brand Section (5 cols) */}
           <div className="md:col-span-5 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-[#211725] border border-[#403044] flex items-center justify-center font-serif text-sm font-medium text-[#E6A995] shrink-0 shadow-sm">
+              <div className="w-10 h-10 rounded-full bg-[#211725] border border-[#403044] flex items-center justify-center font-serif text-sm font-bold text-[#E6A995] shrink-0 shadow-sm">
                 AV
               </div>
-              <h3 className="font-serif text-lg sm:text-xl lg:text-2xl tracking-wide text-[#F7EFF4] font-medium leading-tight">
+              <h3 className="font-serif text-lg sm:text-xl lg:text-2xl tracking-tight text-[#F7EFF4] font-bold leading-tight">
                 ANJALI MANOJ VISHWAKARMA
               </h3>
             </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from '../lib/motion';
 import { FileText, ArrowDown, Mail } from 'lucide-react';
 import { Github, Linkedin, Twitter } from './Icons';
 import { PERSONAL_INFO } from '../data/portfolioData';
@@ -15,6 +15,20 @@ export const Hero: React.FC = () => {
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
   const [displayText, setDisplayText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
+  const prefersReducedMotion = useReducedMotion();
+
+  useEffect(() => {
+    if (prefersReducedMotion) return;
+    const handleScroll = () => {
+      // Only track while hero is in or near viewport
+      if (window.scrollY < 900) {
+        setScrollY(window.scrollY);
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [prefersReducedMotion]);
 
   useEffect(() => {
     const fullRole = ROLES[currentRoleIndex];
@@ -49,8 +63,20 @@ export const Hero: React.FC = () => {
       id="home"
       className="relative min-h-screen flex flex-col justify-center items-center text-center px-4 sm:px-6 lg:px-8 overflow-hidden pt-28 pb-20 select-none bg-transparent"
     >
-      {/* Centered Content Container */}
-      <div className="relative z-10 max-w-3xl mx-auto flex flex-col items-center text-center">
+      {/* Centered Content Container with Cinematic Scroll Parallax Depth */}
+      <div 
+        style={
+          prefersReducedMotion
+            ? undefined
+            : {
+                transform: `translate3d(0, ${scrollY * 0.22}px, 0)`,
+                opacity: Math.max(0, 1 - scrollY / 680),
+                transition: 'opacity 100ms ease-out',
+                willChange: 'transform, opacity',
+              }
+        }
+        className="relative z-10 max-w-3xl mx-auto flex flex-col items-center text-center"
+      >
         
         {/* Small greeting badge: "HELLO & WELCOME" */}
         <motion.div
@@ -70,7 +96,7 @@ export const Hero: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-          className="font-serif text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-[#F7EFF4] font-normal tracking-tight mb-4 sm:mb-6 leading-none"
+          className="font-serif text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-[#F7EFF4] font-bold tracking-tight mb-4 sm:mb-6 leading-none"
         >
           I'm Anjali<span className="text-[#E6A995]">.</span>
         </motion.h1>
@@ -80,9 +106,9 @@ export const Hero: React.FC = () => {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="text-xl sm:text-2xl md:text-3xl font-serif text-[#F7EFF4]/90 mb-4 sm:mb-5 flex items-center justify-center min-h-[44px]"
+          className="text-2xl sm:text-3xl md:text-4xl text-[#F7EFF4]/90 mb-4 sm:mb-5 flex items-center justify-center min-h-[44px]"
         >
-          <span className="font-normal italic tracking-wide">
+          <span className="font-editorial text-2xl sm:text-3xl md:text-4xl italic font-normal tracking-wide">
             {displayText}
           </span>
           <span className="inline-block w-[2.5px] h-[1em] ml-2 bg-[#E6A995] align-middle animate-pulse" />

@@ -3,6 +3,7 @@ import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
 import { Projects } from './components/Projects';
+import { Experience } from './components/Experience';
 import { Skills } from './components/Skills';
 import { Achievements } from './components/Achievements';
 import { Contact } from './components/Contact';
@@ -18,7 +19,7 @@ export const App: React.FC = () => {
 
   // Intersection Observer for scroll spy
   useEffect(() => {
-    const sectionIds = ['home', 'about', 'projects', 'skills', 'hackathons', 'contact'];
+    const sectionIds = ['home', 'about', 'projects', 'experience', 'skills', 'hackathons', 'contact'];
     const handleScroll = () => {
       const scrollPos = window.scrollY + 200;
       for (const id of sectionIds) {
@@ -84,7 +85,10 @@ export const App: React.FC = () => {
         {/* 4. Selected Works (Projects) Section */}
         <Projects onOpenProject={handleOpenProject} />
 
-        {/* 5. Tools I Work With (Skills) Section */}
+        {/* 5. Where I've Applied My Skills (Experience) Section */}
+        <Experience />
+
+        {/* 6. Tools I Work With (Skills) Section */}
         <Skills />
 
         {/* 6. Beyond the Code (Hackathons & Achievements) Section */}

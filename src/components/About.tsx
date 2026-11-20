@@ -9,6 +9,7 @@ import {
   Sparkles, 
   ArrowUpRight 
 } from 'lucide-react';
+import { LetterRevealHeading } from '../lib/motion';
 
 export const About: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -44,12 +45,14 @@ export const About: React.FC = () => {
         const entry = entries[0];
         if (entry.isIntersecting) {
           setIsRevealed(true);
-          observer.unobserve(entry.target);
+        } else {
+          // Reversible scroll animation
+          setIsRevealed(false);
         }
       },
       {
         threshold: 0.1,
-        rootMargin: '0px 0px -60px 0px',
+        rootMargin: '0px 0px -40px 0px',
       }
     );
 
@@ -85,8 +88,13 @@ export const About: React.FC = () => {
           <span className="text-[11px] uppercase tracking-[0.26em] font-mono font-medium text-[#E6A995] mb-3 block">
             BIOGRAPHY
           </span>
-          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl text-[#F7EFF4] font-normal tracking-tight">
-            A Little About Me
+          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl text-[#F7EFF4] font-bold tracking-tight">
+            <LetterRevealHeading
+              text="A Little About Me"
+              isRevealed={isRevealed}
+              accentChar=""
+              prefersReducedMotion={prefersReducedMotion}
+            />
           </h2>
         </div>
 
@@ -114,7 +122,7 @@ export const About: React.FC = () => {
                       loading="lazy"
                     />
                   </div>
-                  <p className="mt-2 text-center font-serif italic text-[11px] text-[#B3A2AE] group-hover/polaroid:text-[#E6A995] transition-colors">
+                  <p className="mt-2 text-center font-editorial italic text-xs text-[#B3A2AE] group-hover/polaroid:text-[#E6A995] transition-colors">
                     curiosity &amp; books
                   </p>
                 </div>
@@ -134,7 +142,7 @@ export const About: React.FC = () => {
                       loading="lazy"
                     />
                   </div>
-                  <p className="mt-2 text-center font-serif italic text-[11px] text-[#B3A2AE] group-hover/polaroid:text-[#E6A995] transition-colors">
+                  <p className="mt-2 text-center font-editorial italic text-xs text-[#B3A2AE] group-hover/polaroid:text-[#E6A995] transition-colors">
                     crafting with code
                   </p>
                 </div>
@@ -154,7 +162,7 @@ export const About: React.FC = () => {
                       loading="lazy"
                     />
                   </div>
-                  <p className="mt-2 text-center font-serif italic text-[11px] text-[#B3A2AE] group-hover/polaroid:text-[#E6A995] transition-colors">
+                  <p className="mt-2 text-center font-editorial italic text-xs text-[#B3A2AE] group-hover/polaroid:text-[#E6A995] transition-colors">
                     creative studio vibes
                   </p>
                 </div>
@@ -174,14 +182,14 @@ export const About: React.FC = () => {
                   PERSONAL PROFILE
                 </span>
               </div>
-              <h3 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#F7EFF4] font-normal tracking-tight leading-tight">
-                I'm <span className="text-[#E6A995] font-serif italic">Anjali Manoj Vishwakarma</span>
+              <h3 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#F7EFF4] font-bold tracking-tight leading-tight">
+                I'm <span className="text-[#E6A995] font-serif font-bold">Anjali Manoj Vishwakarma</span>
               </h3>
             </div>
 
             {/* Introduction Lead Statement */}
             <div style={getRevealStyle(350, 18)}>
-              <p className="font-serif text-xl sm:text-2xl text-[#F7EFF4] leading-relaxed font-normal mb-5">
+              <p className="font-serif text-xl sm:text-2xl text-[#F7EFF4] leading-relaxed font-semibold tracking-tight mb-5">
                 "An Information Technology engineering student passionate about building thoughtful digital experiences through technology and creativity."
               </p>
             </div>
@@ -241,7 +249,7 @@ export const About: React.FC = () => {
               <span className="text-[11px] font-mono uppercase tracking-wider text-[#E6A995] block mb-1">
                 ACADEMIC DEGREE
               </span>
-              <h4 className="font-serif text-xl sm:text-2xl text-[#F7EFF4] font-normal mb-2.5">
+              <h4 className="font-serif text-xl sm:text-2xl text-[#F7EFF4] font-semibold tracking-tight mb-2.5">
                 B.Tech in Information Technology
               </h4>
               <p className="text-xs sm:text-sm font-sans text-[#B3A2AE] leading-relaxed">
@@ -266,7 +274,7 @@ export const About: React.FC = () => {
               <span className="text-[11px] font-mono uppercase tracking-wider text-[#E6A995] block mb-1">
                 TECHNICAL FOCUS
               </span>
-              <h4 className="font-serif text-xl sm:text-2xl text-[#F7EFF4] font-normal mb-3">
+              <h4 className="font-serif text-xl sm:text-2xl text-[#F7EFF4] font-semibold tracking-tight mb-3">
                 Full-Stack Architecture
               </h4>
               
@@ -300,7 +308,7 @@ export const About: React.FC = () => {
               <span className="text-[11px] font-mono uppercase tracking-wider text-[#E6A995] block mb-1">
                 BASE &amp; REACH
               </span>
-              <h4 className="font-serif text-xl sm:text-2xl text-[#F7EFF4] font-normal mb-2.5">
+              <h4 className="font-serif text-xl sm:text-2xl text-[#F7EFF4] font-semibold tracking-tight mb-2.5">
                 Mumbai, India
               </h4>
               <p className="text-xs sm:text-sm font-sans text-[#B3A2AE] leading-relaxed">

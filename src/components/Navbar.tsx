@@ -10,6 +10,11 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Track window scroll for background glass transition
   useEffect(() => {
@@ -47,6 +52,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
     { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
     { name: 'Projects', href: '#projects' },
+    { name: 'Experience', href: '#experience' },
     { name: 'Skills', href: '#skills' },
     { name: 'Hackathons', href: '#hackathons' },
     { name: 'Contact', href: '#contact' },
@@ -55,7 +61,9 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          mounted ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
+        } ${
           scrolled
             ? 'bg-[#160F19]/92 backdrop-blur-md py-2.5 sm:py-3 border-b border-[#403044]/80 shadow-lg shadow-black/30'
             : 'bg-transparent py-3 sm:py-4 lg:py-5'
@@ -73,7 +81,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
               <div className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 rounded-full bg-[#2B1E30] border border-[#403044] flex items-center justify-center font-sans font-semibold text-[10px] sm:text-xs tracking-wider text-[#E6A995] group-hover:border-[#E6A995] group-hover:shadow-[0_0_12px_rgba(230,169,149,0.25)] transition-all shrink-0">
                 AV
               </div>
-              <span className="font-serif text-[10px] sm:text-xs md:text-[11px] lg:text-[12px] xl:text-[13px] tracking-normal sm:tracking-wider lg:tracking-[0.1em] xl:tracking-[0.12em] uppercase font-medium text-[#F7EFF4] group-hover:text-[#E6A995] transition-colors whitespace-nowrap">
+              <span className="font-serif text-[10px] sm:text-xs md:text-[11px] lg:text-[12px] xl:text-[13px] tracking-normal sm:tracking-wider lg:tracking-[0.1em] xl:tracking-[0.12em] uppercase font-bold text-[#F7EFF4] group-hover:text-[#E6A995] transition-colors whitespace-nowrap">
                 ANJALI MANOJ VISHWAKARMA
               </span>
             </a>
@@ -89,7 +97,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
                   <a
                     key={link.name}
                     href={link.href}
-                    className={`relative px-2.5 xl:px-3.5 py-1 text-[11.5px] xl:text-xs font-medium font-sans tracking-wide transition-all rounded-full ${
+                    className={`relative px-2 xl:px-3 py-1 text-[11px] xl:text-xs font-medium font-sans tracking-tight xl:tracking-wide transition-all rounded-full ${
                       isActive
                         ? 'text-[#160F19]'
                         : 'text-[#B3A2AE] hover:text-[#F7EFF4] hover:bg-[#2B1E30]/60'
@@ -119,7 +127,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
                   <a
                     key={link.name}
                     href={link.href}
-                    className={`relative px-2 py-0.5 text-[10.5px] font-medium font-sans tracking-tight transition-all rounded-full ${
+                    className={`relative px-1.5 py-0.5 text-[10px] font-medium font-sans tracking-tight transition-all rounded-full ${
                       isActive
                         ? 'text-[#160F19]'
                         : 'text-[#B3A2AE] hover:text-[#F7EFF4] hover:bg-[#2B1E30]/60'

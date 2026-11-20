@@ -9,12 +9,18 @@ import {
 } from 'lucide-react';
 import { Github } from './Icons';
 import { PROJECTS } from '../data/portfolioData';
+import { useScrollReveal, LetterRevealHeading } from '../lib/motion';
 
 interface ProjectsProps {
   onOpenProject: (projectId: string) => void;
 }
 
 export const Projects: React.FC<ProjectsProps> = ({ onOpenProject }) => {
+  const { ref: sectionRef, isRevealed, prefersReducedMotion: hookReducedMotion } = useScrollReveal<HTMLElement>({
+    threshold: 0.08,
+    rootMargin: '0px 0px -40px 0px',
+    once: false,
+  });
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const [isTabVisible, setIsTabVisible] = useState(true);
@@ -231,19 +237,36 @@ export const Projects: React.FC<ProjectsProps> = ({ onOpenProject }) => {
   return (
     <section 
       id="projects" 
+      ref={sectionRef}
       className="py-24 sm:py-32 relative bg-transparent border-t border-[#403044]/60 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="mb-12 sm:mb-16 text-center max-w-3xl mx-auto">
+        <div 
+          className="mb-12 sm:mb-16 text-center max-w-3xl mx-auto transition-all duration-700"
+          style={
+            prefersReducedMotion
+              ? undefined
+              : {
+                  opacity: isRevealed ? 1 : 0,
+                  transform: isRevealed ? 'translateY(0)' : 'translateY(24px)',
+                  transition: 'opacity 700ms cubic-bezier(0.16, 1, 0.3, 1), transform 700ms cubic-bezier(0.16, 1, 0.3, 1)',
+                }
+          }
+        >
           <div className="flex items-center justify-center gap-3 mb-3">
             <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#E6A995] block">
               SELECTED WORK / 01—04
             </span>
           </div>
-          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl text-[#F7EFF4] font-normal tracking-tight mb-3">
-            Things I've Built
+          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl text-[#F7EFF4] font-bold tracking-tight mb-3">
+            <LetterRevealHeading
+              text="Things I've Built"
+              isRevealed={isRevealed}
+              accentChar=""
+              prefersReducedMotion={prefersReducedMotion}
+            />
           </h2>
           <p className="text-sm sm:text-base font-sans text-[#B3A2AE] font-normal max-w-xl mx-auto">
             A few ideas turned into working experiences. Explore via 3D Coverflow slider.
@@ -252,7 +275,16 @@ export const Projects: React.FC<ProjectsProps> = ({ onOpenProject }) => {
 
         {/* 1. 3D Coverflow Carousel Stage */}
         <div 
-          className="relative w-full py-4 sm:py-6 cursor-grab active:cursor-grabbing select-none"
+          className="relative w-full py-4 sm:py-6 cursor-grab active:cursor-grabbing select-none transition-all duration-700"
+          style={
+            prefersReducedMotion
+              ? undefined
+              : {
+                  opacity: isRevealed ? 1 : 0,
+                  transform: isRevealed ? 'scale(1) translateY(0)' : 'scale(0.96) translateY(32px)',
+                  transition: 'opacity 800ms cubic-bezier(0.16, 1, 0.3, 1) 150ms, transform 800ms cubic-bezier(0.16, 1, 0.3, 1) 150ms',
+                }
+          }
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => { setIsHovered(false); handleMouseUp(); }}
           onTouchStart={handleTouchStart}
@@ -421,7 +453,18 @@ export const Projects: React.FC<ProjectsProps> = ({ onOpenProject }) => {
         </div>
 
         {/* 2. Active Project Details Showcase Card */}
-        <div className="max-w-4xl mx-auto rounded-3xl bg-[#2B1E30] border border-[#403044] hover:border-[#E6A995]/50 transition-all duration-500 p-6 sm:p-8 lg:p-10 shadow-2xl relative overflow-hidden">
+        <div 
+          className="max-w-4xl mx-auto rounded-3xl bg-[#2B1E30] border border-[#403044] hover:border-[#E6A995]/50 transition-all duration-500 p-6 sm:p-8 lg:p-10 shadow-2xl relative overflow-hidden"
+          style={
+            prefersReducedMotion
+              ? undefined
+              : {
+                  opacity: isRevealed ? 1 : 0,
+                  transform: isRevealed ? 'translateY(0)' : 'translateY(28px)',
+                  transition: 'opacity 800ms cubic-bezier(0.16, 1, 0.3, 1) 300ms, transform 800ms cubic-bezier(0.16, 1, 0.3, 1) 300ms, border-color 400ms ease',
+                }
+          }
+        >
           {/* Subtle card internal ambient glow */}
           <div className="absolute top-0 right-0 w-80 h-80 bg-[#E6A995]/[0.025] rounded-full blur-3xl pointer-events-none" />
 
@@ -445,7 +488,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onOpenProject }) => {
           </div>
 
           {/* Project Title */}
-          <h3 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#F7EFF4] font-normal tracking-tight mb-2 relative z-10">
+          <h3 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#F7EFF4] font-bold tracking-tight mb-2 relative z-10">
             {activeProject.title}
           </h3>
 

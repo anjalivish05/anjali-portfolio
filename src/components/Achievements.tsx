@@ -7,6 +7,7 @@ import {
   FileText,
   ExternalLink 
 } from 'lucide-react';
+import { LetterRevealHeading } from '../lib/motion';
 import { ACHIEVEMENTS } from '../data/portfolioData';
 
 interface TimelineItem {
@@ -57,12 +58,14 @@ export const Achievements: React.FC = () => {
         const entry = entries[0];
         if (entry.isIntersecting) {
           setIsRevealed(true);
-          observer.unobserve(entry.target);
+        } else {
+          // Smoothly reverse on scroll exit
+          setIsRevealed(false);
         }
       },
       {
         threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px',
+        rootMargin: '0px 0px -40px 0px',
       }
     );
 
@@ -137,8 +140,21 @@ export const Achievements: React.FC = () => {
           <span className="text-[11px] uppercase tracking-[0.25em] font-mono font-medium text-[#E6A995] mb-3 block">
             CREDENTIALS
           </span>
-          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl text-[#F7EFF4] font-normal tracking-tight mb-4">
-            Beyond the <span className="text-[#E6A995]">Code</span>
+          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl text-[#F7EFF4] font-bold tracking-tight mb-4">
+            <LetterRevealHeading
+              text="Beyond the"
+              isRevealed={isRevealed}
+              accentChar=""
+              prefersReducedMotion={prefersReducedMotion}
+            />{' '}
+            <span className="text-[#E6A995] font-serif inline-block">
+              <LetterRevealHeading
+                text="Code"
+                isRevealed={isRevealed}
+                accentChar=""
+                prefersReducedMotion={prefersReducedMotion}
+              />
+            </span>
           </h2>
           <p className="text-sm sm:text-base font-sans text-[#B3A2AE] font-normal max-w-xl mx-auto">
             Verified hackathon participation, competitions, and technical credentials.
@@ -197,7 +213,7 @@ export const Achievements: React.FC = () => {
                           </div>
 
                           {/* Achievement Title */}
-                          <h3 className="font-serif text-2xl sm:text-3xl text-[#F7EFF4] font-normal tracking-tight mb-2 leading-snug group-hover:text-[#E6A995] transition-colors">
+                          <h3 className="font-serif text-2xl sm:text-3xl text-[#F7EFF4] font-semibold tracking-tight mb-2 leading-snug group-hover:text-[#E6A995] transition-colors">
                             {item.title}
                           </h3>
 

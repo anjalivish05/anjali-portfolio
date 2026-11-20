@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScrollReveal, LetterRevealHeading } from '../lib/motion';
 import { 
   Send, 
   CheckCircle, 
@@ -29,6 +29,11 @@ interface FormErrors {
 }
 
 export const Contact: React.FC = () => {
+  const { ref: sectionRef, isRevealed, prefersReducedMotion } = useScrollReveal<HTMLElement>({
+    threshold: 0.08,
+    rootMargin: '0px 0px -40px 0px',
+    once: false,
+  });
   const [formData, setFormData] = useState<FormState>({
     name: '',
     email: '',
@@ -88,16 +93,36 @@ export const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-28 sm:py-36 relative bg-transparent border-t border-[#403044]/60">
+    <section 
+      id="contact" 
+      ref={sectionRef}
+      className="py-28 sm:py-36 relative bg-transparent border-t border-[#403044]/60"
+    >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="mb-14 sm:mb-20 text-center max-w-2xl mx-auto">
+        <div 
+          className="mb-14 sm:mb-20 text-center max-w-4xl mx-auto transition-all duration-700"
+          style={
+            prefersReducedMotion
+              ? undefined
+              : {
+                  opacity: isRevealed ? 1 : 0,
+                  transform: isRevealed ? 'translateY(0)' : 'translateY(24px)',
+                  transition: 'opacity 700ms cubic-bezier(0.16, 1, 0.3, 1), transform 700ms cubic-bezier(0.16, 1, 0.3, 1)',
+                }
+          }
+        >
           <span className="text-[11px] uppercase tracking-[0.26em] font-sans font-medium text-[#E6A995] mb-3 block">
             GET IN TOUCH
           </span>
-          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl text-[#F7EFF4] font-normal tracking-tight mb-4">
-            Let's Create Something Meaningful.
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-[52px] text-[#F7EFF4] font-bold tracking-tight mb-4 leading-tight">
+            <LetterRevealHeading
+              text="Let's Create Something Meaningful"
+              isRevealed={isRevealed}
+              accentChar="."
+              prefersReducedMotion={prefersReducedMotion}
+            />
           </h2>
           <p className="text-sm sm:text-base font-sans text-[#B3A2AE] font-normal">
             Have an idea, project or opportunity? Let's connect.
@@ -105,7 +130,18 @@ export const Contact: React.FC = () => {
         </div>
 
         {/* 2-Column Minimal Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+        <div 
+          className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start"
+          style={
+            prefersReducedMotion
+              ? undefined
+              : {
+                  opacity: isRevealed ? 1 : 0,
+                  transform: isRevealed ? 'translateY(0)' : 'translateY(28px)',
+                  transition: 'opacity 800ms cubic-bezier(0.16, 1, 0.3, 1) 150ms, transform 800ms cubic-bezier(0.16, 1, 0.3, 1) 150ms',
+                }
+          }
+        >
           
           {/* Left Column: Direct Info & Resume Card */}
           <div className="lg:col-span-5 space-y-6">
@@ -157,7 +193,7 @@ export const Contact: React.FC = () => {
                 <span className="text-[11px] font-sans uppercase tracking-wider text-[#E6A995] block mb-1">
                   Curriculum Vitae
                 </span>
-                <h3 className="font-serif text-xl text-[#F7EFF4] font-normal mb-2">
+                <h3 className="font-serif text-xl text-[#F7EFF4] font-semibold tracking-tight mb-2">
                   Verified Resume
                 </h3>
                 <p className="text-xs font-sans text-[#B3A2AE] leading-relaxed mb-5">
@@ -184,7 +220,7 @@ export const Contact: React.FC = () => {
               <span className="text-[11px] font-sans uppercase tracking-wider text-[#E6A995] block mb-2">
                 Send an Inquiry
               </span>
-              <h3 className="font-serif text-2xl text-[#F7EFF4] font-normal mb-6">
+              <h3 className="font-serif text-2xl text-[#F7EFF4] font-semibold tracking-tight mb-6">
                 Start a Conversation
               </h3>
 
@@ -300,7 +336,18 @@ export const Contact: React.FC = () => {
         </div>
 
         {/* Social Profiles: LET'S CONNECT */}
-        <div className="mt-14 sm:mt-16 pt-12 sm:pt-14 border-t border-[#403044]/60">
+        <div 
+          className="mt-14 sm:mt-16 pt-12 sm:pt-14 border-t border-[#403044]/60 transition-all duration-700"
+          style={
+            prefersReducedMotion
+              ? undefined
+              : {
+                  opacity: isRevealed ? 1 : 0,
+                  transform: isRevealed ? 'translateY(0)' : 'translateY(24px)',
+                  transition: 'opacity 800ms cubic-bezier(0.16, 1, 0.3, 1) 300ms, transform 800ms cubic-bezier(0.16, 1, 0.3, 1) 300ms',
+                }
+          }
+        >
           <div className="mb-8 text-center sm:text-left">
             <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#E6A995] block mb-1.5 font-medium">
               LET'S CONNECT
@@ -323,7 +370,7 @@ export const Contact: React.FC = () => {
                   <Github className="w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
                 <div className="min-w-0">
-                  <span className="font-serif text-base sm:text-lg text-[#F7EFF4] group-hover:text-[#E6A995] transition-colors block font-medium truncate">
+                  <span className="font-serif text-base sm:text-lg text-[#F7EFF4] group-hover:text-[#E6A995] transition-colors block font-semibold tracking-tight truncate">
                     GitHub
                   </span>
                   <span className="text-xs font-sans text-[#B3A2AE] block truncate">
@@ -346,7 +393,7 @@ export const Contact: React.FC = () => {
                   <Linkedin className="w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
                 <div className="min-w-0">
-                  <span className="font-serif text-base sm:text-lg text-[#F7EFF4] group-hover:text-[#E6A995] transition-colors block font-medium truncate">
+                  <span className="font-serif text-base sm:text-lg text-[#F7EFF4] group-hover:text-[#E6A995] transition-colors block font-semibold tracking-tight truncate">
                     LinkedIn
                   </span>
                   <span className="text-xs font-sans text-[#B3A2AE] block truncate">
@@ -369,7 +416,7 @@ export const Contact: React.FC = () => {
                   <Twitter className="w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
                 <div className="min-w-0">
-                  <span className="font-serif text-base sm:text-lg text-[#F7EFF4] group-hover:text-[#E6A995] transition-colors block font-medium truncate">
+                  <span className="font-serif text-base sm:text-lg text-[#F7EFF4] group-hover:text-[#E6A995] transition-colors block font-semibold tracking-tight truncate">
                     X
                   </span>
                   <span className="text-xs font-sans text-[#B3A2AE] block truncate">
