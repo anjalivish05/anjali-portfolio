@@ -43,10 +43,10 @@ export const GlobalBackground: React.FC = () => {
                 willChange: 'transform',
               }
         }
-        className="absolute inset-0 global-ambient-layer transition-transform duration-100 ease-out"
+        className="absolute inset-0 global-ambient-layer transition-transform duration-100 ease-out overflow-hidden max-w-full"
       >
         {/* Deep aubergine central glow (from hero) */}
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] sm:w-[600px] lg:w-[900px] h-[300px] sm:h-[450px] lg:h-[550px] bg-[#2B1E30]/60 rounded-full blur-[100px] sm:blur-[130px] lg:blur-[150px]" />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] min-[380px]:w-[340px] sm:w-[600px] lg:w-[900px] h-[280px] min-[380px]:h-[300px] sm:h-[450px] lg:h-[550px] bg-[#2B1E30]/60 rounded-full blur-[90px] sm:blur-[130px] lg:blur-[150px]" />
         
         {/* Soft peach top edge ambient glow */}
         <div className="absolute -top-32 right-1/4 w-[240px] sm:w-[380px] lg:w-[480px] h-[200px] sm:h-[300px] lg:h-[380px] bg-[#E6A995]/[0.06] sm:bg-[#E6A995]/[0.07] rounded-full blur-[90px] sm:blur-[120px] lg:blur-[140px]" />
@@ -68,18 +68,18 @@ export const GlobalBackground: React.FC = () => {
                 willChange: 'transform',
               }
         }
-        className="absolute inset-0 global-wave-layer transition-transform duration-100 ease-out"
+        className="absolute inset-0 global-wave-layer transition-transform duration-100 ease-out overflow-hidden max-w-full"
       >
         <svg
-          className="w-full h-full opacity-[0.04] sm:opacity-[0.055] lg:opacity-[0.065] text-[#E6A995]"
+          className="w-full h-full opacity-[0.04] sm:opacity-[0.055] lg:opacity-[0.065] text-[#E6A995] overflow-hidden"
           viewBox="0 0 1440 900"
-          preserveAspectRatio="xMidYMid slice"
+          preserveAspectRatio="none"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
           {/* Primary Graceful Sweeping Wave (from Hero) */}
           <path
-            d="M-100 450 C 300 200, 700 700, 1100 400 C 1300 250, 1500 500, 1600 450"
+            d="M0 450 C 300 200, 700 700, 1100 400 C 1250 250, 1350 480, 1440 450"
             stroke="currentColor"
             strokeWidth="1.2"
             vectorEffect="non-scaling-stroke"
@@ -87,7 +87,7 @@ export const GlobalBackground: React.FC = () => {
 
           {/* Delicate Dashed Echo Contour (from Hero) */}
           <path
-            d="M-50 520 C 350 280, 650 780, 1050 480 C 1250 330, 1450 580, 1550 520"
+            d="M0 520 C 350 280, 650 780, 1050 480 C 1200 330, 1350 550, 1440 520"
             stroke="currentColor"
             strokeWidth="0.8"
             strokeDasharray="4 6"
@@ -96,7 +96,7 @@ export const GlobalBackground: React.FC = () => {
 
           {/* Upper Diagonal Flowing Wave (from Hero) */}
           <path
-            d="M100 150 C 500 350, 800 100, 1200 300 C 1350 400, 1500 250, 1600 300"
+            d="M50 150 C 450 350, 800 100, 1150 280 C 1280 360, 1380 260, 1440 280"
             stroke="currentColor"
             strokeWidth="0.8"
             vectorEffect="non-scaling-stroke"
@@ -104,7 +104,7 @@ export const GlobalBackground: React.FC = () => {
 
           {/* Extended Lower Organic Contour for Continuous Scrolling Depth */}
           <path
-            d="M-80 720 C 260 580, 640 820, 1020 660 C 1260 560, 1460 700, 1600 650"
+            d="M0 720 C 260 580, 640 820, 1020 660 C 1200 560, 1340 680, 1440 650"
             stroke="currentColor"
             strokeWidth="0.9"
             vectorEffect="non-scaling-stroke"
@@ -112,7 +112,7 @@ export const GlobalBackground: React.FC = () => {
 
           {/* Soft Secondary Whispering Wave */}
           <path
-            d="M-120 280 C 220 120, 560 380, 960 210 C 1220 100, 1420 250, 1580 190"
+            d="M0 280 C 220 120, 560 380, 960 210 C 1180 100, 1340 230, 1440 190"
             stroke="currentColor"
             strokeWidth="0.75"
             strokeDasharray="3 5"

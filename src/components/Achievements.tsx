@@ -172,11 +172,11 @@ export const Achievements: React.FC = () => {
               transformOrigin: 'top',
               transition: prefersReducedMotion ? 'none' : 'transform 1000ms cubic-bezier(0.22, 1, 0.36, 1) 150ms, opacity 800ms ease 150ms',
             }}
-            className="absolute left-[23px] sm:left-[27px] md:left-[31px] top-6 bottom-6 w-[2px] bg-gradient-to-b from-[#E6A995]/80 via-[#403044] to-[#403044]/30 pointer-events-none z-0" 
+            className="absolute left-[19px] sm:left-[27px] md:left-[31px] top-6 bottom-6 w-[2px] bg-gradient-to-b from-[#E6A995]/80 via-[#403044] to-[#403044]/30 pointer-events-none z-0" 
           />
 
           {/* Timeline Entries */}
-          <div className="space-y-12 sm:space-y-16">
+          <div className="space-y-10 sm:space-y-16">
             {timelineItems.map((item, idx) => {
               const delay = 200 + idx * 220;
 
@@ -188,32 +188,32 @@ export const Achievements: React.FC = () => {
                 >
                   {/* Circular Peach-Outlined Icon on the Timeline */}
                   <div className="relative z-10 shrink-0">
-                    <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-[#211725] border-2 border-[#E6A995] flex items-center justify-center shadow-[0_0_20px_-4px_rgba(230,169,149,0.35)] transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_25px_-2px_rgba(230,169,149,0.55)] group-hover:border-[#F7EFF4]">
+                    <div className="w-10 h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-[#211725] border-2 border-[#E6A995] flex items-center justify-center shadow-[0_0_20px_-4px_rgba(230,169,149,0.35)] transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_25px_-2px_rgba(230,169,149,0.55)] group-hover:border-[#F7EFF4]">
                       {item.icon}
                     </div>
                   </div>
 
                   {/* Main Content Area beside Timeline Icon */}
-                  <div className="ml-5 sm:ml-8 md:ml-10 flex-1 pt-1 sm:pt-2">
-                    <div className="p-6 sm:p-8 rounded-2xl bg-[#211725]/80 border border-[#403044] hover:border-[#E6A995]/50 transition-all duration-300 shadow-xl group-hover:shadow-[0_8px_30px_-8px_rgba(230,169,149,0.15)] group-hover:-translate-y-0.5">
+                  <div className="ml-3 sm:ml-7 md:ml-10 flex-1 min-w-0 pt-0.5 sm:pt-2">
+                    <div className="p-4 min-[380px]:p-6 sm:p-8 rounded-2xl bg-[#211725]/80 border border-[#403044] hover:border-[#E6A995]/50 transition-all duration-300 shadow-xl group-hover:shadow-[0_8px_30px_-8px_rgba(230,169,149,0.15)] group-hover:-translate-y-0.5">
                       
                       {/* Two-Column Content Grid on Desktop */}
-                      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-start">
+                      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 lg:gap-10 items-start">
                         
                         {/* Left Column: Category, Date, Title, Organization & Project */}
                         <div className="lg:col-span-6 flex flex-col justify-start">
                           {/* Category Badge & Date/Status */}
-                          <div className="flex items-center gap-3 mb-2.5 flex-wrap">
-                            <span className="px-3 py-0.5 rounded-full text-[10px] sm:text-[11px] font-mono font-semibold uppercase tracking-wider bg-[#160F19] border border-[#403044] text-[#E6A995]">
+                          <div className="flex items-center gap-2.5 sm:gap-3 mb-2 sm:mb-2.5 flex-wrap">
+                            <span className="px-2.5 sm:px-3 py-0.5 rounded-full text-[10px] sm:text-[11px] font-mono font-semibold uppercase tracking-wider bg-[#160F19] border border-[#403044] text-[#E6A995]">
                               {item.category}
                             </span>
-                            <span className="text-xs sm:text-sm font-mono text-[#8E7D8A]">
+                            <span className="text-[11px] sm:text-sm font-mono text-[#8E7D8A]">
                               {item.dateOrStatus}
                             </span>
                           </div>
 
                           {/* Achievement Title */}
-                          <h3 className="font-serif text-2xl sm:text-3xl text-[#F7EFF4] font-semibold tracking-tight mb-2 leading-snug group-hover:text-[#E6A995] transition-colors">
+                          <h3 className="font-serif text-xl sm:text-2xl lg:text-3xl text-[#F7EFF4] font-semibold tracking-tight mb-2 leading-snug group-hover:text-[#E6A995] transition-colors">
                             {item.title}
                           </h3>
 
@@ -233,24 +233,24 @@ export const Achievements: React.FC = () => {
 
                         {/* Right Column: Description & Action Buttons */}
                         <div className="lg:col-span-6 flex flex-col justify-between">
-                          <p className="text-sm sm:text-base font-sans text-[#B3A2AE] leading-relaxed font-normal">
+                          <p className="text-xs sm:text-sm lg:text-base font-sans text-[#B3A2AE] leading-relaxed font-normal">
                             {item.description}
                           </p>
 
                           {/* Action Buttons Row */}
                           {(item.certificateUrl || item.showcaseUrl) && (
-                            <div className="mt-5 pt-4 border-t border-[#403044]/60 flex flex-wrap items-center gap-3">
+                            <div className="mt-4 sm:mt-5 pt-3.5 sm:pt-4 border-t border-[#403044]/60 flex flex-wrap items-center gap-2.5 sm:gap-3">
                               {/* Certificate Action */}
                               {item.certificateUrl && (
                                 <a
                                   href={item.certificateUrl}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#E6A995] text-[#160F19] hover:bg-[#D9907B] text-xs sm:text-sm font-sans font-semibold transition-all duration-200 shadow-md hover:shadow-lg hover:scale-[1.02] group/btn"
+                                  className="inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-[#E6A995] text-[#160F19] hover:bg-[#D9907B] text-xs sm:text-sm font-sans font-semibold transition-all duration-200 shadow-md hover:shadow-lg hover:scale-[1.02] group/btn w-full min-[480px]:w-auto min-h-[38px]"
                                 >
-                                  <FileText className="w-3.5 h-3.5" />
-                                  <span>{item.certificateLabel || 'View Certificate'}</span>
-                                  <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+                                  <FileText className="w-3.5 h-3.5 shrink-0" />
+                                  <span className="truncate">{item.certificateLabel || 'View Certificate'}</span>
+                                  <ArrowUpRight className="w-3.5 h-3.5 shrink-0 transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
                                 </a>
                               )}
 
@@ -260,11 +260,11 @@ export const Achievements: React.FC = () => {
                                   href={item.showcaseUrl}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#403044] hover:border-[#E6A995] bg-[#160F19] hover:bg-[#2B1E30] text-[#F7EFF4] hover:text-[#E6A995] text-xs sm:text-sm font-sans font-medium transition-all duration-200 shadow-sm hover:scale-[1.02] group/btn"
+                                  className="inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-[#403044] hover:border-[#E6A995] bg-[#160F19] hover:bg-[#2B1E30] text-[#F7EFF4] hover:text-[#E6A995] text-xs sm:text-sm font-sans font-medium transition-all duration-200 shadow-sm hover:scale-[1.02] group/btn w-full min-[480px]:w-auto min-h-[38px]"
                                 >
-                                  <ExternalLink className="w-3.5 h-3.5 text-[#E6A995]" />
-                                  <span>View Project Showcase</span>
-                                  <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+                                  <ExternalLink className="w-3.5 h-3.5 text-[#E6A995] shrink-0" />
+                                  <span className="truncate">View Project Showcase</span>
+                                  <ArrowUpRight className="w-3.5 h-3.5 shrink-0 transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
                                 </a>
                               )}
                             </div>

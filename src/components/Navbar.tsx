@@ -75,13 +75,13 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
             {/* 1. LEFT BRANDING: AV Monogram + Complete Name ANJALI MANOJ VISHWAKARMA */}
             <a
               href="#home"
-              className="group flex items-center gap-1.5 sm:gap-2.5 text-[#F7EFF4] hover:text-[#E6A995] transition-colors shrink-0"
+              className="group flex items-center gap-1.5 sm:gap-2.5 text-[#F7EFF4] hover:text-[#E6A995] transition-colors shrink-0 min-w-0"
               aria-label="Anjali Manoj Vishwakarma — Home"
             >
               <div className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 rounded-full bg-[#2B1E30] border border-[#403044] flex items-center justify-center font-sans font-semibold text-[10px] sm:text-xs tracking-wider text-[#E6A995] group-hover:border-[#E6A995] group-hover:shadow-[0_0_12px_rgba(230,169,149,0.25)] transition-all shrink-0">
                 AV
               </div>
-              <span className="font-serif text-[10px] sm:text-xs md:text-[11px] lg:text-[12px] xl:text-[13px] tracking-normal sm:tracking-wider lg:tracking-[0.1em] xl:tracking-[0.12em] uppercase font-bold text-[#F7EFF4] group-hover:text-[#E6A995] transition-colors whitespace-nowrap">
+              <span className="font-serif text-[10px] min-[360px]:text-[11px] sm:text-xs md:text-[11px] lg:text-[12px] xl:text-[13px] tracking-normal sm:tracking-wider lg:tracking-[0.1em] xl:tracking-[0.12em] uppercase font-bold text-[#F7EFF4] group-hover:text-[#E6A995] transition-colors truncate max-w-[150px] min-[360px]:max-w-[210px] min-[420px]:max-w-none">
                 ANJALI MANOJ VISHWAKARMA
               </span>
             </a>
@@ -174,7 +174,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
                 href={PERSONAL_INFO.resumeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1 px-2.5 py-1 text-[10.5px] font-medium font-sans text-[#B3A2AE] hover:text-[#E6A995] bg-[#2B1E30] hover:bg-[#37283E] border border-[#403044] hover:border-[#E6A995]/50 rounded-full transition-all"
+                className="hidden min-[900px]:flex items-center gap-1 px-2.5 py-1 text-[10.5px] font-medium font-sans text-[#B3A2AE] hover:text-[#E6A995] bg-[#2B1E30] hover:bg-[#37283E] border border-[#403044] hover:border-[#E6A995]/50 rounded-full transition-all"
                 title="View Resume (PDF)"
               >
                 <FileText className="w-3 h-3 text-[#E6A995]" />
@@ -190,22 +190,22 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
               </a>
             </div>
 
-            {/* 4. MOBILE CONTROLS (Below 768px): Quick Resume Icon + Accessible Hamburger Toggle */}
-            <div className="flex md:hidden items-center gap-1.5 shrink-0">
+            {/* 4. MOBILE CONTROLS (Below 768px): Quick Resume Icon + Accessible 40px+ Hamburger Toggle */}
+            <div className="flex md:hidden items-center gap-1.5 sm:gap-2 shrink-0">
               <a
                 href={PERSONAL_INFO.resumeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-1.5 rounded-full bg-[#2B1E30] border border-[#403044] text-[#E6A995] hover:border-[#E6A995] transition-all"
+                className="w-9 h-9 min-w-[36px] min-h-[36px] sm:w-10 sm:h-10 sm:min-w-[40px] sm:min-h-[40px] flex items-center justify-center rounded-full bg-[#2B1E30] border border-[#403044] text-[#E6A995] hover:border-[#E6A995] transition-all"
                 aria-label="View Resume (PDF)"
                 title="View Resume"
               >
-                <FileText className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                <FileText className="w-4 h-4" />
               </a>
 
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-1.5 rounded-full bg-[#2B1E30] border border-[#403044] text-[#F7EFF4] hover:text-[#E6A995] hover:border-[#E6A995]/50 transition-colors"
+                className="w-9 h-9 min-w-[36px] min-h-[36px] sm:w-10 sm:h-10 sm:min-w-[40px] sm:min-h-[40px] flex items-center justify-center rounded-full bg-[#2B1E30] border border-[#403044] text-[#F7EFF4] hover:text-[#E6A995] hover:border-[#E6A995]/50 transition-colors"
                 aria-label={mobileMenuOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'}
                 aria-expanded={mobileMenuOpen}
               >

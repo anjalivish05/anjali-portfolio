@@ -861,7 +861,7 @@ const SkillCardItem: React.FC<{
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       style={cardStyle}
-      className={`group p-6 sm:p-7 rounded-2xl bg-[#2B1E30] border border-[#403044] ${
+      className={`group p-4.5 min-[380px]:p-6 sm:p-7 rounded-2xl bg-[#2B1E30] border border-[#403044] ${
         !canTilt
           ? 'hover:border-[#E6A995]/50 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_16px_36px_-10px_rgba(10,6,12,0.85)]'
           : ''
@@ -874,10 +874,10 @@ const SkillCardItem: React.FC<{
 
       <div style={canTilt && tilt.isHovered ? { transform: 'translateZ(14px)', transition: 'transform 250ms ease' } : undefined}>
         {/* Card Header Row: Icon + Number */}
-        <div className="flex items-center justify-between mb-5">
+        <div className="flex items-center justify-between mb-4 sm:mb-5">
           <div 
             style={canTilt && tilt.isHovered ? { transform: 'translateZ(26px)', transition: 'transform 250ms ease' } : undefined}
-            className="w-10 h-10 rounded-xl bg-[#211725] border border-[#403044] group-hover:border-[#E6A995]/50 group-hover:shadow-[0_4px_16px_rgba(230,169,149,0.18)] flex items-center justify-center transition-all duration-300 transform group-hover:scale-105 group-hover:-translate-y-0.5"
+            className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#211725] border border-[#403044] group-hover:border-[#E6A995]/50 group-hover:shadow-[0_4px_16px_rgba(230,169,149,0.18)] flex items-center justify-center transition-all duration-300 transform group-hover:scale-105 group-hover:-translate-y-0.5"
           >
             {card.lineIcon}
           </div>
@@ -887,11 +887,11 @@ const SkillCardItem: React.FC<{
         </div>
 
         {/* Content & 3D Illustration Area (Text Left, 3D Illustration Right) */}
-        <div className="flex items-start justify-between gap-3 mb-6">
+        <div className="flex items-start justify-between gap-2.5 sm:gap-3 mb-5 sm:mb-6">
           {/* Left Text Column */}
           <div className="flex-1 min-w-0 pr-1">
             <h3 
-              className="font-serif text-2xl text-[#F7EFF4] group-hover:text-[#E6A995] transition-colors font-semibold tracking-tight mb-2 leading-tight"
+              className="font-serif text-xl min-[380px]:text-2xl text-[#F7EFF4] group-hover:text-[#E6A995] transition-colors font-semibold tracking-tight mb-2 leading-tight"
               style={
                 prefersReducedMotion
                   ? undefined
@@ -923,7 +923,7 @@ const SkillCardItem: React.FC<{
           {/* Right 3D Illustration */}
           <div 
             style={canTilt && tilt.isHovered ? { transform: 'translateZ(30px)', transition: 'transform 250ms ease' } : undefined}
-            className="flex-shrink-0 w-28 sm:w-32 h-24 sm:h-28 flex items-center justify-center relative pointer-events-none"
+            className="flex-shrink-0 w-20 min-[380px]:w-26 sm:w-32 h-20 min-[380px]:h-26 sm:h-28 flex items-center justify-center relative pointer-events-none"
           >
             <Illustration isHovered={tilt.isHovered} />
           </div>
@@ -1064,7 +1064,7 @@ export const Skills: React.FC = () => {
     <section 
       id="skills" 
       ref={sectionRef}
-      className="py-28 sm:py-36 relative bg-transparent border-t border-[#403044]/60"
+      className="py-24 sm:py-32 relative bg-transparent border-t border-[#403044]/60 overflow-hidden"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         

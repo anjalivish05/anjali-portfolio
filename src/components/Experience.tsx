@@ -98,10 +98,10 @@ const TimelineRow: React.FC<TimelineRowProps> = ({ item, isEven, prefersReducedM
     >
       {/* 1. Center / Left Timeline Node */}
       <div 
-        className="absolute left-6 md:left-1/2 top-6 md:top-10 -translate-x-1/2 z-20 shrink-0 select-none"
+        className="absolute left-5 sm:left-6 md:left-1/2 top-6 md:top-10 -translate-x-1/2 z-20 shrink-0 select-none"
       >
         <div
-          className={`w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#211725] border-2 flex items-center justify-center transition-all duration-500 ${
+          className={`w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-[#211725] border-2 flex items-center justify-center transition-all duration-500 ${
             isRevealed
               ? 'border-[#E6A995] text-[#E6A995] shadow-[0_0_22px_rgba(230,169,149,0.45)] scale-110'
               : 'border-[#403044] text-[#8E7D8A]'
@@ -130,7 +130,7 @@ const TimelineRow: React.FC<TimelineRowProps> = ({ item, isEven, prefersReducedM
 
       {/* 3. Experience Card Container */}
       <div
-        className={`w-full md:w-[calc(50%-2.5rem)] pl-14 sm:pl-16 md:pl-0 ${
+        className={`w-full md:w-[calc(50%-2.5rem)] pl-11 sm:pl-16 md:pl-0 ${
           isEven ? 'md:mr-auto' : 'md:ml-auto'
         }`}
       >
@@ -139,7 +139,7 @@ const TimelineRow: React.FC<TimelineRowProps> = ({ item, isEven, prefersReducedM
           <div
             ref={tiltRef}
             {...tiltProps}
-            className={`p-6 sm:p-8 rounded-2xl bg-[#2B1E30]/80 border transition-all duration-300 relative backdrop-blur-md shadow-xl ${
+            className={`p-4 min-[380px]:p-6 sm:p-8 rounded-2xl bg-[#2B1E30]/80 border transition-all duration-300 relative backdrop-blur-md shadow-xl ${
               isHovered
                 ? 'border-[#E6A995]/60 shadow-[0_12px_36px_-8px_rgba(230,169,149,0.22)]'
                 : 'border-[#403044] hover:border-[#E6A995]/40 shadow-[0_4px_20px_-6px_rgba(10,6,12,0.6)]'
@@ -258,7 +258,7 @@ export const Experience: React.FC = () => {
         <div className="relative max-w-5xl mx-auto">
           {/* Continuous Vertical Timeline Line on Mobile (Left) and Desktop (Center) */}
           <div 
-            className="absolute left-6 md:left-1/2 -translate-x-1/2 top-4 bottom-4 w-[2px] bg-[#403044]/40 pointer-events-none z-0"
+            className="absolute left-5 sm:left-6 md:left-1/2 -translate-x-1/2 top-4 bottom-4 w-[2px] bg-[#403044]/40 pointer-events-none z-0"
           >
             {/* Animated Progressive Fill Line */}
             <div

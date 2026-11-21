@@ -106,14 +106,14 @@ export const About: React.FC = () => {
             style={getRevealStyle(150, 25)}
             className="lg:col-span-5 w-full flex items-center justify-center"
           >
-            <div className="relative w-full max-w-[340px] sm:max-w-[400px] h-[340px] sm:h-[400px] flex items-center justify-center">
+            <div className="relative w-full max-w-[270px] min-[380px]:max-w-[340px] sm:max-w-[400px] h-[280px] min-[380px]:h-[340px] sm:h-[400px] flex items-center justify-center">
 
               {/* Polaroid 1: Books & Learning (Top Left / Back Layer) */}
               <div 
-                className="absolute top-2 left-2 sm:left-4 w-40 sm:w-48 -rotate-6 hover:-rotate-2 transition-all duration-500 hover:scale-105 z-10 hover:z-30 cursor-pointer"
+                className="absolute top-2 left-1 min-[380px]:left-2 sm:left-4 w-32 min-[380px]:w-40 sm:w-48 -rotate-6 hover:-rotate-2 transition-all duration-500 hover:scale-105 z-10 hover:z-30 cursor-pointer"
                 title="Curiosity & books"
               >
-                <div className="p-2.5 pb-6 sm:p-3 sm:pb-7 rounded-2xl bg-[#211725] border border-[#E6A995]/30 hover:border-[#E6A995] shadow-xl backdrop-blur-sm group/polaroid">
+                <div className="p-2 pb-5 min-[380px]:p-2.5 min-[380px]:pb-6 sm:p-3 sm:pb-7 rounded-2xl bg-[#211725] border border-[#E6A995]/30 hover:border-[#E6A995] shadow-xl backdrop-blur-sm group/polaroid">
                   <div className="aspect-[4/3] rounded-xl overflow-hidden bg-[#160F19]">
                     <img 
                       src="/assets/about/books-learning.jpg" 
@@ -122,7 +122,7 @@ export const About: React.FC = () => {
                       loading="lazy"
                     />
                   </div>
-                  <p className="mt-2 text-center font-editorial italic text-xs text-[#B3A2AE] group-hover/polaroid:text-[#E6A995] transition-colors">
+                  <p className="mt-1.5 min-[380px]:mt-2 text-center font-editorial italic text-[11px] min-[380px]:text-xs text-[#B3A2AE] group-hover/polaroid:text-[#E6A995] transition-colors">
                     curiosity &amp; books
                   </p>
                 </div>
@@ -130,10 +130,10 @@ export const About: React.FC = () => {
 
               {/* Polaroid 2: Coding & Systems (Bottom Right / Middle Layer) */}
               <div 
-                className="absolute bottom-3 right-2 sm:right-4 w-44 sm:w-52 rotate-6 hover:rotate-2 transition-all duration-500 hover:scale-105 z-15 hover:z-30 cursor-pointer"
+                className="absolute bottom-2 min-[380px]:bottom-3 right-1 min-[380px]:right-2 sm:right-4 w-36 min-[380px]:w-44 sm:w-52 rotate-6 hover:rotate-2 transition-all duration-500 hover:scale-105 z-15 hover:z-30 cursor-pointer"
                 title="Crafting with code"
               >
-                <div className="p-2.5 pb-6 sm:p-3 sm:pb-7 rounded-2xl bg-[#211725] border border-[#E6A995]/30 hover:border-[#E6A995] shadow-2xl backdrop-blur-sm group/polaroid">
+                <div className="p-2 pb-5 min-[380px]:p-2.5 min-[380px]:pb-6 sm:p-3 sm:pb-7 rounded-2xl bg-[#211725] border border-[#E6A995]/30 hover:border-[#E6A995] shadow-2xl backdrop-blur-sm group/polaroid">
                   <div className="aspect-[4/3] rounded-xl overflow-hidden bg-[#160F19]">
                     <img 
                       src="/assets/about/coding.jpg" 
@@ -142,7 +142,7 @@ export const About: React.FC = () => {
                       loading="lazy"
                     />
                   </div>
-                  <p className="mt-2 text-center font-editorial italic text-xs text-[#B3A2AE] group-hover/polaroid:text-[#E6A995] transition-colors">
+                  <p className="mt-1.5 min-[380px]:mt-2 text-center font-editorial italic text-[11px] min-[380px]:text-xs text-[#B3A2AE] group-hover/polaroid:text-[#E6A995] transition-colors">
                     crafting with code
                   </p>
                 </div>
@@ -150,10 +150,10 @@ export const About: React.FC = () => {
 
               {/* Polaroid 3: Coffee & Creative Workspace (Center / Front Layer) */}
               <div 
-                className="absolute top-12 sm:top-14 left-10 sm:left-14 w-44 sm:w-52 -rotate-1 hover:rotate-0 transition-all duration-500 hover:scale-105 z-20 hover:z-30 cursor-pointer"
+                className="absolute top-9 min-[380px]:top-12 sm:top-14 left-6 min-[380px]:left-10 sm:left-14 w-36 min-[380px]:w-44 sm:w-52 -rotate-1 hover:rotate-0 transition-all duration-500 hover:scale-105 z-20 hover:z-30 cursor-pointer"
                 title="Creative workspace"
               >
-                <div className="p-3 pb-7 sm:p-3.5 sm:pb-8 rounded-2xl bg-[#2B1E30] border border-[#E6A995]/50 hover:border-[#E6A995] shadow-2xl backdrop-blur-sm group/polaroid">
+                <div className="p-2.5 pb-6 min-[380px]:p-3 min-[380px]:pb-7 sm:p-3.5 sm:pb-8 rounded-2xl bg-[#2B1E30] border border-[#E6A995]/50 hover:border-[#E6A995] shadow-2xl backdrop-blur-sm group/polaroid">
                   <div className="aspect-[4/3] rounded-xl overflow-hidden bg-[#160F19]">
                     <img 
                       src="/assets/about/workspace-coffee.jpg" 
@@ -162,7 +162,7 @@ export const About: React.FC = () => {
                       loading="lazy"
                     />
                   </div>
-                  <p className="mt-2 text-center font-editorial italic text-xs text-[#B3A2AE] group-hover/polaroid:text-[#E6A995] transition-colors">
+                  <p className="mt-1.5 min-[380px]:mt-2 text-center font-editorial italic text-[11px] min-[380px]:text-xs text-[#B3A2AE] group-hover/polaroid:text-[#E6A995] transition-colors">
                     creative studio vibes
                   </p>
                 </div>
@@ -182,7 +182,7 @@ export const About: React.FC = () => {
                   PERSONAL PROFILE
                 </span>
               </div>
-              <h3 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#F7EFF4] font-bold tracking-tight leading-tight">
+              <h3 className="font-serif text-2xl min-[360px]:text-3xl sm:text-4xl lg:text-5xl text-[#F7EFF4] font-bold tracking-tight leading-tight">
                 I'm <span className="text-[#E6A995] font-serif font-bold">Anjali Manoj Vishwakarma</span>
               </h3>
             </div>
@@ -240,7 +240,7 @@ export const About: React.FC = () => {
           {/* CARD 1: ACADEMIC DEGREE */}
           <div 
             style={getRevealStyle(650, 20)}
-            className="p-7 sm:p-8 rounded-2xl bg-[#2B1E30]/70 border border-[#403044] hover:border-[#E6A995]/50 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_-6px_rgba(230,169,149,0.15)] transition-all duration-300 flex flex-col justify-between group"
+            className="p-5 min-[380px]:p-7 sm:p-8 rounded-2xl bg-[#2B1E30]/70 border border-[#403044] hover:border-[#E6A995]/50 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_-6px_rgba(230,169,149,0.15)] transition-all duration-300 flex flex-col justify-between group"
           >
             <div>
               <div className="w-10 h-10 rounded-full bg-[#211725] border border-[#403044] group-hover:border-[#E6A995]/60 flex items-center justify-center text-[#E6A995] mb-5 transition-colors">
@@ -265,7 +265,7 @@ export const About: React.FC = () => {
           {/* CARD 2: TECHNICAL FOCUS (Technology Pills) */}
           <div 
             style={getRevealStyle(750, 20)}
-            className="p-7 sm:p-8 rounded-2xl bg-[#2B1E30]/70 border border-[#403044] hover:border-[#E6A995]/50 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_-6px_rgba(230,169,149,0.15)] transition-all duration-300 flex flex-col justify-between group"
+            className="p-5 min-[380px]:p-7 sm:p-8 rounded-2xl bg-[#2B1E30]/70 border border-[#403044] hover:border-[#E6A995]/50 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_-6px_rgba(230,169,149,0.15)] transition-all duration-300 flex flex-col justify-between group"
           >
             <div>
               <div className="w-10 h-10 rounded-full bg-[#211725] border border-[#403044] group-hover:border-[#E6A995]/60 flex items-center justify-center text-[#E6A995] mb-5 transition-colors">
@@ -299,7 +299,7 @@ export const About: React.FC = () => {
           {/* CARD 3: BASE & REACH */}
           <div 
             style={getRevealStyle(850, 20)}
-            className="p-7 sm:p-8 rounded-2xl bg-[#2B1E30]/70 border border-[#403044] hover:border-[#E6A995]/50 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_-6px_rgba(230,169,149,0.15)] transition-all duration-300 flex flex-col justify-between group"
+            className="p-5 min-[380px]:p-7 sm:p-8 rounded-2xl bg-[#2B1E30]/70 border border-[#403044] hover:border-[#E6A995]/50 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_-6px_rgba(230,169,149,0.15)] transition-all duration-300 flex flex-col justify-between group"
           >
             <div>
               <div className="w-10 h-10 rounded-full bg-[#211725] border border-[#403044] group-hover:border-[#E6A995]/60 flex items-center justify-center text-[#E6A995] mb-5 transition-colors">

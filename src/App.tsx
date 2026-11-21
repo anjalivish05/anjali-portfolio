@@ -12,6 +12,7 @@ import { GlobalBackground } from './components/GlobalBackground';
 import { ProjectModal } from './components/ProjectModal';
 import { PROJECTS } from './data/portfolioData';
 import { Project } from './types';
+import { trackPageView } from './lib/analytics';
 
 export const App: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>('home');
@@ -41,6 +42,7 @@ export const App: React.FC = () => {
 
   // Support URL query parameter ?project=hospitalflow, etc.
   useEffect(() => {
+    trackPageView(window.location.pathname);
     const params = new URLSearchParams(window.location.search);
     const proj = params.get('project');
     if (proj && PROJECTS.some(p => p.id === proj)) {

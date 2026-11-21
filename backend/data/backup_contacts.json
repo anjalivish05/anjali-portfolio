@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "full_name": "Resend Live Test",
+    "email": "test.verification@example.com",
+    "subject": "Resend Email Notification Live Verification",
+    "message": "This is an automated test inquiry to verify that Resend accepts the email request and dispatches the notification to anjali13anuj@gmail.com.",
+    "status": "New",
+    "created_at": "2026-11-21T16:19:55"
+  },
+  {
+    "id": 2,
+    "full_name": "radha",
+    "email": "radha13aanik@gmail.com",
+    "subject": "internship",
+    "message": "hiii anjali, i want to submit something",
+    "status": "New",
+    "created_at": "2026-11-21T16:26:23"
+  }
+]

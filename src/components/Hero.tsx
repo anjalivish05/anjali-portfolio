@@ -3,6 +3,7 @@ import { motion, useReducedMotion } from '../lib/motion';
 import { FileText, ArrowDown, Mail } from 'lucide-react';
 import { Github, Linkedin, Twitter } from './Icons';
 import { PERSONAL_INFO } from '../data/portfolioData';
+import { trackEvent } from '../lib/analytics';
 
 const ROLES = [
   'Full-Stack Developer',
@@ -96,7 +97,7 @@ export const Hero: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-          className="font-serif text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-[#F7EFF4] font-bold tracking-tight mb-4 sm:mb-6 leading-none"
+          className="font-serif text-[38px] min-[360px]:text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-[#F7EFF4] font-bold tracking-tight mb-3 sm:mb-6 leading-tight sm:leading-none"
         >
           I'm Anjali<span className="text-[#E6A995]">.</span>
         </motion.h1>
@@ -106,9 +107,9 @@ export const Hero: React.FC = () => {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="text-2xl sm:text-3xl md:text-4xl text-[#F7EFF4]/90 mb-4 sm:mb-5 flex items-center justify-center min-h-[44px]"
+          className="text-xl min-[360px]:text-2xl sm:text-3xl md:text-4xl text-[#F7EFF4]/90 mb-4 sm:mb-5 flex items-center justify-center min-h-[40px] sm:min-h-[44px]"
         >
-          <span className="font-editorial text-2xl sm:text-3xl md:text-4xl italic font-normal tracking-wide">
+          <span className="font-editorial text-xl min-[360px]:text-2xl sm:text-3xl md:text-4xl italic font-normal tracking-wide">
             {displayText}
           </span>
           <span className="inline-block w-[2.5px] h-[1em] ml-2 bg-[#E6A995] align-middle animate-pulse" />
@@ -179,14 +180,15 @@ export const Hero: React.FC = () => {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="flex flex-wrap items-center justify-center gap-3.5 sm:gap-4"
+          className="flex flex-col min-[420px]:flex-row items-center justify-center gap-3 sm:gap-4 w-full max-w-xs min-[420px]:max-w-none"
         >
           {/* Primary Button */}
           <a
             href={PERSONAL_INFO.resumeUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-[#E6A995] text-[#160F19] font-sans font-semibold text-xs sm:text-sm hover:bg-[#D9907B] transition-all shadow-[0_4px_20px_-4px_rgba(230,169,149,0.35)] hover:shadow-[0_6px_24px_-4px_rgba(230,169,149,0.5)] hover:scale-[1.02]"
+            onClick={() => trackEvent('resume_download', 'Hero Section Resume Button')}
+            className="inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3 w-full min-[420px]:w-auto rounded-full bg-[#E6A995] text-[#160F19] font-sans font-semibold text-xs sm:text-sm hover:bg-[#D9907B] transition-all shadow-[0_4px_20px_-4px_rgba(230,169,149,0.35)] hover:shadow-[0_6px_24px_-4px_rgba(230,169,149,0.5)] hover:scale-[1.02] min-h-[44px]"
           >
             <FileText className="w-4 h-4" />
             <span>View Resume</span>
@@ -195,7 +197,7 @@ export const Hero: React.FC = () => {
           {/* Secondary Button */}
           <a
             href="#projects"
-            className="group inline-flex items-center gap-2 px-7 py-3 rounded-full bg-[#211725]/80 hover:bg-[#2B1E30] border border-[#403044] hover:border-[#E6A995]/60 text-[#F7EFF4] hover:text-[#E6A995] font-sans font-medium text-xs sm:text-sm transition-all hover:scale-[1.02]"
+            className="group inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3 w-full min-[420px]:w-auto rounded-full bg-[#211725]/80 hover:bg-[#2B1E30] border border-[#403044] hover:border-[#E6A995]/60 text-[#F7EFF4] hover:text-[#E6A995] font-sans font-medium text-xs sm:text-sm transition-all hover:scale-[1.02] min-h-[44px]"
           >
             <span>Explore My Work</span>
             <ArrowDown className="w-3.5 h-3.5 text-[#E6A995] transition-transform group-hover:translate-y-0.5" />

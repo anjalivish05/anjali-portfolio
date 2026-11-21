@@ -10,6 +10,7 @@ import {
 import { Github } from './Icons';
 import { PROJECTS } from '../data/portfolioData';
 import { useScrollReveal, LetterRevealHeading } from '../lib/motion';
+import { trackEvent } from '../lib/analytics';
 
 interface ProjectsProps {
   onOpenProject: (projectId: string) => void;
@@ -320,7 +321,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onOpenProject }) => {
                   }`}
                 >
                   {/* Browser-Style Top Header Bar */}
-                  <div className="px-4 py-2.5 sm:py-3 bg-[#1B1320] border-b border-[#403044] flex items-center justify-between gap-3">
+                  <div className="px-3 sm:px-4 py-2 sm:py-3 bg-[#1B1320] border-b border-[#403044] flex items-center justify-between gap-2 sm:gap-3">
                     {/* 3 Window Control Dots */}
                     <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
                       <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#EF4444]/90 inline-block shadow-sm" />
@@ -329,7 +330,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onOpenProject }) => {
                     </div>
 
                     {/* URL Bar */}
-                    <div className="flex-1 max-w-sm sm:max-w-md mx-2 px-2.5 sm:px-3 py-1 bg-[#160F19] border border-[#403044] rounded-lg text-[10px] sm:text-xs font-mono text-[#B3A2AE] truncate flex items-center gap-1.5">
+                    <div className="flex-1 min-w-0 max-w-sm sm:max-w-md mx-1.5 sm:mx-2 px-2 sm:px-3 py-1 bg-[#160F19] border border-[#403044] rounded-lg text-[9px] min-[360px]:text-[10px] sm:text-xs font-mono text-[#B3A2AE] truncate flex items-center gap-1.5">
                       <svg className="w-3 h-3 text-[#8E7D8A] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                       </svg>
@@ -337,7 +338,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onOpenProject }) => {
                     </div>
 
                     {/* Live Application Status Badge */}
-                    <div className="px-2 sm:px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-[9px] sm:text-[11px] font-mono text-emerald-400 flex items-center gap-1.5 shrink-0">
+                    <div className="px-1.5 min-[360px]:px-2 sm:px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-[8.5px] min-[360px]:text-[9px] sm:text-[11px] font-mono text-emerald-400 flex items-center gap-1 sm:gap-1.5 shrink-0">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                       <span className="hidden sm:inline">Live Application</span>
                       <span className="sm:hidden">Live</span>
@@ -357,13 +358,13 @@ export const Projects: React.FC<ProjectsProps> = ({ onOpenProject }) => {
                     <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#160F19]/95 via-[#160F19]/50 to-transparent pointer-events-none" />
 
                     {/* Slide Bottom Bar Info */}
-                    <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between px-3 sm:px-4 py-2 rounded-xl bg-[#160F19]/85 backdrop-blur-md border border-[#403044]/90 text-xs font-mono">
-                      <div className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-[#E6A995]" />
-                        <span className="text-[#F7EFF4] font-medium text-xs sm:text-sm font-serif">
+                    <div className="absolute bottom-2.5 sm:bottom-3 left-2.5 sm:left-3 right-2.5 sm:right-3 flex items-center justify-between px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-[#160F19]/85 backdrop-blur-md border border-[#403044]/90 text-xs font-mono gap-2">
+                      <div className="flex items-center gap-1.5 sm:gap-2 min-w-0 flex-1">
+                        <span className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-[#E6A995] shrink-0" />
+                        <span className="text-[#F7EFF4] font-medium text-xs sm:text-sm font-serif truncate">
                           {project.title}
                         </span>
-                        <span className="text-[10px] sm:text-xs text-[#8E7D8A] font-mono hidden sm:inline">
+                        <span className="text-[10px] sm:text-xs text-[#8E7D8A] font-mono hidden sm:inline truncate">
                           ({project.role})
                         </span>
                       </div>
@@ -373,14 +374,14 @@ export const Projects: React.FC<ProjectsProps> = ({ onOpenProject }) => {
                           href={project.deploymentUrl || project.liveDemoUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-[#E6A995] flex items-center gap-1 hover:underline text-[11px] sm:text-xs font-sans font-medium"
+                          className="text-[#E6A995] flex items-center gap-1 hover:underline text-[10px] sm:text-xs font-sans font-medium shrink-0"
                           onClick={(e) => e.stopPropagation()}
                         >
                           <span>Open Live</span>
-                          <ArrowUpRight className="w-3.5 h-3.5" />
+                          <ArrowUpRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                         </a>
                       ) : (
-                        <span className="text-[#B3A2AE] text-[10px] sm:text-xs font-sans">
+                        <span className="text-[#B3A2AE] text-[9.5px] sm:text-xs font-sans shrink-0">
                           Click to View
                         </span>
                       )}
@@ -454,7 +455,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onOpenProject }) => {
 
         {/* 2. Active Project Details Showcase Card */}
         <div 
-          className="max-w-4xl mx-auto rounded-3xl bg-[#2B1E30] border border-[#403044] hover:border-[#E6A995]/50 transition-all duration-500 p-6 sm:p-8 lg:p-10 shadow-2xl relative overflow-hidden"
+          className="max-w-4xl mx-auto rounded-3xl bg-[#2B1E30] border border-[#403044] hover:border-[#E6A995]/50 transition-all duration-500 p-5 min-[380px]:p-7 sm:p-8 lg:p-10 shadow-2xl relative overflow-hidden"
           style={
             prefersReducedMotion
               ? undefined
@@ -526,7 +527,10 @@ export const Projects: React.FC<ProjectsProps> = ({ onOpenProject }) => {
           <div className="flex flex-wrap items-center gap-3 relative z-10">
             {/* View Case Study Button */}
             <button
-              onClick={() => onOpenProject(activeProject.id)}
+              onClick={() => {
+                trackEvent('project_click', `${activeProject.title} - Case Study`);
+                onOpenProject(activeProject.id);
+              }}
               className="px-5 py-2.5 rounded-full bg-[#E6A995] text-[#160F19] hover:bg-[#D9907B] transition-all duration-200 font-sans text-xs sm:text-sm font-semibold flex items-center gap-1.5 shadow-md group/btn"
             >
               <span>View Case Study</span>
@@ -539,6 +543,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onOpenProject }) => {
                 href={activeProject.deploymentUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackEvent('project_click', `${activeProject.title} - Live Demo`)}
                 className="px-4 py-2.5 rounded-full border border-[#403044] text-[#F7EFF4] hover:border-[#E6A995] hover:text-[#E6A995] transition-colors font-sans text-xs sm:text-sm font-medium flex items-center gap-1.5"
               >
                 <ExternalLink className="w-3.5 h-3.5" />
@@ -552,6 +557,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onOpenProject }) => {
                 href={activeProject.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackEvent('project_click', `${activeProject.title} - Source Code`)}
                 className="px-4 py-2.5 rounded-full border border-[#403044] text-[#F7EFF4] hover:border-[#E6A995] hover:text-[#E6A995] transition-colors font-sans text-xs sm:text-sm font-medium flex items-center gap-1.5"
               >
                 <Github className="w-3.5 h-3.5" />

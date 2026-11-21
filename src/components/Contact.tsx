@@ -6,19 +6,21 @@ import {
   Copy, 
   Check, 
   MapPin, 
-  Phone, 
   FileText,
-  ArrowUpRight
+  ArrowUpRight,
+  AlertCircle
 } from 'lucide-react';
 import { Linkedin, Github, Twitter } from './Icons';
 import confetti from 'canvas-confetti';
 import { PERSONAL_INFO } from '../data/portfolioData';
+import { trackEvent } from '../lib/analytics';
 
 interface FormState {
   name: string;
   email: string;
   subject: string;
   message: string;
+  _hp_company: string;
 }
 
 interface FormErrors {
@@ -38,10 +40,12 @@ export const Contact: React.FC = () => {
     name: '',
     email: '',
     subject: '',
-    message: ''
+    message: '',
+    _hp_company: ''
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
+  const [serverError, setServerError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -64,14 +68,48 @@ export const Contact: React.FC = () => {
     return Object.keys(errs).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
 
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
+    setServerError(null);
+
+    try {
+      let response: Response;
+      try {
+        response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            full_name: formData.name.trim(),
+            email: formData.email.trim(),
+            subject: formData.subject.trim(),
+            message: formData.message.trim(),
+            _hp_company: formData._hp_company.trim() || undefined,
+          }),
+        });
+      } catch {
+        throw new Error('Unable to reach the server. Please verify your connection or try again shortly.');
+      }
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        if (response.status === 409) {
+          throw new Error('An identical message was recently submitted. Please wait a few minutes before resubmitting.');
+        } else if (response.status === 429) {
+          throw new Error('Too many requests. Please wait a moment before sending another message.');
+        } else {
+          throw new Error(data.detail || 'Unable to deliver message right now. Please try again shortly.');
+        }
+      }
+
       setIsSubmitted(true);
+      trackEvent('contact_submit', 'Direct Inquiry Form');
+
       try {
         confetti({
           particleCount: 45,
@@ -82,8 +120,14 @@ export const Contact: React.FC = () => {
       } catch {
         // decorative
       }
-      setFormData({ name: '', email: '', subject: '', message: '' });
-    }, 1100);
+
+      setFormData({ name: '', email: '', subject: '', message: '', _hp_company: '' });
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Something went wrong. Please try again.';
+      setServerError(message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleCopyEmail = () => {
@@ -96,7 +140,7 @@ export const Contact: React.FC = () => {
     <section 
       id="contact" 
       ref={sectionRef}
-      className="py-28 sm:py-36 relative bg-transparent border-t border-[#403044]/60"
+      className="py-24 sm:py-32 relative bg-transparent border-t border-[#403044]/60 overflow-hidden"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
@@ -188,7 +232,7 @@ export const Contact: React.FC = () => {
             </div>
 
             {/* Dedicated Resume Card (Section 10) */}
-            <div className="p-7 rounded-2xl bg-[#2B1E30]/70 border border-[#403044] flex flex-col justify-between">
+            <div className="p-5 min-[380px]:p-7 rounded-2xl bg-[#2B1E30]/70 border border-[#403044] flex flex-col justify-between">
               <div>
                 <span className="text-[11px] font-sans uppercase tracking-wider text-[#E6A995] block mb-1">
                   Curriculum Vitae
@@ -205,7 +249,8 @@ export const Contact: React.FC = () => {
                 href={PERSONAL_INFO.resumeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 w-full py-3 rounded-full bg-[#E6A995] text-[#160F19] font-sans font-semibold text-xs hover:bg-[#D9907B] transition-all shadow-md"
+                onClick={() => trackEvent('resume_download', 'Contact Section Card')}
+                className="inline-flex items-center justify-center gap-2 w-full py-3 rounded-full bg-[#E6A995] text-[#160F19] font-sans font-semibold text-xs hover:bg-[#D9907B] transition-all shadow-md min-h-[44px]"
               >
                 <FileText className="w-4 h-4" />
                 <span>View Resume</span>
@@ -216,7 +261,7 @@ export const Contact: React.FC = () => {
 
           {/* Right Column: Minimal Contact Form */}
           <div className="lg:col-span-7">
-            <div className="p-7 sm:p-9 rounded-2xl bg-[#2B1E30] border border-[#403044]">
+            <div className="p-5 min-[380px]:p-7 sm:p-9 rounded-2xl bg-[#2B1E30] border border-[#403044]">
               <span className="text-[11px] font-sans uppercase tracking-wider text-[#E6A995] block mb-2">
                 Send an Inquiry
               </span>
@@ -242,6 +287,28 @@ export const Contact: React.FC = () => {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
+                  {/* Invisible Spam Honeypot Field */}
+                  <div className="hidden" aria-hidden="true" style={{ display: 'none' }}>
+                    <label htmlFor="_hp_company">Company</label>
+                    <input
+                      id="_hp_company"
+                      type="text"
+                      name="_hp_company"
+                      value={formData._hp_company}
+                      onChange={(e) => setFormData({ ...formData, _hp_company: e.target.value })}
+                      tabIndex={-1}
+                      autoComplete="off"
+                    />
+                  </div>
+
+                  {/* Submission Error Banner */}
+                  {serverError && (
+                    <div className="p-3.5 rounded-xl bg-[#211725] border border-[#E6A995]/50 flex items-start gap-2.5 text-xs text-[#E6A995]">
+                      <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
+                      <span>{serverError}</span>
+                    </div>
+                  )}
+
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {/* Name */}
                     <div>
@@ -316,7 +383,7 @@ export const Contact: React.FC = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="inline-flex items-center justify-center gap-2 w-full py-3 rounded-full bg-[#E6A995] text-[#160F19] font-sans font-semibold text-xs hover:bg-[#D9907B] transition-all shadow-md disabled:opacity-50"
+                    className="inline-flex items-center justify-center gap-2 w-full py-3 rounded-full bg-[#E6A995] text-[#160F19] font-sans font-semibold text-xs hover:bg-[#D9907B] transition-all shadow-md disabled:opacity-50 min-h-[44px]"
                   >
                     {isSubmitting ? (
                       <span className="inline-block w-4 h-4 border-2 border-[#160F19] border-t-transparent rounded-full animate-spin" />

@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { Github } from './Icons';
 import { Project } from '../types';
+import { trackEvent } from '../lib/analytics';
 
 interface ProjectModalProps {
   project: Project | null;
@@ -29,7 +30,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
       window.addEventListener('keydown', handleKeyDown);
     }
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = '';
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [project, onClose]);
@@ -38,7 +39,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-6 overflow-y-auto">
         {/* Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -54,12 +55,12 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-          className="relative w-full max-w-4xl bg-bg-card border border-border rounded-2xl shadow-2xl overflow-hidden z-10 max-h-[90vh] flex flex-col my-auto"
+          className="relative w-full max-w-4xl bg-bg-card border border-border rounded-2xl shadow-2xl overflow-hidden z-10 max-h-[92vh] flex flex-col my-auto"
         >
           {/* Modal Header */}
-          <div className="px-6 py-4 border-b border-border bg-bg-card/90 backdrop-blur flex items-center justify-between sticky top-0 z-20">
-            <div className="flex items-center gap-3">
-              <span className="px-2.5 py-1 rounded-md text-[11px] font-mono bg-bg-elevated border border-border text-accent">
+          <div className="px-4 py-3 sm:px-6 sm:py-4 border-b border-border bg-bg-card/90 backdrop-blur flex items-center justify-between sticky top-0 z-20">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <span className="px-2.5 py-1 rounded-md text-[10.5px] sm:text-[11px] font-mono bg-bg-elevated border border-border text-accent">
                 {project.category}
               </span>
               <span className="text-xs font-mono text-text-muted hidden sm:inline">
@@ -67,12 +68,12 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
               </span>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 sm:gap-2">
               <a
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-lg bg-bg-elevated hover:bg-border text-text-secondary hover:text-text-primary border border-border transition-colors text-xs font-mono flex items-center gap-1.5"
+                className="p-2 rounded-lg bg-bg-elevated hover:bg-border text-text-secondary hover:text-text-primary border border-border transition-colors text-xs font-mono flex items-center gap-1.5 min-h-[38px]"
               >
                 <Github className="w-4 h-4" />
                 <span className="hidden sm:inline">Source Code</span>
@@ -80,7 +81,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
 
               <button
                 onClick={onClose}
-                className="p-2 rounded-lg bg-bg-elevated hover:bg-border text-text-secondary hover:text-text-primary border border-border transition-colors"
+                className="p-2 rounded-lg bg-bg-elevated hover:bg-border text-text-secondary hover:text-text-primary border border-border transition-colors min-h-[38px] min-w-[38px] flex items-center justify-center"
                 aria-label="Close Case Study"
               >
                 <X className="w-4 h-4" />
@@ -89,7 +90,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
           </div>
 
           {/* Scrollable Content */}
-          <div className="overflow-y-auto p-6 sm:p-8 space-y-10 custom-scrollbar">
+          <div className="overflow-y-auto p-4.5 sm:p-8 space-y-8 sm:space-y-10 custom-scrollbar">
             
             {/* Title & Tagline Banner */}
             <div>
@@ -268,17 +269,18 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
           </div>
 
           {/* Modal Footer */}
-          <div className="p-4 sm:p-6 border-t border-border bg-bg-card/90 flex flex-wrap items-center justify-between gap-3 sticky bottom-0 z-20">
+          <div className="p-3.5 sm:p-6 border-t border-border bg-bg-card/90 flex flex-wrap items-center justify-between gap-3 sticky bottom-0 z-20">
             <div className="text-xs font-mono text-text-muted">
               Project Identifier: #{project.id}
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2.5 sm:gap-3 flex-wrap">
               <a
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-4 py-2 rounded-xl bg-accent text-bg-main font-heading font-semibold text-xs flex items-center gap-1.5 hover:bg-accent-light transition-all"
+                onClick={() => trackEvent('project_click', `${project.title} - Modal GitHub Link`)}
+                className="px-4 py-2 rounded-xl bg-accent text-bg-main font-heading font-semibold text-xs flex items-center gap-1.5 hover:bg-accent-light transition-all min-h-[38px]"
               >
                 <span>View GitHub Repository</span>
                 <ExternalLink className="w-3.5 h-3.5" />
@@ -286,7 +288,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
 
               <button
                 onClick={onClose}
-                className="px-4 py-2 rounded-xl bg-bg-elevated hover:bg-border text-text-primary font-mono text-xs border border-border transition-colors"
+                className="px-4 py-2 rounded-xl bg-bg-elevated hover:bg-border text-text-primary font-mono text-xs border border-border transition-colors min-h-[38px]"
               >
                 Close
               </button>
