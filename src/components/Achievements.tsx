@@ -8,7 +8,6 @@ import {
   ExternalLink 
 } from 'lucide-react';
 import { LetterRevealHeading } from '../lib/motion';
-import { ACHIEVEMENTS } from '../data/portfolioData';
 
 interface TimelineItem {
   id: string;
@@ -58,14 +57,12 @@ export const Achievements: React.FC = () => {
         const entry = entries[0];
         if (entry.isIntersecting) {
           setIsRevealed(true);
-        } else {
-          // Smoothly reverse on scroll exit
-          setIsRevealed(false);
+          observer.unobserve(entry.target);
         }
       },
       {
-        threshold: 0.1,
-        rootMargin: '0px 0px -40px 0px',
+        threshold: 0.08,
+        rootMargin: '0px 0px -20px 0px',
       }
     );
 
@@ -128,7 +125,7 @@ export const Achievements: React.FC = () => {
     <section 
       id="hackathons" 
       ref={sectionRef}
-      className="py-24 sm:py-32 relative bg-transparent border-t border-[#403044]/60 overflow-hidden"
+      className="py-20 sm:py-28 lg:py-32 relative bg-transparent border-t border-[#403044]/60 overflow-hidden scroll-mt-20 sm:scroll-mt-24 lg:scroll-mt-28"
     >
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         

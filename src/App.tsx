@@ -18,25 +18,42 @@ export const App: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>('home');
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
 
-  // Intersection Observer for scroll spy
+  // Optimized passive scroll spy with requestAnimationFrame
   useEffect(() => {
     const sectionIds = ['home', 'about', 'projects', 'experience', 'skills', 'hackathons', 'contact'];
+    let ticking = false;
+
     const handleScroll = () => {
-      const scrollPos = window.scrollY + 200;
-      for (const id of sectionIds) {
-        const el = document.getElementById(id);
-        if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPos >= top && scrollPos < top + height) {
-            setActiveSection(id);
-            break;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          // If scrolled near bottom of page, highlight contact
+          if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 120) {
+            setActiveSection('contact');
+            ticking = false;
+            return;
           }
-        }
+
+          const scrollPos = window.scrollY + 200;
+          for (let i = sectionIds.length - 1; i >= 0; i--) {
+            const id = sectionIds[i];
+            const el = document.getElementById(id);
+            if (el) {
+              const rect = el.getBoundingClientRect();
+              const top = rect.top + window.scrollY;
+              if (scrollPos >= top - 30) {
+                setActiveSection(id);
+                break;
+              }
+            }
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 

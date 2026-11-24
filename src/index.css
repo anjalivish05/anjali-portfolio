@@ -31,6 +31,23 @@ html {
   color-scheme: dark;
 }
 
+/* Ensure all section navigation targets have generous clearance below the fixed navbar */
+section[id] {
+  scroll-margin-top: 5rem; /* 80px mobile */
+}
+
+@media (min-width: 640px) {
+  section[id] {
+    scroll-margin-top: 6rem; /* 96px tablet */
+  }
+}
+
+@media (min-width: 1024px) {
+  section[id] {
+    scroll-margin-top: 6.5rem; /* 104px desktop */
+  }
+}
+
 body {
   background-color: #160F19;
   color: #F7EFF4;

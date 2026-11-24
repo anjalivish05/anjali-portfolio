@@ -17,10 +17,10 @@ interface ProjectsProps {
 }
 
 export const Projects: React.FC<ProjectsProps> = ({ onOpenProject }) => {
-  const { ref: sectionRef, isRevealed, prefersReducedMotion: hookReducedMotion } = useScrollReveal<HTMLElement>({
+  const { ref: sectionRef, isRevealed } = useScrollReveal<HTMLElement>({
     threshold: 0.08,
     rootMargin: '0px 0px -40px 0px',
-    once: false,
+    once: true,
   });
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
@@ -239,7 +239,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onOpenProject }) => {
     <section 
       id="projects" 
       ref={sectionRef}
-      className="py-24 sm:py-32 relative bg-transparent border-t border-[#403044]/60 overflow-hidden"
+      className="py-20 sm:py-28 lg:py-32 relative bg-transparent border-t border-[#403044]/60 overflow-hidden scroll-mt-20 sm:scroll-mt-24 lg:scroll-mt-28"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         

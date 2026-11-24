@@ -70,14 +70,14 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* 3. Connect Section (4 cols) */}
-          <div className="md:col-span-4 space-y-4 sm:space-y-5">
+          {/* 3. Connect Section (4 cols) — Centered horizontally with responsive button */}
+          <div className="md:col-span-4 space-y-4 sm:space-y-5 flex flex-col items-center text-center">
             <span className="text-[11px] font-mono text-[#E6A995] uppercase tracking-[0.2em] block font-medium">
               LET'S CONNECT
             </span>
 
             {/* Social Icons Row with accessible 40px+ touch targets */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center justify-center gap-3">
               <a
                 href={PERSONAL_INFO.github}
                 target="_blank"
@@ -121,13 +121,13 @@ export const Footer: React.FC = () => {
               </a>
             </div>
 
-            {/* Prominent VIEW RESUME ↗ Button (Properly sized for all devices) */}
-            <div className="pt-0.5">
+            {/* Prominent VIEW RESUME ↗ Button (Centered, properly sized for all devices) */}
+            <div className="pt-0.5 flex justify-center w-full">
               <a
                 href={PERSONAL_INFO.resumeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-[#E6A995] hover:bg-[#D9907B] text-[#160F19] font-sans font-semibold text-xs tracking-wider uppercase hover:-translate-y-0.5 hover:shadow-[0_0_20px_-3px_rgba(230,169,149,0.35)] transition-all duration-300 min-h-[40px]"
+                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-[#E6A995] hover:bg-[#D9907B] text-[#160F19] font-sans font-semibold text-xs tracking-wider uppercase hover:-translate-y-0.5 hover:shadow-[0_0_20px_-3px_rgba(230,169,149,0.35)] transition-all duration-300 min-h-[42px] shadow-sm"
               >
                 <span>VIEW RESUME</span>
                 <ArrowUpRight className="w-4 h-4" />

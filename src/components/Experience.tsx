@@ -214,14 +214,14 @@ export const Experience: React.FC = () => {
   const { ref: sectionRef, isRevealed, prefersReducedMotion } = useScrollReveal<HTMLElement>({
     threshold: 0.1,
     rootMargin: '-40px 0px -40px 0px',
-    once: false,
+    once: true,
   });
 
   return (
     <section 
       id="experience" 
       ref={sectionRef}
-      className="bg-transparent py-24 sm:py-32 relative z-10 overflow-hidden"
+      className="py-20 sm:py-28 lg:py-32 relative bg-transparent border-t border-[#403044]/60 overflow-hidden scroll-mt-20 sm:scroll-mt-24 lg:scroll-mt-28 z-10"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         

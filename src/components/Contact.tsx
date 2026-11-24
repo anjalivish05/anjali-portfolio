@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion, useScrollReveal, LetterRevealHeading } from '../lib/motion';
+import { useScrollReveal, LetterRevealHeading } from '../lib/motion';
 import { 
   Send, 
   CheckCircle, 
@@ -34,7 +34,7 @@ export const Contact: React.FC = () => {
   const { ref: sectionRef, isRevealed, prefersReducedMotion } = useScrollReveal<HTMLElement>({
     threshold: 0.08,
     rootMargin: '0px 0px -40px 0px',
-    once: false,
+    once: true,
   });
   const [formData, setFormData] = useState<FormState>({
     name: '',
@@ -140,7 +140,7 @@ export const Contact: React.FC = () => {
     <section 
       id="contact" 
       ref={sectionRef}
-      className="py-24 sm:py-32 relative bg-transparent border-t border-[#403044]/60 overflow-hidden"
+      className="py-20 sm:py-28 lg:py-32 relative bg-transparent border-t border-[#403044]/60 overflow-hidden scroll-mt-20 sm:scroll-mt-24 lg:scroll-mt-28"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
@@ -319,7 +319,7 @@ export const Contact: React.FC = () => {
                         type="text"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        placeholder="e.g. Jane Doe"
+                        placeholder="Enter your full name"
                         className="w-full px-4 py-2.5 rounded-xl bg-[#211725] border border-[#403044] focus:border-[#E6A995] focus:outline-none text-xs font-sans text-[#F7EFF4] placeholder-[#8E7D8A] transition-colors"
                       />
                       {errors.name && (
@@ -336,7 +336,7 @@ export const Contact: React.FC = () => {
                         type="email"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        placeholder="e.g. jane@company.com"
+                        placeholder="you@example.com"
                         className="w-full px-4 py-2.5 rounded-xl bg-[#211725] border border-[#403044] focus:border-[#E6A995] focus:outline-none text-xs font-sans text-[#F7EFF4] placeholder-[#8E7D8A] transition-colors"
                       />
                       {errors.email && (

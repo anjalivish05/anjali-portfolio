@@ -1,22 +1,19 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 import { 
   Code, 
   Terminal, 
   Sparkles, 
-  Github, 
   Award, 
   Compass, 
   ArrowUpRight, 
   Layers, 
   Check, 
   Copy, 
-  ExternalLink,
-  BookOpen,
-  Activity,
-  Cpu
+  BookOpen, 
+  Activity, 
+  Cpu 
 } from 'lucide-react';
-import { PERSONAL_INFO, PROJECTS } from '../data/portfolioData';
+import { PERSONAL_INFO } from '../data/portfolioData';
 
 interface BentoGridProps {
   onOpenProject: (projectId: string) => void;
@@ -80,7 +77,7 @@ export const BentoGrid: React.FC<BentoGridProps> = ({ onOpenProject }) => {
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-full overflow-hidden border border-border">
                   <img
-                    src={PERSONAL_INFO.avatarUrl}
+                    src={(PERSONAL_INFO as Record<string, any>).avatarUrl || '/assets/avatar.jpg'}
                     alt={PERSONAL_INFO.name}
                     className="w-full h-full object-cover object-top"
                     onError={(e) => {

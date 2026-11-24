@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Star, GitFork, ExternalLink, GitCommit, BookOpen } from 'lucide-react';
+import { Star, ExternalLink, GitCommit, BookOpen } from 'lucide-react';
 import { Github } from './Icons';
 import { PERSONAL_INFO, GITHUB_REPOS } from '../data/portfolioData';
 

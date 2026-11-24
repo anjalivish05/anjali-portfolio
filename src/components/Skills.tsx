@@ -6,11 +6,7 @@ import {
   Database, 
   Terminal,
   Cpu,
-  Layers,
-  Sparkles,
-  ArrowRight,
-  GitBranch,
-  Wrench
+  Sparkles
 } from 'lucide-react';
 import { Figma } from './Icons';
 import { useReducedMotion } from '../lib/motion';
@@ -1045,14 +1041,12 @@ export const Skills: React.FC = () => {
         const entry = entries[0];
         if (entry.isIntersecting) {
           setIsRevealed(true);
-        } else {
-          // Smoothly reverse when leaving viewport
-          setIsRevealed(false);
+          observer.unobserve(entry.target);
         }
       },
       {
         threshold: 0.08,
-        rootMargin: '0px 0px -40px 0px',
+        rootMargin: '0px 0px -20px 0px',
       }
     );
 
@@ -1064,7 +1058,7 @@ export const Skills: React.FC = () => {
     <section 
       id="skills" 
       ref={sectionRef}
-      className="py-24 sm:py-32 relative bg-transparent border-t border-[#403044]/60 overflow-hidden"
+      className="py-20 sm:py-28 lg:py-32 relative bg-transparent border-t border-[#403044]/60 overflow-hidden scroll-mt-20 sm:scroll-mt-24 lg:scroll-mt-28"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         

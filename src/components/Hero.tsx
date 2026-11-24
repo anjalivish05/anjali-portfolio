@@ -33,7 +33,7 @@ export const Hero: React.FC = () => {
 
   useEffect(() => {
     const fullRole = ROLES[currentRoleIndex];
-    let timer: NodeJS.Timeout;
+    let timer: ReturnType<typeof setTimeout>;
 
     if (!isDeleting) {
       if (displayText.length < fullRole.length) {
@@ -62,18 +62,17 @@ export const Hero: React.FC = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex flex-col justify-center items-center text-center px-4 sm:px-6 lg:px-8 overflow-hidden pt-28 pb-20 select-none bg-transparent"
+      className="relative min-h-screen flex flex-col justify-center items-center text-center px-4 sm:px-6 lg:px-8 overflow-hidden pt-28 pb-20 select-none bg-transparent scroll-mt-24 sm:scroll-mt-28"
     >
-      {/* Centered Content Container with Cinematic Scroll Parallax Depth */}
+      {/* Centered Content Container with Natural Scroll Flow */}
       <div 
         style={
           prefersReducedMotion
             ? undefined
             : {
-                transform: `translate3d(0, ${scrollY * 0.22}px, 0)`,
-                opacity: Math.max(0, 1 - scrollY / 680),
+                opacity: Math.max(0, 1 - scrollY / 750),
                 transition: 'opacity 100ms ease-out',
-                willChange: 'transform, opacity',
+                willChange: 'opacity',
               }
         }
         className="relative z-10 max-w-3xl mx-auto flex flex-col items-center text-center"

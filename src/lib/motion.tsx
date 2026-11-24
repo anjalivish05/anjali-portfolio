@@ -16,7 +16,7 @@ export interface ScrollRevealOptions {
 export const useScrollReveal = <T extends HTMLElement = HTMLDivElement>(
   options: ScrollRevealOptions = {}
 ) => {
-  const { threshold = 0.1, rootMargin = '-40px 0px -40px 0px', once = false } = options;
+  const { threshold = 0.08, rootMargin = '0px 0px -30px 0px', once = true } = options;
   const ref = useRef<T>(null);
   const [isRevealed, setIsRevealed] = useState(false);
   const [hasEntered, setHasEntered] = useState(false);

@@ -14,7 +14,7 @@ export const PERSONAL_INFO = {
   phone: '+91 9987406608',
   linkedin: 'https://www.linkedin.com/in/anjali-vishwakarma-736392382/',
   github: 'https://github.com/anjalivish05',
-  x: 'https://x.com/anjalivish05',
+  x: 'https://x.com/anjali50568',
   resumeUrl: '/resume.pdf',
   status: 'Open for Opportunities',
   education: [
