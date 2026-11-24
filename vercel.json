@@ -4,7 +4,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://anjali-portfolio-backend.onrender.com/api/:path*"
+      "destination": "https://anjali-portfolio-tz6o.onrender.com/api/:path*"
     }
   ]
 }
