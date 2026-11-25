@@ -68,7 +68,7 @@ const TimelineRow: React.FC<TimelineRowProps> = ({ item, isEven, prefersReducedM
   const { ref: rowRef, isRevealed } = useScrollReveal<HTMLDivElement>({
     threshold: 0.15,
     rootMargin: '-30px 0px -30px 0px',
-    once: false,
+    once: true,
   });
 
   const { ref: tiltRef, tiltProps, isHovered } = use3DTilt<HTMLDivElement>({
@@ -109,9 +109,9 @@ const TimelineRow: React.FC<TimelineRowProps> = ({ item, isEven, prefersReducedM
         >
           {item.icon}
         </div>
-        {/* Animated ambient pulse ring when illuminated */}
+        {/* Animated ambient pulse ring when illuminated (Desktop only) */}
         {isRevealed && !prefersReducedMotion && (
-          <span className="absolute inset-0 rounded-full border border-[#E6A995]/40 animate-ping pointer-events-none" />
+          <span className="hidden sm:inline-block absolute inset-0 rounded-full border border-[#E6A995]/40 animate-ping pointer-events-none" />
         )}
       </div>
 
@@ -139,7 +139,7 @@ const TimelineRow: React.FC<TimelineRowProps> = ({ item, isEven, prefersReducedM
           <div
             ref={tiltRef}
             {...tiltProps}
-            className={`p-4 min-[380px]:p-6 sm:p-8 rounded-2xl bg-[#2B1E30]/80 border transition-all duration-300 relative backdrop-blur-md shadow-xl ${
+            className={`p-4 min-[380px]:p-6 sm:p-8 rounded-2xl bg-[#2B1E30]/95 md:backdrop-blur-md border transition-all duration-300 relative shadow-xl ${
               isHovered
                 ? 'border-[#E6A995]/60 shadow-[0_12px_36px_-8px_rgba(230,169,149,0.22)]'
                 : 'border-[#403044] hover:border-[#E6A995]/40 shadow-[0_4px_20px_-6px_rgba(10,6,12,0.6)]'

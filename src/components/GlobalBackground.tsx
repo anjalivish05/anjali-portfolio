@@ -54,20 +54,20 @@ export const GlobalBackground: React.FC = () => {
         }
         className="absolute inset-0 global-ambient-layer overflow-hidden max-w-full"
       >
-        {/* Deep aubergine central glow (from hero) - lightweight blur on mobile */}
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[260px] sm:w-[600px] lg:w-[900px] h-[260px] sm:h-[450px] lg:h-[550px] bg-[#2B1E30]/60 rounded-full blur-[40px] sm:blur-[120px] lg:blur-[150px]" />
+        {/* Deep aubergine central glow - 100% pure hardware radial-gradient (zero blur filter) */}
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] sm:w-[600px] lg:w-[900px] h-[320px] sm:h-[450px] lg:h-[550px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(43,30,48,0.75)_0%,transparent_70%)]" />
         
-        {/* Soft peach top edge ambient glow */}
-        <div className="absolute -top-32 right-1/4 w-[200px] sm:w-[380px] lg:w-[480px] h-[180px] sm:h-[300px] lg:h-[380px] bg-[#E6A995]/[0.05] sm:bg-[#E6A995]/[0.07] rounded-full blur-[45px] sm:blur-[110px] lg:blur-[140px]" />
+        {/* Soft peach top edge ambient glow - 100% pure hardware radial-gradient (zero blur filter) */}
+        <div className="absolute -top-32 right-1/4 w-[260px] sm:w-[380px] lg:w-[480px] h-[220px] sm:h-[300px] lg:h-[380px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(230,169,149,0.08)_0%,transparent_70%)]" />
         
-        {/* Soft peach bottom-left ambient glow */}
-        <div className="absolute -bottom-28 left-6 sm:left-10 w-[220px] sm:w-[420px] lg:w-[520px] h-[180px] sm:h-[320px] lg:h-[400px] bg-[#E6A995]/[0.04] sm:bg-[#E6A995]/[0.055] rounded-full blur-[45px] sm:blur-[120px] lg:blur-[145px]" />
+        {/* Soft peach bottom-left ambient glow - 100% pure hardware radial-gradient (zero blur filter) */}
+        <div className="absolute -bottom-28 left-6 sm:left-10 w-[260px] sm:w-[420px] lg:w-[520px] h-[220px] sm:h-[320px] lg:h-[400px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(230,169,149,0.065)_0%,transparent_70%)]" />
 
-        {/* Muted plum mid-right secondary glow - hidden on small mobile to reduce fill rate */}
-        <div className="hidden sm:block absolute top-2/3 right-10 w-[350px] lg:w-[450px] h-[350px] lg:h-[450px] bg-[#37283E]/40 rounded-full blur-[110px] sm:blur-[140px]" />
+        {/* Muted plum mid-right secondary glow */}
+        <div className="hidden sm:block absolute top-2/3 right-10 w-[350px] lg:w-[450px] h-[350px] lg:h-[450px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(55,40,62,0.45)_0%,transparent_70%)]" />
       </div>
 
-      {/* 3. Flowing Curved Wave Contours with Organic Counter-Parallax on Desktop */}
+      {/* 3. Flowing Curved Wave Contours on Desktop & Tablet (Hidden on Mobile for Butter-Smooth 120Hz Touch) */}
       <div 
         style={
           prefersReducedMotion || isMobile
@@ -76,7 +76,7 @@ export const GlobalBackground: React.FC = () => {
                 transform: `translate3d(0, ${scrollY * -0.025}px, 0)`,
               }
         }
-        className="absolute inset-0 global-wave-layer overflow-hidden max-w-full"
+        className="hidden sm:block absolute inset-0 global-wave-layer overflow-hidden max-w-full"
       >
         <svg
           className="w-full h-full opacity-[0.04] sm:opacity-[0.055] lg:opacity-[0.065] text-[#E6A995] overflow-hidden"

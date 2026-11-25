@@ -31,6 +31,9 @@ export const Projects: React.FC<ProjectsProps> = ({ onOpenProject }) => {
 
   // Drag / swipe gesture state
   const dragStartX = useRef<number | null>(null);
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
+  const isHorizontalSwipe = useRef<boolean | null>(null);
   const [dragDelta, setDragDelta] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
 
@@ -121,24 +124,51 @@ export const Projects: React.FC<ProjectsProps> = ({ onOpenProject }) => {
     return () => clearTimeout(timer);
   }, [activeIndex, isHovered, isTabVisible, prefersReducedMotion, isDragging, isInView, handleNext]);
 
-  // Touch handlers
+  // Non-hijacking touch gesture handlers: strictly preserves native vertical page scroll
   const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
     dragStartX.current = e.touches[0].clientX;
-    setIsDragging(true);
+    isHorizontalSwipe.current = null;
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    if (dragStartX.current === null) return;
-    setDragDelta(e.touches[0].clientX - dragStartX.current);
+    if (touchStartX.current === null || touchStartY.current === null) return;
+
+    const diffX = e.touches[0].clientX - touchStartX.current;
+    const diffY = e.touches[0].clientY - touchStartY.current;
+
+    // Detect gesture direction before capturing touch
+    if (isHorizontalSwipe.current === null) {
+      if (Math.abs(diffY) > 8 && Math.abs(diffY) >= Math.abs(diffX)) {
+        // User is scrolling vertically down or up: do NOT hijack touch or trigger re-renders!
+        isHorizontalSwipe.current = false;
+        return;
+      }
+      if (Math.abs(diffX) > 10 && Math.abs(diffX) > Math.abs(diffY)) {
+        // User is intentionally swiping horizontally across the carousel cards
+        isHorizontalSwipe.current = true;
+        setIsDragging(true);
+      }
+    }
+
+    if (isHorizontalSwipe.current) {
+      setDragDelta(diffX);
+    }
   };
 
   const handleTouchEnd = () => {
-    if (dragDelta > 45) {
-      handlePrev();
-    } else if (dragDelta < -45) {
-      handleNext();
+    if (isHorizontalSwipe.current) {
+      if (dragDelta > 45) {
+        handlePrev();
+      } else if (dragDelta < -45) {
+        handleNext();
+      }
     }
+    touchStartX.current = null;
+    touchStartY.current = null;
     dragStartX.current = null;
+    isHorizontalSwipe.current = null;
     setDragDelta(0);
     setIsDragging(false);
   };
@@ -287,9 +317,9 @@ export const Projects: React.FC<ProjectsProps> = ({ onOpenProject }) => {
           </p>
         </div>
 
-        {/* 1. 3D Coverflow Carousel Stage */}
+        {/* 1. 3D Coverflow Carousel Stage: touch-action:pan-y ensures 120Hz native touch scroll */}
         <div 
-          className="relative w-full py-4 sm:py-6 cursor-grab active:cursor-grabbing select-none transition-all duration-700"
+          className="relative w-full py-4 sm:py-6 cursor-grab active:cursor-grabbing select-none transition-all duration-700 [touch-action:pan-y]"
           style={
             prefersReducedMotion
               ? undefined

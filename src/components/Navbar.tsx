@@ -66,7 +66,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
           mounted ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
         } ${
           scrolled
-            ? 'bg-[#160F19]/92 backdrop-blur-md py-2.5 sm:py-3 border-b border-[#403044]/80 shadow-lg shadow-black/30'
+            ? 'bg-[#160F19]/96 md:backdrop-blur-md py-2.5 sm:py-3 border-b border-[#403044]/80 shadow-lg shadow-black/30'
             : 'bg-transparent py-3 sm:py-4 lg:py-5'
         }`}
       >

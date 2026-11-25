@@ -27,8 +27,15 @@
 }
 
 html {
-  scroll-behavior: smooth;
   color-scheme: dark;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Smooth scrolling strictly on desktop fine pointers: prevents mobile touch-scroll fighting */
+@media (hover: hover) and (pointer: fine) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 /* Ensure all section navigation targets have generous clearance below the fixed navbar */
@@ -52,10 +59,12 @@ body {
   background-color: #160F19;
   color: #F7EFF4;
   font-family: 'DM Sans', sans-serif;
-  overflow-x: hidden;
+  overflow-x: clip;
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-overflow-scrolling: touch;
+  touch-action: manipulation;
 }
 
 ::selection {

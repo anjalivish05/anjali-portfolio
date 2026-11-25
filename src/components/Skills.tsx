@@ -9,7 +9,7 @@ import {
   Sparkles
 } from 'lucide-react';
 import { Figma } from './Icons';
-import { useReducedMotion } from '../lib/motion';
+import { useReducedMotion, LetterRevealHeading } from '../lib/motion';
 
 // --- Custom 3D Isometric Illustrations (Pure SVG, Zero external assets) ---
 
@@ -635,7 +635,8 @@ const RotatingWordsHeader: React.FC<{ prefersReducedMotion: boolean }> = ({ pref
   const [wordIndex, setWordIndex] = useState(0);
 
   useEffect(() => {
-    if (prefersReducedMotion) return;
+    if (prefersReducedMotion || typeof window === 'undefined') return;
+    if (window.innerWidth < 768) return; // Keep static on mobile to avoid background interval re-renders
     const interval = setInterval(() => {
       setWordIndex((prev) => (prev + 1) % ROTATING_WORDS.length);
     }, 2400);
@@ -692,65 +693,6 @@ const RotatingWordsHeader: React.FC<{ prefersReducedMotion: boolean }> = ({ pref
         })}
       </div>
     </div>
-  );
-};
-
-// --- Letter-by-Letter Reveal Section Heading (Word-Safe Wrapping) ---
-const LetterRevealHeading: React.FC<{
-  text: string;
-  isRevealed: boolean;
-  prefersReducedMotion: boolean;
-}> = ({ text, isRevealed, prefersReducedMotion }) => {
-  const words = text.split(' ');
-  let charCounter = 0;
-
-  return (
-    <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl text-[#F7EFF4] font-bold tracking-tight mb-4 inline-flex flex-wrap justify-center items-center gap-x-[0.28em] gap-y-1">
-      {words.map((word, wordIdx) => {
-        const isLastWord = wordIdx === words.length - 1;
-        return (
-          <span key={wordIdx} className="inline-block whitespace-nowrap">
-            {word.split('').map((char) => {
-              const charIndex = charCounter++;
-              return (
-                <span
-                  key={charIndex}
-                  className="inline-block transition-all"
-                  style={
-                    prefersReducedMotion
-                      ? { opacity: 1, transform: 'none' }
-                      : {
-                          opacity: isRevealed ? 1 : 0,
-                          transform: isRevealed ? 'translateY(0)' : 'translateY(22px)',
-                          transition: `opacity 600ms cubic-bezier(0.16, 1, 0.3, 1) ${charIndex * 35}ms, transform 600ms cubic-bezier(0.16, 1, 0.3, 1) ${charIndex * 35}ms`,
-                          willChange: 'opacity, transform',
-                        }
-                  }
-                >
-                  {char}
-                </span>
-              );
-            })}
-            {isLastWord && (
-              <span 
-                className="text-[#E6A995] inline-block transition-all"
-                style={
-                  prefersReducedMotion
-                    ? undefined
-                    : {
-                        opacity: isRevealed ? 1 : 0,
-                        transform: isRevealed ? 'scale(1)' : 'scale(0)',
-                        transition: `opacity 400ms ease ${charCounter * 35}ms, transform 400ms cubic-bezier(0.16, 1, 0.3, 1) ${charCounter * 35}ms`
-                      }
-                }
-              >
-                .
-              </span>
-            )}
-          </span>
-        );
-      })}
-    </h2>
   );
 };
 
@@ -815,7 +757,7 @@ const SkillCardItem: React.FC<{
         opacity: 0,
         transform: 'translateY(28px)',
         transition: `opacity 700ms cubic-bezier(0.16, 1, 0.3, 1) ${staggerDelay}ms, transform 700ms cubic-bezier(0.16, 1, 0.3, 1) ${staggerDelay}ms`,
-        willChange: 'transform, opacity',
+        willChange: 'auto',
       };
     }
 
