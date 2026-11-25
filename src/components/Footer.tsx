@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion } from '../lib/motion';
 import { ArrowUp, Mail, ArrowUpRight } from 'lucide-react';
 import { Github, Linkedin, Twitter } from './Icons';
 import { PERSONAL_INFO } from '../data/portfolioData';

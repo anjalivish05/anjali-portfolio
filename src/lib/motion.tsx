@@ -21,18 +21,6 @@ export const useScrollReveal = <T extends HTMLElement = HTMLDivElement>(
   const [isRevealed, setIsRevealed] = useState(false);
   const [hasEntered, setHasEntered] = useState(false);
   const prefersReducedMotion = useReducedMotion();
-  const lastScrollY = useRef(0);
-  const [scrollDirection, setScrollDirection] = useState<'down' | 'up'>('down');
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      setScrollDirection(currentScrollY > lastScrollY.current ? 'down' : 'up');
-      lastScrollY.current = currentScrollY;
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   useEffect(() => {
     if (prefersReducedMotion) {
@@ -75,7 +63,7 @@ export const useScrollReveal = <T extends HTMLElement = HTMLDivElement>(
     return () => observer.disconnect();
   }, [threshold, rootMargin, once, prefersReducedMotion]);
 
-  return { ref, isRevealed, hasEntered, scrollDirection, prefersReducedMotion };
+  return { ref, isRevealed, hasEntered, scrollDirection: 'down' as const, prefersReducedMotion };
 };
 
 // --- Reusable 3D Tilt Hook for Cards ---
@@ -174,6 +162,31 @@ export const LetterRevealHeading: React.FC<{
   accentChar?: string;
   prefersReducedMotion?: boolean;
 }> = ({ text, isRevealed, className = '', accentChar = '.', prefersReducedMotion = false }) => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile, { passive: true });
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  if (isMobile || prefersReducedMotion) {
+    return (
+      <span
+        className={`inline-flex flex-wrap justify-center items-center gap-x-[0.28em] gap-y-1 transition-all duration-500 ease-out ${className}`}
+        style={{
+          opacity: isRevealed || prefersReducedMotion ? 1 : 0,
+          transform: isRevealed || prefersReducedMotion ? 'translateY(0)' : 'translateY(16px)',
+        }}
+      >
+        <span>{text}</span>
+        {accentChar && <span className="text-[#E6A995] inline-block">{accentChar}</span>}
+      </span>
+    );
+  }
+
   const words = text.split(' ');
   let charCounter = 0;
 
@@ -189,16 +202,11 @@ export const LetterRevealHeading: React.FC<{
                 <span
                   key={charIndex}
                   className="inline-block transition-all"
-                  style={
-                    prefersReducedMotion
-                      ? { opacity: 1, transform: 'none' }
-                      : {
-                          opacity: isRevealed ? 1 : 0,
-                          transform: isRevealed ? 'translateY(0)' : 'translateY(22px)',
-                          transition: `opacity 600ms cubic-bezier(0.16, 1, 0.3, 1) ${charIndex * 28}ms, transform 600ms cubic-bezier(0.16, 1, 0.3, 1) ${charIndex * 28}ms`,
-                          willChange: 'opacity, transform',
-                        }
-                  }
+                  style={{
+                    opacity: isRevealed ? 1 : 0,
+                    transform: isRevealed ? 'translateY(0)' : 'translateY(22px)',
+                    transition: `opacity 600ms cubic-bezier(0.16, 1, 0.3, 1) ${charIndex * 28}ms, transform 600ms cubic-bezier(0.16, 1, 0.3, 1) ${charIndex * 28}ms`,
+                  }}
                 >
                   {char}
                 </span>
@@ -207,15 +215,11 @@ export const LetterRevealHeading: React.FC<{
             {isLastWord && accentChar && (
               <span 
                 className="text-[#E6A995] inline-block transition-all"
-                style={
-                  prefersReducedMotion
-                    ? undefined
-                    : {
-                        opacity: isRevealed ? 1 : 0,
-                        transform: isRevealed ? 'scale(1)' : 'scale(0)',
-                        transition: `opacity 400ms ease ${charCounter * 28}ms, transform 400ms cubic-bezier(0.16, 1, 0.3, 1) ${charCounter * 28}ms`
-                      }
-                }
+                style={{
+                  opacity: isRevealed ? 1 : 0,
+                  transform: isRevealed ? 'scale(1)' : 'scale(0)',
+                  transition: `opacity 400ms ease ${charCounter * 28}ms, transform 400ms cubic-bezier(0.16, 1, 0.3, 1) ${charCounter * 28}ms`
+                }}
               >
                 {accentChar}
               </span>
@@ -287,7 +291,7 @@ const parseMotionValues = (
     transition: isHovered
       ? 'transform 200ms cubic-bezier(0.16, 1, 0.3, 1), opacity 200ms ease, box-shadow 300ms ease'
       : `transform ${Math.round(durationSec * 1000)}ms ${easeStr} ${Math.round(delaySec * 1000)}ms, opacity ${Math.round(durationSec * 1000)}ms ${easeStr} ${Math.round(delaySec * 1000)}ms`,
-    willChange: 'transform, opacity',
+    willChange: isHovered ? 'transform' : 'auto',
   };
 
   if (transforms.length > 0) res.transform = transforms.join(' ');

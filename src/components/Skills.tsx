@@ -72,7 +72,7 @@ const Programming3D: React.FC<{ isHovered: boolean }> = ({ isHovered }) => (
       
       {/* Blinking Cursor Bar */}
       <line x1="82" y1="58" x2="82" y2="65" stroke="#E6A995" strokeWidth="1.8" strokeLinecap="round" transform="skewY(-6.5)">
-        <animate attributeName="opacity" values="1;0.2;1" dur="1.2s" repeatCount="indefinite" />
+        {isHovered && <animate attributeName="opacity" values="1;0.2;1" dur="1.2s" repeatCount="indefinite" />}
       </line>
     </g>
 
@@ -112,7 +112,7 @@ const Programming3D: React.FC<{ isHovered: boolean }> = ({ isHovered }) => (
 
     {/* Subtle floating particle */}
     <circle cx="128" cy="30" r="2" fill="#E6A995" opacity={isHovered ? 0.9 : 0.5}>
-      <animate attributeName="cy" values="30;27;30" dur="3s" repeatCount="indefinite" />
+      {isHovered && <animate attributeName="cy" values="30;27;30" dur="3s" repeatCount="indefinite" />}
     </circle>
   </svg>
 );
@@ -226,7 +226,7 @@ const Backend3D: React.FC<{ isHovered: boolean }> = ({ isHovered }) => (
       {/* Grill & Status LEDs */}
       <line x1="32" y1="27" x2="72" y2="27" stroke="#3F2B45" strokeWidth="2.5" strokeDasharray="3 2" />
       <circle cx="82" cy="27" r="2" fill="#E6A995">
-        <animate attributeName="opacity" values="1;0.4;1" dur="2s" repeatCount="indefinite" />
+        {isHovered && <animate attributeName="opacity" values="1;0.4;1" dur="2s" repeatCount="indefinite" />}
       </circle>
       <circle cx="89" cy="27" r="2" fill="#E6A995" opacity="0.8" />
       <circle cx="95" cy="27" r="1.5" fill="#8E7D8A" />
@@ -244,7 +244,7 @@ const Backend3D: React.FC<{ isHovered: boolean }> = ({ isHovered }) => (
       <line x1="32" y1="27" x2="72" y2="27" stroke="#3F2B45" strokeWidth="2.5" strokeDasharray="3 2" />
       <circle cx="82" cy="27" r="2" fill="#E6A995" />
       <circle cx="89" cy="27" r="2" fill="#E6A995">
-        <animate attributeName="opacity" values="0.4;1;0.4" dur="1.5s" repeatCount="indefinite" />
+        {isHovered && <animate attributeName="opacity" values="0.4;1;0.4" dur="1.5s" repeatCount="indefinite" />}
       </circle>
       <circle cx="95" cy="27" r="1.5" fill="#8E7D8A" />
     </g>
@@ -260,7 +260,7 @@ const Backend3D: React.FC<{ isHovered: boolean }> = ({ isHovered }) => (
       {/* Grill & Status LEDs */}
       <line x1="32" y1="27" x2="72" y2="27" stroke="#483250" strokeWidth="2.5" strokeDasharray="3 2" />
       <circle cx="82" cy="27" r="2" fill="#E6A995">
-        <animate attributeName="opacity" values="1;0.3;1" dur="1.8s" repeatCount="indefinite" />
+        {isHovered && <animate attributeName="opacity" values="1;0.3;1" dur="1.8s" repeatCount="indefinite" />}
       </circle>
       <circle cx="89" cy="27" r="2" fill="#E6A995" />
       <circle cx="95" cy="27" r="1.5" fill="#8E7D8A" />
@@ -280,7 +280,7 @@ const Backend3D: React.FC<{ isHovered: boolean }> = ({ isHovered }) => (
     <g transform={`translate(${isHovered ? 90 : 86}, ${isHovered ? 38 : 42})`} className="transition-transform duration-500">
       <rect x="0" y="0" width="48" height="24" rx="12" fill="#231528" stroke="#E6A995" strokeWidth="1.2" strokeOpacity="0.85" />
       <circle cx="10" cy="12" r="3" fill="#E6A995">
-        <animate attributeName="opacity" values="1;0.5;1" dur="1.5s" repeatCount="indefinite" />
+        {isHovered && <animate attributeName="opacity" values="1;0.5;1" dur="1.5s" repeatCount="indefinite" />}
       </circle>
       <text x="18" y="15" fill="#F7EFF4" fontSize="9" fontFamily="monospace" fontWeight="600">
         REST
@@ -348,7 +348,7 @@ const Database3D: React.FC<{ isHovered: boolean }> = ({ isHovered }) => (
         SQL
       </text>
       <circle cx="37" cy="13" r="2.5" fill="#E6A995">
-        <animate attributeName="opacity" values="1;0.3;1" dur="1.4s" repeatCount="indefinite" />
+        {isHovered && <animate attributeName="opacity" values="1;0.3;1" dur="1.4s" repeatCount="indefinite" />}
       </circle>
     </g>
   </svg>
@@ -499,14 +499,14 @@ const Blockchain3D: React.FC<{ isHovered: boolean }> = ({ isHovered }) => (
         {/* Shield / Key Node */}
         <polygon points="8,4 16,8 16,18 8,22 0,18 0,8" fill="#201325" stroke="#E6A995" strokeWidth="1.2" />
         <circle cx="8" cy="13" r="2.5" fill="#E6A995">
-          <animate attributeName="opacity" values="1;0.4;1" dur="1.6s" repeatCount="indefinite" />
+          {isHovered && <animate attributeName="opacity" values="1;0.4;1" dur="1.6s" repeatCount="indefinite" />}
         </circle>
       </g>
     </g>
 
     {/* Floating Node Particles */}
     <circle cx="80" cy="18" r="2.2" fill="#E6A995" opacity={isHovered ? 1 : 0.6}>
-      <animate attributeName="cy" values="18;15;18" dur="2.5s" repeatCount="indefinite" />
+      {isHovered && <animate attributeName="cy" values="18;15;18" dur="2.5s" repeatCount="indefinite" />}
     </circle>
     <circle cx="135" cy="38" r="1.8" fill="#E6A995" opacity="0.7" />
     <circle cx="25" cy="80" r="1.8" fill="#8E7D8A" opacity="0.7" />

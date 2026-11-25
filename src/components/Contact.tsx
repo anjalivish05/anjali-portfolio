@@ -11,7 +11,6 @@ import {
   AlertCircle
 } from 'lucide-react';
 import { Linkedin, Github, Twitter } from './Icons';
-import confetti from 'canvas-confetti';
 import { PERSONAL_INFO } from '../data/portfolioData';
 import { trackEvent } from '../lib/analytics';
 
@@ -111,6 +110,8 @@ export const Contact: React.FC = () => {
       trackEvent('contact_submit', 'Direct Inquiry Form');
 
       try {
+        const confettiModule = await import('canvas-confetti');
+        const confetti = confettiModule.default;
         confetti({
           particleCount: 45,
           spread: 55,

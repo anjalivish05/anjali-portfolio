@@ -20,7 +20,10 @@ export const Hero: React.FC = () => {
   const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
-    if (prefersReducedMotion) return;
+    if (prefersReducedMotion || typeof window === 'undefined') return;
+    // On mobile screens, skip continuous scroll-driven state updates to eliminate touch scroll jank
+    if (window.innerWidth < 768) return;
+
     const handleScroll = () => {
       // Only track while hero is in or near viewport
       if (window.scrollY < 900) {

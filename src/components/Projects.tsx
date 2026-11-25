@@ -26,7 +26,8 @@ export const Projects: React.FC<ProjectsProps> = ({ onOpenProject }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isTabVisible, setIsTabVisible] = useState(true);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-  const [progress, setProgress] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isInView, setIsInView] = useState(false);
 
   // Drag / swipe gesture state
   const dragStartX = useRef<number | null>(null);
@@ -34,6 +35,32 @@ export const Projects: React.FC<ProjectsProps> = ({ onOpenProject }) => {
   const [isDragging, setIsDragging] = useState(false);
 
   const AUTOPLAY_DURATION = 5000;
+
+  // Responsive mobile check
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile, { passive: true });
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // IntersectionObserver to only run autoplay when the projects section is visible
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el || !('IntersectionObserver' in window)) {
+      setIsInView(true);
+      return;
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.15 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [sectionRef]);
 
   // Check prefers-reduced-motion
   useEffect(() => {
@@ -57,27 +84,20 @@ export const Projects: React.FC<ProjectsProps> = ({ onOpenProject }) => {
 
   const handleNext = useCallback(() => {
     setActiveIndex((prev) => (prev + 1) % PROJECTS.length);
-    setProgress(0);
   }, []);
 
   const handlePrev = useCallback(() => {
     setActiveIndex((prev) => (prev - 1 + PROJECTS.length) % PROJECTS.length);
-    setProgress(0);
   }, []);
 
   const handleSelect = (idx: number) => {
     setActiveIndex(idx);
-    setProgress(0);
   };
 
   // Keyboard arrow navigation when projects section is in view
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      const projectsEl = document.getElementById('projects');
-      if (!projectsEl) return;
-      const rect = projectsEl.getBoundingClientRect();
-      const inView = rect.top < window.innerHeight && rect.bottom > 0;
-      if (!inView) return;
+      if (!isInView) return;
 
       if (e.key === 'ArrowLeft') {
         handlePrev();
@@ -88,25 +108,18 @@ export const Projects: React.FC<ProjectsProps> = ({ onOpenProject }) => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [handlePrev, handleNext]);
+  }, [isInView, handlePrev, handleNext]);
 
-  // Autoplay timer (5 seconds) with pause-on-hover & pause-on-hidden
+  // Autoplay timer: single timeout triggered when activeIndex changes or view state resumes
   useEffect(() => {
-    if (isHovered || !isTabVisible || prefersReducedMotion || isDragging) return;
+    if (isHovered || !isTabVisible || prefersReducedMotion || isDragging || !isInView) return;
 
-    const startTime = Date.now();
-    const interval = setInterval(() => {
-      const elapsed = Date.now() - startTime;
-      const pct = Math.min((elapsed / AUTOPLAY_DURATION) * 100, 100);
-      setProgress(pct);
+    const timer = setTimeout(() => {
+      handleNext();
+    }, AUTOPLAY_DURATION);
 
-      if (elapsed >= AUTOPLAY_DURATION) {
-        handleNext();
-      }
-    }, 50);
-
-    return () => clearInterval(interval);
-  }, [activeIndex, isHovered, isTabVisible, prefersReducedMotion, isDragging, handleNext]);
+    return () => clearTimeout(timer);
+  }, [activeIndex, isHovered, isTabVisible, prefersReducedMotion, isDragging, isInView, handleNext]);
 
   // Touch handlers
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -199,7 +212,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onOpenProject }) => {
         zIndex: 20,
         opacity: 0.65,
         pointerEvents: 'auto',
-        filter: 'brightness(0.65) blur(0.5px)',
+        filter: isMobile ? 'brightness(0.65)' : 'brightness(0.65) blur(0.5px)',
         cursor: 'pointer',
         transition: isDragging ? 'none' : 'transform 600ms cubic-bezier(0.22, 1, 0.36, 1), opacity 600ms ease, filter 600ms ease',
       };
@@ -215,7 +228,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onOpenProject }) => {
         zIndex: 20,
         opacity: 0.65,
         pointerEvents: 'auto',
-        filter: 'brightness(0.65) blur(0.5px)',
+        filter: isMobile ? 'brightness(0.65)' : 'brightness(0.65) blur(0.5px)',
         cursor: 'pointer',
         transition: isDragging ? 'none' : 'transform 600ms cubic-bezier(0.22, 1, 0.36, 1), opacity 600ms ease, filter 600ms ease',
       };
@@ -230,7 +243,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onOpenProject }) => {
       zIndex: 10,
       opacity: 0,
       pointerEvents: 'none',
-      filter: 'brightness(0.4) blur(2px)',
+      filter: isMobile ? 'brightness(0.4)' : 'brightness(0.4) blur(2px)',
       transition: isDragging ? 'none' : 'transform 600ms cubic-bezier(0.22, 1, 0.36, 1), opacity 600ms ease',
     };
   };
@@ -352,13 +365,16 @@ export const Projects: React.FC<ProjectsProps> = ({ onOpenProject }) => {
                       alt={`${project.title} live interface preview`}
                       className="w-full h-full object-cover object-top"
                       loading="lazy"
+                      decoding="async"
+                      width="760"
+                      height="475"
                     />
 
                     {/* Bottom gradient overlay */}
                     <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#160F19]/95 via-[#160F19]/50 to-transparent pointer-events-none" />
 
                     {/* Slide Bottom Bar Info */}
-                    <div className="absolute bottom-2.5 sm:bottom-3 left-2.5 sm:left-3 right-2.5 sm:right-3 flex items-center justify-between px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-[#160F19]/85 backdrop-blur-md border border-[#403044]/90 text-xs font-mono gap-2">
+                    <div className="absolute bottom-2.5 sm:bottom-3 left-2.5 sm:left-3 right-2.5 sm:right-3 flex items-center justify-between px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-[#160F19]/90 md:backdrop-blur-md border border-[#403044]/90 text-xs font-mono gap-2">
                       <div className="flex items-center gap-1.5 sm:gap-2 min-w-0 flex-1">
                         <span className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-[#E6A995] shrink-0" />
                         <span className="text-[#F7EFF4] font-medium text-xs sm:text-sm font-serif truncate">
@@ -447,8 +463,13 @@ export const Projects: React.FC<ProjectsProps> = ({ onOpenProject }) => {
           {/* Autoplay 5-second indicator bar */}
           <div className="w-16 sm:w-24 h-1 bg-[#211725] rounded-full overflow-hidden border border-[#403044]/60">
             <div 
-              className="h-full bg-[#E6A995] transition-all duration-75 ease-linear"
-              style={{ width: `${progress}%` }}
+              key={`${activeIndex}-${isHovered}-${isTabVisible}-${isInView}`}
+              className="h-full w-full bg-[#E6A995] rounded-full origin-left"
+              style={{
+                transform: 'scaleX(0)',
+                animation: `progressFill ${AUTOPLAY_DURATION}ms linear forwards`,
+                animationPlayState: isHovered || !isTabVisible || isDragging || !isInView ? 'paused' : 'running',
+              }}
             />
           </div>
         </div>
